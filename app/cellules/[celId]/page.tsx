@@ -19,6 +19,8 @@ import { BiMap } from "react-icons/bi";
 import Link from "next/link";
 import { auth } from "@/auth";
 import CelUpdateBar from "@/components/cel/celUpdateBar";
+import { getPersonsCel } from "@/lib/_personActions";
+import CelMembers from "@/components/cel/celMembers";
 
 type CelDetailsPageProps = {
   params: {
@@ -33,6 +35,9 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
 
   const res = await getCel(params.celId);
   const cel = await res?.data;
+
+  const resu = await getPersonsCel(params.celId);
+  const members = await resu?.data;
 
   //console.log("CEL:", cel);
 
@@ -112,6 +117,7 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
             </div>
           )}
         </div>
+        <CelMembers members={members} />
         {/*         <div>
           {
             cel?.cellules.filter((cel: Cellule) => cel.statut == "ACTIF")

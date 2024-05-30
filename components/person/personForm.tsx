@@ -139,7 +139,11 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
         }
       );
 
-    router.push("/members");
+    if (!mbr?.id && celId) {
+      router.push(`/cellules/${celId}`);
+    } else {
+      router.push("/members");
+    }
   };
 
   return (

@@ -26,7 +26,7 @@ const MembersPage = async ({
 }) => {
   const session = await auth();
 
-  if (!session || !session.user)
+  /*   if (!session || !session.user)
     return (
       <div className="border border-neutral-400 rounded-lg text-red-600 flex flex-col items-center md:w-1/2 mx-auto my-24 p-8 gap-8">
         <span className="font-semibold">
@@ -44,7 +44,7 @@ const MembersPage = async ({
           </Link>
         </div>
       </div>
-    );
+    ); */
 
   const skip =
     typeof searchParams.skip === "string" ? Number(searchParams.skip) : 0;

@@ -150,3 +150,26 @@ export const getAllPersons = async () => {
     };
   } catch (error) {}
 };
+
+// GET PERSONS OF SPECIF CELLULE
+export const getPersonsCel = async (celId: number) => {
+  //const resut = zoneFormSchema.safeParse(data);
+  //if (resut.success) {
+
+  // console.log("zoneId: " + zoneId);
+
+  try {
+    const persons = await prisma.person.findMany({
+      where: {
+        celluleId: +celId,
+      },
+    });
+
+    //  revalidatePath("/zones");
+
+    return {
+      success: true,
+      data: persons,
+    };
+  } catch (error) {}
+};
