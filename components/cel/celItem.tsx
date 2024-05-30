@@ -20,7 +20,7 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
   const role = userSession?.user?.role;
   const name = userSession?.user?.name;
 
-  console.log("userSession:", role);
+  //console.log("userSession:", role);
 
   return (
     <div

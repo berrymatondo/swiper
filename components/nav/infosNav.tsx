@@ -9,6 +9,7 @@ import {
 } from "react-icons/md";
 import { Label } from "../ui/label";
 import { BsBuildings, BsHouse } from "react-icons/bs";
+import { FaRegHandPointRight } from "react-icons/fa";
 
 const navList = [
   {
@@ -62,40 +63,57 @@ const navList = [
   },
 ];
 
+const linksList = [
+  {
+    id: 1,
+    name: "Pourquoi servir dans une cellule d'impact",
+    href: "/infos",
+    external: false,
+    //  icon: <MdDashboard size={40} />,
+    // color: "text-orange-400",
+  },
+  {
+    id: 2,
+    name: "Parcours de croissance de la nouvelle création",
+    href: "https://impactcentrechretien.elvanto.eu/form/d91ad054-677e-4bf9-a89f-6faad376342e",
+    external: true,
+  },
+  {
+    id: 3,
+    name: "A propos de l'église Impact Centre Chrétien",
+    href: "https://impactcentrechretien.com/",
+    external: true,
+  },
+  {
+    id: 4,
+    name: "IEBI - Ecole Biblique Internationale",
+    href: "https://ecolebiblique.com/",
+    external: true,
+  },
+];
+
 const InfosNav = () => {
   return (
     <div className="bg-gradient-to-tr from-blue-200 transparent flex flex-col justify-start items-center p-2 my-2 gap-2 text-black  rounded-bl-2xl">
       <p className="uppercase text-lg font-semibold text-orange-800">
         Informations utiles
       </p>
-      <Link
-        className="hover:text-orange-600 text-center  text-blue-900 p-1 rounded-bl-2xl rounded-tr-2xl"
-        href="/infos"
-      >
-        {"Pourquoi servir dans une cellule d'impact"}
-      </Link>
-      <Link
-        className="hover:text-orange-600 text-center  text-blue-900  p-1 rounded-bl-2xl rounded-tr-2xl"
-        href="https://impactcentrechretien.elvanto.eu/form/d91ad054-677e-4bf9-a89f-6faad376342e"
-        target="_blank"
-      >
-        {"Parcours de croissance de la nouvelle création"}
-      </Link>
-      <Link
-        className="hover:text-orange-600 text-center  text-blue-900  p-1 rounded-bl-2xl rounded-tr-2xl"
-        href="https://impactcentrechretien.com/"
-        target="_blank"
-      >
-        {"A propos de l'église Impact Centre Chrétien"}
-      </Link>
 
-      <Link
-        className="hover:text-orange-600 text-center  text-blue-900  p-1 rounded-bl-2xl rounded-tr-2xl"
-        href="https://ecolebiblique.com/"
-        target="_blank"
-      >
-        {"Ecole Biblique Internationale"}
-      </Link>
+      {linksList.map((nav) => (
+        <Link
+          className="grid gap-1 grid-cols-12 hover:text-orange-600   text-blue-900 p-1 rounded-bl-2xl rounded-tr-2xl"
+          key={nav.id}
+          href={nav.href}
+          target={nav.external ? "_blank" : ""}
+        >
+          <FaRegHandPointRight
+            size={20}
+            className="col-span-2 text-orange-800"
+          />
+
+          <span className="col-span-10">{nav.name}</span>
+        </Link>
+      ))}
 
       {/*       {navList.map((nav) => (
         <Link

@@ -26,6 +26,9 @@ import {
   TbCircleNumber2,
   TbCircleNumber4,
   TbCircleNumber6,
+  TbCircleNumber2Filled,
+  TbCircleNumber4Filled,
+  TbCircleNumber6Filled,
 } from "react-icons/tb";
 
 const CellulesPage = async () => {
@@ -36,37 +39,37 @@ const CellulesPage = async () => {
     >
       <div className="">
         <CustomBreadcrumb name="Informations" />
-        <p className="mb-8 bg-white rounded-bl-full rounded-tr-full m-1 uppercase text-xl max-md:text-sm  text-center p-4 font-bold bg-teal-600">
+        <p className="text-orange-600 border mb-8  rounded-bl-full rounded-tr-full m-1 uppercase text-xl max-md:text-sm  text-center p-4 font-bold bg-gradient-to-r to-orange-100 from-white">
           {"7 bonnes raisons d'être membre d'une cellule d'Impact "}
         </p>
         <div className="max-md:text-xs max-md:mx-1 flex flex-col items-start justify-between my-2">
           <p className="text-end flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl">
-            <TbCircleNumber1Filled size={40} className="text-teal-600" />{" "}
+            <TbCircleNumber1Filled size={40} className="text-orange-600" />{" "}
             <span> {"Mieux comprendre la parole de Dieu"}</span>
           </p>
 
-          <p className="flex items-center bg-teal-600 text-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber2 size={40} className="text-white" />
+          <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+            <TbCircleNumber2Filled size={40} className="text-orange-600" />
             <span> {"Apprendre à prier avec et pourles autres"}</span>
           </p>
 
           <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber3Filled size={40} className="text-teal-600" />{" "}
+            <TbCircleNumber3Filled size={40} className="text-orange-600" />{" "}
             <span> {"Apprendre à évangéliserles voisins"}</span>
           </p>
 
-          <p className="flex items-center bg-teal-600 text-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber4 size={40} className="text-white" />
+          <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+            <TbCircleNumber4Filled size={40} className="text-orange-600" />
             <span> {"Apprendre à paître les brebis du Seigneur"}</span>
           </p>
 
           <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber5Filled size={40} className="text-teal-600" />{" "}
+            <TbCircleNumber5Filled size={40} className="text-orange-600" />{" "}
             <span> {"Apprendre à exhorter"}</span>
           </p>
 
-          <p className="flex items-center bg-teal-600 text-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber6 size={40} className="text-white" />
+          <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+            <TbCircleNumber6Filled size={40} className="text-orange-600" />
             <span>
               {" "}
               {
@@ -76,7 +79,7 @@ const CellulesPage = async () => {
           </p>
 
           <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber7Filled size={40} className="text-teal-600" />{" "}
+            <TbCircleNumber7Filled size={40} className="text-orange-600" />{" "}
             <span> {"Devenir un véritable disciple de Jésus-Christ"}</span>
           </p>
         </div>
