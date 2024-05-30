@@ -1,0 +1,161 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+enum CelStatuses {
+ ACTIF
+ INACTIF
+ SUSPENDU
+}
+
+enum ZonesStatuses {
+ ACTIF
+ INACTIF
+ SUSPENDU
+}
+
+enum UserStatuses {
+ ACTIF
+ INACTIF
+ SUSPENDU
+}
+
+enum UserRoles {
+ VISITOR
+ PILOTE
+ RESPO
+ ADMIN
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  //email String @unique
+  password String
+  username String @unique
+  status UserStatuses @default(INACTIF)
+  role UserRoles @default(VISITOR)
+
+  celluleId Int?
+  cellule Cellule? @relation(fields: [celluleId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+
+}
+
+model Zone {
+
+  id Int @id @default(autoincrement())
+  name String @unique
+  statut ZonesStatuses @default(INACTIF)
+  cellules Cellule[] 
+
+  respoId Int?
+  respo Person? @relation(fields: [respoId], references: [id]) 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("zones")
+}
+
+
+model Cellule {
+  id Int @id @default(autoincrement())
+  name String
+  hours String @default("De 19h à 20h30")
+  days String  @default("Tous les jeudis")
+  statut CelStatuses @default(INACTIF)
+  persons Person[] 
+  users User[] 
+  meetings Meeting[] 
+
+  zoneId Int?
+  zone Zone? @relation(fields: [zoneId], references: [id])
+
+  addressId Int?
+  address Address? @relation(fields: [addressId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("cellules")
+}
+
+model Address {
+  id Int @id @default(autoincrement())
+  street String
+  number String
+  box String?
+  municipality String
+  postalCode String
+  city String
+  country String
+
+  longitude String?
+  latitude String?
+
+  cellule Cellule[] 
+  person Person[]
+
+  createAt DateTime? @default(now())
+  updatedAt DateTime?  @updatedAt
+  @@map("addresses")
+}
+
+
+model Person {
+  id Int @id @default(autoincrement())
+  firstname String
+  lastname String?
+  email String?
+  mobile String?
+  isIcc Boolean? @default(false)
+  isStar Boolean? @default(false)
+  isPilote Boolean? @default(false)
+  isRespo Boolean? @default(false)
+  zones Zone[]
+  
+  celluleId Int?
+  cellule Cellule? @relation(fields: [celluleId], references: [id]) 
+
+  addressId Int?
+  address Address? @relation(fields: [addressId], references: [id]) 
+
+  createAt DateTime? @default(now())
+  updatedAt DateTime?  @updatedAt
+  @@map("persons")
+}
+
+
+model Meeting {
+  id Int @id @default(autoincrement())
+  date DateTime @default(now())
+  nCon Int @default(0)
+  nPar Int @default(0)
+  nStar Int @default(0)
+  nIcc Int @default(0)
+  nNIcc Int @default(0)
+  nNew Int @default(0)
+  onLine Boolean @default(true)
+  notes String?
+  
+  celluleId Int?
+  cellule Cellule? @relation(fields: [celluleId], references: [id]) 
+
+  createAt DateTime? @default(now())
+  updatedAt DateTime?  @updatedAt
+  @@map("meetings")
+}
