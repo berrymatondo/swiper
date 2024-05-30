@@ -14,7 +14,6 @@ import { MdAddCircle } from "react-icons/md";
 import { prisma } from "@/lib/prisma";
 import { Cellule } from "@prisma/client";
 import CelItem from "@/components/cel/celItem";
-import SearchCel from "@/components/searchCel";
 import PersonItem from "@/components/person/personItem";
 import SearchPer from "@/components/searchPer";
 import { auth } from "@/auth";
