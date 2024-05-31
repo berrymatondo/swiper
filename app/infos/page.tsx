@@ -35,7 +35,7 @@ const CellulesPage = async () => {
   return (
     <PageLayout
       title="Informations cellules d'impact"
-      description="Voici quelsues informations à propos des cellules d'impact"
+      description="Voici quelques informations à propos des cellules d'impact"
     >
       <div className="">
         <CustomBreadcrumb name="Informations" />
