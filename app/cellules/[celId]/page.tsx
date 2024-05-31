@@ -31,7 +31,7 @@ type CelDetailsPageProps = {
 const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
   const session = await auth();
   const usr = session?.user;
-  console.log("USR", usr);
+  //console.log("USR", usr);
 
   const res = await getCel(params.celId);
   const cel = await res?.data;
@@ -77,14 +77,19 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 mb-2">
-            <FaMobileAlt className="text-orange-600" />
+          <div className="flex flex-col items-start mb-2">
             {cel?.persons &&
-              cel?.persons?.map((person: Person) => (
-                <div key={person.id}>
-                  {person.mobile} ({person.firstname})
-                </div>
-              ))}
+              cel?.persons
+                ?.filter((per: Person) => per.isPilote == true)
+                .map((person: Person) => (
+                  <div
+                    className="flex justify-start items-center gap-2"
+                    key={person.id}
+                  >
+                    <FaMobileAlt className="text-orange-600" /> {person.mobile}{" "}
+                    ({person.firstname})
+                  </div>
+                ))}
           </div>
 
           <div className="flex items-center max-md:items-start gap-2  ">
@@ -130,6 +135,12 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
                 {cell.name}
               </div>
             ))}
+        </div> */}
+        {/*         <div className="md:hidden col-span-3 p-1 max-h-1/2">
+          <Map cels={cellules} haut="250px" />
+        </div>
+        <div className="max-md:hidden col-span-4 p-1 max-h-1/2">
+          <Map cels={cellules} />
         </div> */}
         <div className="p-2 max-h-1/3">
           <Map cels={cels} />
