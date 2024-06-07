@@ -6,7 +6,7 @@ import { useDebounce } from "use-debounce";
 
 const SearchPer = ({ search }: { search?: string }) => {
   const [text, setText] = useState(search);
-  const [query] = useDebounce(text, 500);
+  const [query] = useDebounce(text, 300);
   const router = useRouter();
 
   const initialRender = useRef(true);

@@ -59,7 +59,10 @@ const CellulesPage = async ({
       <div className="">
         <CustomBreadcrumb name="Cellules" />
         <div className="flex items-center justify-between max-md:m-1 md:mt-2">
-          <SearchCel search={search} />
+          <div className="flex items-center text-xs gap-1">
+            <SearchCel search={search} />
+            <span className="max-md:hidden ">Ex: Anderlecht</span>
+          </div>
           <div className="flex justify-normal gap-2 ">
             {skip == 0 ? null : (
               <Link

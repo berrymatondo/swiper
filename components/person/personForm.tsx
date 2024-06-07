@@ -310,7 +310,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                 />
               )}
 
-              {icc && (
+              {!celId && icc && (
                 <FormField
                   control={form.control}
                   name="isPilote"
@@ -334,7 +334,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                 />
               )}
 
-              {icc && (
+              {!celId && icc && (
                 <FormField
                   control={form.control}
                   name="isRespo"
@@ -358,7 +358,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                 />
               )}
 
-              {icc && star && (
+              {!celId && icc && star && (
                 <FormField
                   control={form.control}
                   name="isGest"

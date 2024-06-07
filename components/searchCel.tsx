@@ -7,7 +7,7 @@ import { LuSearch } from "react-icons/lu";
 
 const SearchCel = ({ search }: { search?: string }) => {
   const [text, setText] = useState(search);
-  const [query] = useDebounce(text, 500);
+  const [query] = useDebounce(text, 300);
   const router = useRouter();
 
   const initialRender = useRef(true);
@@ -27,7 +27,7 @@ const SearchCel = ({ search }: { search?: string }) => {
   return (
     <div className="relative">
       <Input
-        placeholder="Rechercher ..."
+        placeholder="Rechercher une cellule ..."
         value={text}
         onChange={(e) => setText(e.target.value)}
         className="rounded-lg bg-gradient-to-l from-orange-200/80 to-transparent"

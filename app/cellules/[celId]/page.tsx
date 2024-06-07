@@ -21,6 +21,7 @@ import { auth } from "@/auth";
 import CelUpdateBar from "@/components/cel/celUpdateBar";
 import { getPersonsCel } from "@/lib/_personActions";
 import CelMembers from "@/components/cel/celMembers";
+import { TbAlertTriangleFilled } from "react-icons/tb";
 
 type CelDetailsPageProps = {
   params: {
@@ -52,6 +53,8 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
   let cels = [];
   cels.push(cel);
 
+  const taille = cel?.persons ? cel?.persons.length : 0;
+
   return (
     <PageLayout
       title="Détails d'une cellule d'impact"
@@ -65,9 +68,18 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
         <div className="p-2 bg-gradient-to-l from-orange-300 to-transparent m-2 rounded-lg">
           <div className="flex items-center gap-2 mb-2 ">
             <p className="w-full flex justify-between font-semibold text-blue-800">
-              <span>
+              <span className="flex items-center">
                 {cel?.name} ({cel?.persons.length} membre(s))
+                {taille > 1 ? (
+                  <TbAlertTriangleFilled
+                    size={30}
+                    className=" block text-red-700 p-1 rounded-full"
+                  />
+                ) : (
+                  ""
+                )}
               </span>
+
               <Link
                 href={`/cellules/${cel?.id}/newmbr`}
                 className="p-2 rounded-full bg-blue-800 text-sm text-white"
