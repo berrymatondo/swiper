@@ -11,8 +11,6 @@ const SearchCel = ({ search }: { search?: string }) => {
   const router = useRouter();
 
   const initialRender = useRef(true);
-  //console.log("Query:", query);
-  //console.log("initialRender.current", initialRender.current);
 
   useEffect(() => {
     if (initialRender.current) {
@@ -25,14 +23,14 @@ const SearchCel = ({ search }: { search?: string }) => {
   }, [router, query]);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
+      <LuSearch className="absolute top-0 left-0 text-neutral-300" size={40} />
       <Input
-        placeholder="Rechercher une cellule ..."
+        placeholder="       Rechercher une cellule d'Impact"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        className="rounded-lg bg-gradient-to-l from-orange-200/80 to-transparent"
+        className="rounded-full bg-gradient-to-l from-orange-200/80 to-transparent"
       />
-      <LuSearch className="absolute top-0 right-0 text-neutral-300" size={40} />
     </div>
   );
 };

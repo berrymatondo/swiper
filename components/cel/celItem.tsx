@@ -8,6 +8,7 @@ import { Button } from "../ui/button";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import Link from "next/link";
 import { FaRegHandPointRight } from "react-icons/fa";
+import { Badge } from "../ui/badge";
 
 type CelItemProps = {
   cel: any;
@@ -26,37 +27,32 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
     <div
       key={cel.id}
       // className="shadow-xl rounded-lg my-2 bg-gradient-to-r from-slate-200 to-transparent hover:bg-slate-300 hover:cursor-pointer"
-      className="w-full bg-gradient-to-l from-orange-300 to-transparent p-2 my-1 mx-autu rounded-md"
+      //  className="w-full bg-gradient-to-l from-orange-300 to-transparent p-2 my-1 mx-autu rounded-md"
+      className="mb-1 w-full border border-orange-300/30 p-1 mx-auto rounded-md"
     >
-      <div className="my-2">
-        {/*           <p className="flex justify-between  font-semibold text-red-800 w-full ">
+      <div className="flex items-start justify-between gap-2 w-full  ">
+        <div className="flex flex-col lg:gap-2 items-start">
+          <p className="flex justify-between  font-semibold text-blue-800 w-full ">
             {cel.name}
-            {getStatus(cel)}
-          </p> */}
-        <div className="flex items-start justify-between gap-2 w-full  ">
-          <div className="flex flex-col lg:gap-2 items-start">
-            <p className="flex justify-between  font-semibold text-blue-800 w-full ">
-              {cel.name}
-            </p>
+          </p>
 
-            <p className="max-md:text-xs">
-              {cel?.address?.street as string}, {cel?.address?.number as string}{" "}
-              {cel?.address?.box as string}
-            </p>
-            <p className="max-md:text-xs">
-              {cel?.address?.postalCode as string}{" "}
-              {cel?.address?.municipality as string}
-            </p>
-          </div>
-
-          <Button
-            className="max-md:text-xs uppercase text-white w-1/3 md:w-2/5 bg-gradient-to-r from-red-800/80 to-orange-500"
-            onClick={() => router.push(`/cellules/${cel.id}`)}
-          >
-            <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
-            Détails
-          </Button>
+          <p className="max-md:text-xs">
+            {cel?.address?.street as string}, {cel?.address?.number as string}{" "}
+            {cel?.address?.box as string}
+          </p>
+          <p className="max-md:text-xs">
+            {cel?.address?.postalCode as string}{" "}
+            {cel?.address?.municipality as string}
+          </p>
         </div>
+
+        <Badge
+          className="hover:cursor-pointer max-md:text-xs uppercase text-white w-1/3 md:w-2/5 bg-gradient-to-r from-red-800/80 to-orange-500"
+          onClick={() => router.push(`/cellules/${cel.id}`)}
+        >
+          <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
+          Détails
+        </Badge>
       </div>
       {/*       <div className=" max-md:hiddenflex justify-between gap-2 md:gap-4 w-full">
         <Button
@@ -66,25 +62,29 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
           Contacter la cellule
         </Button>{" "}
       </div> */}
-      <div className="   flex justify-between items-center ">
-        {getStatus(cel)}
-        {role && (
-          <div className="flex justify-between w-1/3">
-            {role == "ADMIN" && (
-              <MdOutlineDeleteForever
-                className="text-red-400 bg-white rounded-full p-1"
-                onClick={() => router.push(`/admin/cellules/delete/${cel.id}`)}
+      {userSession && (
+        <div className="   flex justify-between items-center ">
+          {getStatus(cel)}
+          {role && (
+            <div className="flex justify-between w-1/3">
+              {role == "ADMIN" && (
+                <MdOutlineDeleteForever
+                  className="text-red-400 bg-white rounded-full p-1"
+                  onClick={() =>
+                    router.push(`/admin/cellules/delete/${cel.id}`)
+                  }
+                  size={30}
+                />
+              )}
+              <BiEditAlt
+                onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
+                className="bg-blue-800 text-white rounded-full p-1"
                 size={30}
-              />
-            )}
-            <BiEditAlt
-              onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
-              className="bg-blue-800 text-white rounded-full p-1"
-              size={30}
-            />{" "}
-          </div>
-        )}
-      </div>
+              />{" "}
+            </div>
+          )}
+        </div>
+      )}
 
       {/*    <div className="flex flex-col gap-4 justify-center items-center  max-md:hidden">
         <div className="flex justify-end gap-2 w-full">

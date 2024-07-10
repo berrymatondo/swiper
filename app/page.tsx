@@ -2,7 +2,9 @@ import Image from "next/image";
 import im from "../public/home.jpg";
 import logoicc0 from "../public/logoicc0.png";
 import Link from "next/link";
-import { MdDirectionsRun } from "react-icons/md";
+import { MdDirectionsRun, MdInfo } from "react-icons/md";
+import { BiBuildingHouse } from "react-icons/bi";
+import { GrUserAdmin } from "react-icons/gr";
 
 export default function Home() {
   return (
@@ -60,12 +62,37 @@ export default function Home() {
             </p>
           </div>
         </Link>
-        <div className="w-full flex justify-center gap-4">
-          <Link className="mt-24 underline hover:text-yellow-400" href="/infos">
-            {"Plus d'informations"}
+
+        <div className=" w-full flex justify-center gap-4">
+          <Link
+            className="mt-24 underline hover:text-yellow-400 max-md:text-xs"
+            href="/infos"
+          >
+            <div className="flex flex-col justify-center items-center">
+              <MdInfo className="" size={30} />
+
+              <p>{"Plus d'informations"}</p>
+            </div>
           </Link>
-          <Link className="mt-24 underline text-orange-400" href="/auth/login">
-            {"Espace admin"}
+          <Link
+            href="/benelux"
+            className="mt-24 underline hover:text-yellow-400 max-md:text-xs"
+          >
+            <div className="flex flex-col justify-center items-center">
+              <BiBuildingHouse className="" size={30} />
+
+              <p>Nos campus du Benelux</p>
+            </div>
+          </Link>
+          <Link
+            className="mt-24 underline hover:text-yellow-400 max-md:text-xs"
+            href="/auth/login"
+          >
+            <div className="flex flex-col justify-center items-center">
+              <GrUserAdmin className="" size={30} />
+
+              <p>Espace Admin</p>
+            </div>
           </Link>
         </div>
       </div>

@@ -31,7 +31,7 @@ const CellulesPage = async ({
   const search =
     typeof searchParams.search === "string" ? searchParams.search : undefined;
 
-  const celCount = await prisma.cellule.count();
+  // const celCount = await prisma.cellule.count();
 
   const cellules = await prisma.cellule.findMany({
     take: take,
@@ -57,13 +57,13 @@ const CellulesPage = async ({
       description="La liste de toutes les cellules d'impact"
     >
       <div className="">
-        <CustomBreadcrumb name="Cellules" />
-        <div className="flex items-center justify-between max-md:m-1 md:mt-2">
-          <div className="flex items-center text-xs gap-1">
+        <CustomBreadcrumb name="Les cellules d'Impact" />
+        <div className="flex items-center justify-between max-md:m-1 md:mt-2 md:w-1/2">
+          <div className="flex items-center text-xs gap-1 w-full">
             <SearchCel search={search} />
             <span className="max-md:hidden ">Ex: Anderlecht</span>
           </div>
-          <div className="flex justify-normal gap-2 ">
+          {/*           <div className="flex justify-normal gap-2 ">
             {skip == 0 ? null : (
               <Link
                 href={{
@@ -90,19 +90,23 @@ const CellulesPage = async ({
                 {"Suivant"}
               </Link>
             )}
-          </div>
-          <Link className="" href="/admin/cellules/new">
-            <MdAddCircle size={50} className="md:hidden text-blue-800" />
-            <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-blue-600 hover:cursor-pointer bg-blue-800 text-white ">
-              Nouveau
-            </span>
-          </Link>
+          </div> */}
+          {session && session.user && (
+            <Link className="" href="/admin/cellules/new">
+              <MdAddCircle size={50} className="md:hidden text-blue-800" />
+              <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-blue-600 hover:cursor-pointer bg-blue-800 text-white ">
+                Nouveau
+              </span>
+            </Link>
+          )}
         </div>
         <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-6 ">
           <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-2">
-            {cellules?.map((cel: any) => (
-              <CelItem userSession={session} cel={cel} key={cel.id} />
-            ))}
+            <div>
+              {cellules?.map((cel: any) => (
+                <CelItem userSession={session} cel={cel} key={cel.id} />
+              ))}
+            </div>
           </div>
 
           <div className="md:hidden col-span-3 p-1 max-h-1/2">

@@ -42,48 +42,73 @@ const CellulesPage = async () => {
         <p className="text-orange-600 border mb-8  rounded-bl-full rounded-tr-full m-1 uppercase text-xl max-md:text-sm  text-center p-4 font-bold bg-gradient-to-r to-orange-100 from-white">
           {"7 bonnes raisons d'être membre d'une cellule d'Impact "}
         </p>
-        <div className="max-md:text-xs max-md:mx-1 flex flex-col items-start justify-between my-2">
-          <p className="text-end flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl">
-            <TbCircleNumber1Filled size={40} className="text-orange-600" />{" "}
-            <span> {"Mieux comprendre la parole de Dieu"}</span>
-          </p>
+        <div className="flex">
+          <div className="max-md:text-xs max-md:mx-1 flex flex-col items-start justify-between my-2">
+            <p className="text-end flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl">
+              <TbCircleNumber1Filled size={40} className="text-orange-600" />{" "}
+              <span> {"Mieux comprendre la parole de Dieu"}</span>
+            </p>
 
-          <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber2Filled size={40} className="text-orange-600" />
-            <span> {"Apprendre à prier avec et pourles autres"}</span>
-          </p>
+            <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+              <TbCircleNumber2Filled size={40} className="text-orange-600" />
+              <span> {"Apprendre à prier avec et pourles autres"}</span>
+            </p>
 
-          <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber3Filled size={40} className="text-orange-600" />{" "}
-            <span> {"Apprendre à évangéliserles voisins"}</span>
-          </p>
+            <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+              <TbCircleNumber3Filled size={40} className="text-orange-600" />{" "}
+              <span> {"Apprendre à évangéliserles voisins"}</span>
+            </p>
 
-          <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber4Filled size={40} className="text-orange-600" />
-            <span> {"Apprendre à paître les brebis du Seigneur"}</span>
-          </p>
+            <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+              <TbCircleNumber4Filled size={40} className="text-orange-600" />
+              <span> {"Apprendre à paître les brebis du Seigneur"}</span>
+            </p>
 
-          <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber5Filled size={40} className="text-orange-600" />{" "}
-            <span> {"Apprendre à exhorter"}</span>
-          </p>
+            <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+              <TbCircleNumber5Filled size={40} className="text-orange-600" />{" "}
+              <span> {"Apprendre à exhorter"}</span>
+            </p>
 
-          <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber6Filled size={40} className="text-orange-600" />
-            <span>
+            <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+              <TbCircleNumber6Filled size={40} className="text-orange-600" />
+              <span>
+                {" "}
+                {
+                  "Contribuer à la croissance de l'église en invitantles voisins à l'église"
+                }
+              </span>
+            </p>
+
+            <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
+              <TbCircleNumber7Filled size={40} className="text-orange-600" />{" "}
+              <span> {"Devenir un véritable disciple de Jésus-Christ"}</span>
+            </p>
+          </div>
+
+          <Link
+            href="/cellules"
+            className="max-md:hidden text-center p-1  mt-8 md:mt-24"
+          >
+            <div className="flex flex-col items-center justify-center h-60 w-60 bg-gradient-to-r from-red-800/80 to-orange-500 text-white  rounded-full hover:bg-gradient-to-t  hover:from-orange-500 hover:to-red-800/80">
               {" "}
-              {
-                "Contribuer à la croissance de l'église en invitantles voisins à l'église"
-              }
-            </span>
-          </p>
-
-          <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
-            <TbCircleNumber7Filled size={40} className="text-orange-600" />{" "}
-            <span> {"Devenir un véritable disciple de Jésus-Christ"}</span>
-          </p>
+              <span className="flex justify-center font-semibold">
+                {" "}
+                <span className=" text-yellow-400 md:text-lg">
+                  <MdDirectionsRun size={30} />
+                </span>{" "}
+                Rejoins vite
+              </span>
+              <span className="block md:text-lg  font-semibold">
+                {" "}
+                {" une cellule d'impact !"}
+              </span>
+            </div>
+          </Link>
         </div>
-        <Link href="/zones" className=" text-center p-1  mt-8 md:mt-24">
+        <Link
+          href="/cellules"
+          className="md:hidden text-center p-1  mt-8 md:mt-24 "
+        >
           <div className="m-2 text-lg bg-gradient-to-r from-red-800/80 to-orange-500 text-white py-1 px-20 rounded-full">
             {" "}
             <p className="flex justify-center font-semibold">
