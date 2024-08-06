@@ -11,7 +11,7 @@ import {
 import { getCel } from "@/lib/_celActions";
 import { Cellule, Person } from "@prisma/client";
 import React from "react";
-import { MdCalendarMonth, MdHouse } from "react-icons/md";
+import { MdCalendarMonth, MdHome, MdHouse } from "react-icons/md";
 import { GoClock } from "react-icons/go";
 
 import { FaMobileAlt } from "react-icons/fa";
@@ -68,21 +68,23 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
         <div className="p-2 bg-gradient-to-l from-orange-300 to-transparent m-2 rounded-lg">
           <div className="flex items-center gap-2 mb-2 ">
             <p className="w-full flex justify-between font-semibold text-blue-800">
-              <span className="flex items-center">
-                {cel?.name} ({cel?.persons.length} membre(s))
-                {taille > 1 ? (
+              <span className="flex gap-2 items-center ">
+                {/*                 {cel?.name} ({cel?.persons.length} membre(s))
+                 */}{" "}
+                <MdHome size={20} /> {cel?.name}
+                {/*                 {taille > 1 ? (
                   <TbAlertTriangleFilled
                     size={30}
                     className=" block text-red-700 p-1 rounded-full"
                   />
                 ) : (
                   ""
-                )}
+                )} */}
               </span>
 
               <Link
                 href={`/cellules/${cel?.id}/newmbr`}
-                className="p-2 rounded-full bg-blue-800 text-sm text-white"
+                className="p-2 rounded-full bg-sky-800 text-sm text-white"
               >
                 Rejoindre
               </Link>
@@ -104,9 +106,9 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
                 ))}
           </div>
 
-          <div className="flex items-center max-md:items-start gap-2  ">
+          <div className=" bg-gray-100 rounded-lg p-2 text-sky-800 flex items-center max-md:items-start gap-2  ">
             <BiMap className="text-green-600" />
-            <div className="flex max-md:flex-col md:gap-2 items-start">
+            <div className="font-semibold flex max-md:flex-col md:gap-2 items-start">
               <p className="">
                 {cel?.address?.street as string},{" "}
                 {cel?.address?.number as string} {cel?.address?.box as string}

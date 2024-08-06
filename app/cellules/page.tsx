@@ -41,7 +41,29 @@ const CellulesPage = async ({
       zone: true,
     },
     where: {
-      name: { contains: search as string, mode: "insensitive" },
+      OR: [
+        {
+          address: {
+            postalCode: { contains: search as string, mode: "insensitive" },
+          },
+        },
+        {
+          address: {
+            street: { contains: search as string, mode: "insensitive" },
+          },
+        },
+        {
+          address: {
+            municipality: { contains: search as string, mode: "insensitive" },
+          },
+        },
+        {
+          address: {
+            number: { contains: search as string, mode: "insensitive" },
+          },
+        },
+        { name: { contains: search as string, mode: "insensitive" } },
+      ],
     },
     orderBy: {
       name: "asc",
@@ -61,7 +83,8 @@ const CellulesPage = async ({
         <div className="flex items-center justify-between max-md:m-1 md:mt-2 md:w-1/2">
           <div className="flex items-center text-xs gap-1 w-full">
             <SearchCel search={search} />
-            <span className="max-md:hidden ">Ex: Anderlecht</span>
+            {/*             <span className="max-md:hidden ">Ex: Anderlecht</span>
+             */}{" "}
           </div>
           {/*           <div className="flex justify-normal gap-2 ">
             {skip == 0 ? null : (
