@@ -74,7 +74,7 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
                 Rejoindre
               </Link>
             </Badge>
-            <span className="text-xs text-center">lee groupe WhatsApp</span>
+            <span className="text-xs text-center mt-1">le groupe WhatsApp</span>
           </div>
         )}
       </div>

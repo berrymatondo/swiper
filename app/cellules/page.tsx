@@ -133,7 +133,7 @@ const CellulesPage = async ({
           </div>
 
           <div className="md:hidden col-span-3 p-1 max-h-1/2">
-            <Map cels={cellules} haut="250px" />
+            <Map cels={cellules} haut="250px" show={false} />
           </div>
 
           <div className="max-md:hidden col-span-4 p-1 max-h-1/2">

@@ -13,6 +13,9 @@ import { FaMobileAlt } from "react-icons/fa";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { Icon } from "leaflet";
 import Link from "next/link";
+import { useState } from "react";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 //import { Address, Gi } from "@prisma/client";
 
 type MapProps = {
@@ -23,15 +26,17 @@ type MapProps = {
   haut?: any;
   campus?: any;
   zoom?: any;
+  show?: boolean;
 };
 
 //export default function Map({ addresses, gis, secteurId }: MapProps) {
-export default function Map({ cels, haut, campus, zoom }: MapProps) {
+export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
   //console.log("Adresses", addresses);
   //console.log("secteurId", secteurId);
   //console.log("gis", gis);
 
   let h = haut ? haut : "500px";
+  const [showIn, setShowIn] = useState(show);
 
   const customIcon = new Icon({
     //iconUrl: require("../../public/ic.png"),
@@ -40,97 +45,123 @@ export default function Map({ cels, haut, campus, zoom }: MapProps) {
   });
 
   return (
-    <MapContainer
-      preferCanvas={true}
-      center={[50.85, 4.4]}
-      zoom={zoom ? zoom : 10}
-      scrollWheelZoom={true}
-      style={{ height: h, width: "100%" }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-
-      {cels && (
-        <MarkerClusterGroup>
-          {cels
-            ?.filter(
-              (adr: any) =>
-                //(secteurId ? gi.secteurId == secteurId : 1 == 1) && gi.address
-                adr?.address?.street
-            )
-            .map((gi: any, index: number) => (
-              <Marker
-                position={[
-                  gi.address?.latitude ? +gi.address?.latitude : 0,
-                  gi.address?.longitude ? +gi.address?.longitude : 0,
-                ]}
-                key={index}
-                icon={customIcon}
-              >
-                {" "}
-                <Popup>
-                  <p className="text-blue-800 font-semibold">{gi.name}</p>
-                  <p>
-                    {gi.address.street} {gi.address.number},{" "}
-                    {gi.address.postalCode} {gi.address.municipality}
-                  </p>
-                  {gi?.persons &&
-                    gi?.persons?.map((person: Person) => (
-                      <p className="flex items-center gap-2" key={person.id}>
-                        <FaMobileAlt /> {person.mobile} ({person.firstname})
-                      </p>
-                    ))}
-                </Popup>{" "}
-              </Marker>
-            ))}
-        </MarkerClusterGroup>
+    <div>
+      {showIn ? (
+        <Button
+          onClick={() => setShowIn(!showIn)}
+          className="bg-gray-600 p-2 mb-1"
+        >
+          Cacher la carte
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            setShowIn(!showIn);
+          }}
+          className="bg-blue-900 p-2 mb-1"
+        >
+          Afficher la carte
+        </Button>
       )}
+      {showIn && (
+        <MapContainer
+          preferCanvas={true}
+          center={[50.85, 4.4]}
+          zoom={zoom ? zoom : 10}
+          scrollWheelZoom={true}
+          style={{ height: h, width: "100%" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-      {campus && (
-        <MarkerClusterGroup>
-          {campus
-            ?.filter(
-              (camp: any) =>
-                //(secteurId ? gi.secteurId == secteurId : 1 == 1) && gi.address
-                camp?.address?.street
-            )
-            .map((gi: any, index: number) => (
-              <Marker
-                position={[
-                  gi.address?.latitude ? +gi.address?.latitude : 0,
-                  gi.address?.longitude ? +gi.address?.longitude : 0,
-                ]}
-                key={index}
-                icon={customIcon}
-              >
-                {" "}
-                <Popup>
-                  <Link
-                    href="https://impactcentrechretien.com/bruxelles"
-                    target="_blank"
-                    className="text-blue-800 font-semibold"
+          {cels && (
+            <MarkerClusterGroup>
+              {cels
+                ?.filter(
+                  (adr: any) =>
+                    //(secteurId ? gi.secteurId == secteurId : 1 == 1) && gi.address
+                    adr?.address?.street
+                )
+                .map((gi: any, index: number) => (
+                  <Marker
+                    position={[
+                      gi.address?.latitude ? +gi.address?.latitude : 0,
+                      gi.address?.longitude ? +gi.address?.longitude : 0,
+                    ]}
+                    key={index}
+                    icon={customIcon}
                   >
-                    {gi.name}
-                  </Link>
-                  <p>
-                    {gi.address.street} {gi.address.number},{" "}
-                    {gi.address.postalCode} {gi.address.municipality}
-                  </p>
-                  {/*                 {gi?.persons &&
+                    {" "}
+                    <Popup>
+                      <p className="text-blue-800 font-semibold">{gi.name}</p>
+                      <p>
+                        {/*                     {gi.address.street} {gi.address.number},{" "}
+                         */}{" "}
+                        {gi.address.street}, {gi.address.postalCode}{" "}
+                        {gi.address.municipality}
+                      </p>
+                      {gi?.persons &&
+                        gi?.persons?.map((person: Person) => (
+                          <p
+                            className="flex items-center gap-2"
+                            key={person.id}
+                          >
+                            <FaMobileAlt /> {person.mobile} ({person.firstname})
+                          </p>
+                        ))}
+                    </Popup>{" "}
+                  </Marker>
+                ))}
+            </MarkerClusterGroup>
+          )}
+
+          {campus && (
+            <MarkerClusterGroup>
+              {campus
+                ?.filter(
+                  (camp: any) =>
+                    //(secteurId ? gi.secteurId == secteurId : 1 == 1) && gi.address
+                    camp?.address?.street
+                )
+                .map((gi: any, index: number) => (
+                  <Marker
+                    position={[
+                      gi.address?.latitude ? +gi.address?.latitude : 0,
+                      gi.address?.longitude ? +gi.address?.longitude : 0,
+                    ]}
+                    key={index}
+                    icon={customIcon}
+                  >
+                    {" "}
+                    <Popup>
+                      <Link
+                        href="https://impactcentrechretien.com/bruxelles"
+                        target="_blank"
+                        className="text-blue-800 font-semibold"
+                      >
+                        {gi.name}
+                      </Link>
+                      <p>
+                        {/*                     {gi.address.street} {gi.address.number},{" "}
+                         */}{" "}
+                        {gi.address.street}, {gi.address.postalCode}{" "}
+                        {gi.address.municipality}
+                      </p>
+                      {/*                 {gi?.persons &&
                   gi?.persons?.map((person: Person) => (
                     <p className="flex items-center gap-2" key={person.id}>
                       <FaMobileAlt /> {person.mobile} ({person.firstname})
                     </p>
                   ))} */}
-                </Popup>{" "}
-              </Marker>
-            ))}
-        </MarkerClusterGroup>
-      )}
+                    </Popup>{" "}
+                  </Marker>
+                ))}
+            </MarkerClusterGroup>
+          )}
 
-      {/*       <Marker position={[50.84583, 4.40235]}>
+          {/*       <Marker position={[50.84583, 4.40235]}>
         <Popup>
           <p>{"Rue des lutins 8, 1190 Forest "}</p>
           <p>
@@ -147,6 +178,8 @@ export default function Map({ cels, haut, campus, zoom }: MapProps) {
           </p>
         </Popup>
       </Marker> */}
-    </MapContainer>
+        </MapContainer>
+      )}
+    </div>
   );
 }
