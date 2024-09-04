@@ -13,11 +13,11 @@ const CelMembers = ({ members }: CelMembersProps) => {
       <div className="p-2" onClick={() => setShow(!show)}>
         {show ? (
           <span className="hover:text-blue-800 hover:cursor-pointer font-semibold">
-            Cacher la liste ({members.length}){" "}
+            Cacher la liste ({members?.length}){" "}
           </span>
         ) : (
           <span className="hover:text-blue-800 hover:cursor-pointer font-semibold">
-            Voir les membres ({members.length})
+            Voir les membres ({members?.length})
           </span>
         )}
         {show &&

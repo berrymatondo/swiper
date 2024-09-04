@@ -26,7 +26,7 @@ const SearchCel = ({ search }: { search?: string }) => {
     <div className="relative w-full">
       <LuSearch className="absolute top-0 left-0 text-neutral-300" size={40} />
       <Input
-        placeholder="       Rechercher une cellule d'Impact"
+        placeholder="       Entrer une commune, une rue ou un code postal"
         value={text}
         onChange={(e) => setText(e.target.value)}
         className="rounded-full bg-gradient-to-l from-orange-200/80 to-transparent"

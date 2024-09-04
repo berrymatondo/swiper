@@ -79,6 +79,7 @@ model Cellule {
   hours String @default("De 19h à 20h30")
   days String  @default("Tous les jeudis")
   statut CelStatuses @default(INACTIF)
+  grpWhatsApp String?
   persons Person[] 
   users User[] 
   meetings Meeting[] 

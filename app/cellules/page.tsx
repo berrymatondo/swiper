@@ -79,7 +79,7 @@ const CellulesPage = async ({
       description="La liste de toutes les cellules d'impact"
     >
       <div className="">
-        <CustomBreadcrumb name="Les cellules d'Impact" />
+        <CustomBreadcrumb name="Choisissez une cellule près de chez vous!" />
         <div className="flex items-center justify-between max-md:m-1 md:mt-2 md:w-1/2">
           <div className="flex items-center text-xs gap-1 w-full">
             <SearchCel search={search} />

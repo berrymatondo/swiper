@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MdDirectionsRun, MdInfo } from "react-icons/md";
 import { BiBuildingHouse } from "react-icons/bi";
 import { GrUserAdmin } from "react-icons/gr";
+import { Label } from "@/components/ui/label";
 
 export default function Home() {
   return (
@@ -36,18 +37,34 @@ export default function Home() {
             Cellules<strong className="text-orange-400">{" d'Impact"}</strong>
           </p>
         </h1>
-        <p className="md:text-lg px-4 md:px-36 xl:px-96">
+        <p className="font-normal md:text-2xl px-4 md:px-36 xl:px-96 my-8">
+          Les <strong>cellules {"d'Impact"}</strong> sont des cellules de{" "}
+          {"l'Eglise "}
+          <Link
+            className="text-yellow-400"
+            target="_blank"
+            href="https://impactcentrechretien.com/"
+          >
+            Impact Centre Chrétien.
+            <br />
+          </Link>{" "}
+          Les membres des cellules se {"réunissent "}
+          <strong>tous les jeudis de 19h00 a 20h15 </strong>
+          dans les maisons {"hôtes"} <br /> pour {"s'édifier"} et influencer
+          leurs villes et leurs quartiers avec les valeurs de Christ !
+        </p>
+        {/*         <p className="md:text-xl px-4 md:px-36 xl:px-96">
           {
             "Trouve et rejoins rapidement une cellule de maison à proximité de chez toi"
           }
         </p>
-        <p className="text-lg px-4 md:px-36 xl:px-96">
+        <p className="text-xl px-4 md:px-36 xl:px-96">
           {" et viens y servir le Seigneur avec "}{" "}
           <span className="font-semibold text-xl">IMPACT</span>
-        </p>
+        </p> */}
 
         <Link href="/cellules" className="text-center p-1  mt-8 md:mt-24">
-          <div className="text-lg bg-gradient-to-r from-red-800/80 to-orange-500 text-white py-1 px-20 rounded-full">
+          <div className="text-lg hover:bg-gradient-to-r hover:from-red-700/80 hover:to-orange-400 bg-gradient-to-r from-red-800/80 to-orange-500 text-white py-1 px-20 rounded-full">
             {" "}
             <p className="flex justify-center font-semibold">
               {" "}

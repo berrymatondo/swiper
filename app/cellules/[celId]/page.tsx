@@ -106,28 +106,30 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
                 ))}
           </div>
 
-          <div className=" bg-gray-100 rounded-lg p-2 text-sky-800 flex items-center max-md:items-start gap-2  ">
-            <BiMap className="text-green-600" />
-            <div className="font-semibold flex max-md:flex-col md:gap-2 items-start">
-              <p className="">
-                {cel?.address?.street as string},{" "}
-                {cel?.address?.number as string} {cel?.address?.box as string}
-              </p>
-              <p className="">
-                {cel?.address?.postalCode as string}{" "}
-                {cel?.address?.municipality as string}
-              </p>
+          <div className="flex">
+            <div className="  rounded-lg p-2 text-sky-800 flex items-center max-md:items-start gap-2  ">
+              <BiMap className="text-green-600" />
+              <div className="font-semibold flex flex-col md:gap-2 items-start">
+                <p className="">
+                  {cel?.address?.street as string},{" "}
+                  {cel?.address?.number as string} {cel?.address?.box as string}
+                </p>
+                <p className="">
+                  {cel?.address?.postalCode as string}{" "}
+                  {cel?.address?.municipality as string}
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="flex gap-4">
-            <div className=" flex items-center gap-2 mb-2">
-              <MdCalendarMonth className="text-blue-600" />
-              <p>{cel?.days}</p>
-            </div>
-            <div className="flex items-center gap-2 mb-2">
-              <GoClock className="text-teal-600" />
-              <p>{cel?.hours}</p>
+            <div className="flex flex-col">
+              <div className=" flex items-center gap-2 mb-2">
+                <MdCalendarMonth className="text-blue-600" />
+                <p>{cel?.days}</p>
+              </div>
+              <div className="flex items-center gap-2 mb-2">
+                <GoClock className="text-teal-600" />
+                <p>{cel?.hours}</p>
+              </div>
             </div>
           </div>
           {usr && (
