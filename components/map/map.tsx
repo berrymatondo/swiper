@@ -47,21 +47,21 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
   return (
     <div>
       {showIn ? (
-        <Button
+        <p
           onClick={() => setShowIn(!showIn)}
-          className="bg-gray-600 p-2 mb-1"
+          className="text-red-800 italic underline text-center mb-1"
         >
           Cacher la carte
-        </Button>
+        </p>
       ) : (
-        <Button
+        <p
           onClick={() => {
             setShowIn(!showIn);
           }}
-          className="bg-blue-900 p-2 mb-1"
+          className="text-blue-900 italic underline text-center mb-1"
         >
           Afficher la carte
-        </Button>
+        </p>
       )}
       {showIn && (
         <MapContainer
