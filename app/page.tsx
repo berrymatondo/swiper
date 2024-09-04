@@ -37,7 +37,7 @@ export default function Home() {
             Cellules<strong className="text-orange-400">{" d'Impact"}</strong>
           </p>
         </h1>
-        <p className="font-normal md:text-2xl px-4 md:px-36 xl:px-96 my-8">
+        <p className="font-normal md:text-xl px-4 md:px-36 xl:px-96 my-4">
           Les <strong>cellules {"d'Impact"}</strong> sont des cellules de{" "}
           {"l'Eglise "}
           <Link

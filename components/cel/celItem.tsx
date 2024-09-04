@@ -54,18 +54,22 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
           <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
           Détails
         </Badge> */}
-        <div className="flex flex-col">
-          <Badge
-            className="hover:cursor-pointer max-md:text-xs uppercase text-white w-full bg-green-600 hover:bg-green-800 p-2"
-            onClick={() => router.push(`/cellules/${cel.id}`)}
-          >
-            {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
-             */}{" "}
-            <FaWhatsapp size={20} className="mr-2" />
-            Rejoindre
-          </Badge>
-          <span className="text-xs text-center">le groupe WhatsApp</span>
-        </div>
+        {cel.grpWhatsApp && (
+          <div className="flex flex-col">
+            <Badge
+              className="hover:cursor-pointer max-md:text-xs uppercase text-white w-full bg-green-600 hover:bg-green-800 p-2"
+              onClick={() => router.push(`/cellules/${cel.id}`)}
+            >
+              {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
+               */}{" "}
+              <FaWhatsapp size={20} className="mr-2" />
+              <Link target="_blank" href={cel.grpWhatsApp}>
+                REROINDRE
+              </Link>
+            </Badge>
+            <span className="text-xs text-center">le groupe WhatsApp</span>
+          </div>
+        )}
       </div>
       {/*       <div className=" max-md:hiddenflex justify-between gap-2 md:gap-4 w-full">
         <Button
