@@ -9,6 +9,7 @@ import { MdOutlineDeleteForever } from "react-icons/md";
 import Link from "next/link";
 import { FaRegHandPointRight, FaWhatsapp } from "react-icons/fa";
 import { Badge } from "../ui/badge";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 type CelItemProps = {
   cel: any;
@@ -28,11 +29,16 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
       key={cel.id}
       // className="shadow-xl rounded-lg my-2 bg-gradient-to-r from-slate-200 to-transparent hover:bg-slate-300 hover:cursor-pointer"
       //  className="w-full bg-gradient-to-l from-orange-300 to-transparent p-2 my-1 mx-autu rounded-md"
-      className="hover:bg-orange-300/20 hover:cursor-pointer mb-1 w-full border border-black/30 p-2  mx-auto rounded-md"
+      className="hover:bg-orange-300/20 hover:cursor-pointer mb-2 w-full border shadow-md
+
+ p-2  mx-auto rounded-md"
     >
-      <div className="flex items-start justify-between gap-2 w-full  ">
+      <div
+        // onClick={() => router.push(`/cellules/${cel.id}`)}
+        className="flex items-start justify-between gap-2 w-full "
+      >
         <div className="flex flex-col lg:gap-2 items-start">
-          <p className="opacity-70 flex justify-between  font-semibold text-blue-900 w-full ">
+          <p className="text-lg opacity-70 flex justify-between  font-semibold text-blue-800 w-full ">
             {cel.name}
           </p>
 
@@ -56,18 +62,19 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
         </Badge> */}
         {cel.grpWhatsApp && (
           <div className="flex flex-col">
-            <Badge
-              className="hover:cursor-pointer max-md:text-xs uppercase text-white w-full bg-green-600 hover:bg-green-800 p-2"
-              onClick={() => router.push(`/cellules/${cel.id}`)}
-            >
+            <Badge className="border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-2">
               {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
                */}{" "}
-              <FaWhatsapp size={20} className="mr-2" />
-              <Link target="_blank" href={cel.grpWhatsApp}>
-                REROINDRE
+              <IoLogoWhatsapp size={30} className="mr-2" />
+              <Link
+                target="_blank"
+                href={cel.grpWhatsApp}
+                className="font-semibold text-xl"
+              >
+                Rejoindre
               </Link>
             </Badge>
-            <span className="text-xs text-center">le groupe WhatsApp</span>
+            <span className="text-xs text-center">lee groupe WhatsApp</span>
           </div>
         )}
       </div>
