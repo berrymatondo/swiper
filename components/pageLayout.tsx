@@ -73,7 +73,8 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
       {/* <MobileNav /> */}
       {/*       <MobileAdminNav />
        */}{" "}
-      <Title title={title} description={description} />
+      {/*       <Title title={title} description={description} />
+       */}{" "}
       <div className="grid md:grid-cols-5 gap-4 mt-4 h-full ">
         <div className="max-md:hidden col-span-1 rounded-lg ">
           {/*           <DesktopNav />
