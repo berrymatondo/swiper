@@ -27,6 +27,17 @@ import { addZone, getAllZones, updateZone } from "@/lib/_zoneActions";
 import { useRouter } from "next/navigation";
 import { Address, Zone, ZonesStatuses } from "@prisma/client";
 import { addCel, updateCel } from "@/lib/_celActions";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "../ui/command";
+import { cn } from "@/lib/utils";
 
 type CelFormProps = {
   cel?: any;
@@ -37,10 +48,12 @@ type CelFormProps = {
 export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
   const router = useRouter();
   const [zones, setZones] = useState<any>();
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
 
   //console.log("allZones:", allZones);
-  console.log("cel:", cel);
-  console.log("cel?.addressId:", cel?.addressId);
+  //console.log("cel:", cel);
+  //console.log("cel?.addressId:", cel?.addressId);
 
   const form = useForm<z.infer<typeof celFormSchema>>({
     resolver: zodResolver(celFormSchema),
@@ -49,6 +62,7 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
       name: cel?.name ? cel?.name : "",
       days: cel?.days ? cel?.days : "Tous les jeudis",
       hours: cel?.hours ? cel?.hours : "De 19h à 20h30",
+      grpWhatsApp: cel?.grpWhatsApp ? cel?.grpWhatsApp : "",
       zoneId: cel?.zoneId?.toString(),
       addressId: cel?.addressId ? cel?.addressId.toString() : "",
       /*       respoId: zone?.respoId ? zone?.respoId : undefined,
@@ -82,7 +96,7 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
  */
   // Process Form
   const procesForm = async (values: z.infer<typeof celFormSchema>) => {
-    console.log("Value: ", values);
+    //console.log("Value: ", values);
     // console.log("Zone:", zone);
 
     let res;
@@ -335,13 +349,75 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
                 }}
               />
             )} */}
+            {/*             <FormField
+              control={form.control}
+              name="addressId"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Adresse combo</FormLabel>
+                    <Popover open={open} onOpenChange={setOpen}>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          role="combobox"
+                          aria-expanded={open}
+                          className="w-[200px] justify-between"
+                        >
+                          {value
+                            ? addresses.find(
+                                (framework: any) => framework.value === value
+                              )?.label
+                            : "Selectionner une adresse..."}
+                          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[200px] p-0">
+                        <Command>
+                          <CommandInput placeholder="Search framework..." />
+                          <CommandList>
+                            <CommandEmpty>No framework found.</CommandEmpty>
+                            <CommandGroup>
+                              {addresses.map((framework: Address) => (
+                                <CommandItem
+                                  key={framework.id}
+                                  value={framework.street}
+                                  onSelect={(currentValue) => {
+                                    setValue(
+                                      currentValue === value ? "" : currentValue
+                                    );
+                                    setOpen(false);
+                                  }}
+                                >
+                                  <Check
+                                    className={cn(
+                                      "mr-2 h-4 w-4",
+                                      value === framework.street
+                                        ? "opacity-100"
+                                        : "opacity-0"
+                                    )}
+                                  />
+                                  {framework.street}
+                                </CommandItem>
+                              ))}
+                            </CommandGroup>
+                          </CommandList>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
+
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            /> */}
             <FormField
               control={form.control}
               name="addressId"
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Add de la cellule </FormLabel>
+                    <FormLabel>Adresse de la cellule </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -359,6 +435,25 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
                       </SelectContent>
                     </Select>
 
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="grpWhatsApp"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>{"Groupe WhatsApp"}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Entrer le groupe WhatsApp"
+                        type="text"
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 );

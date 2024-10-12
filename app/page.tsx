@@ -7,6 +7,12 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { GrUserAdmin } from "react-icons/gr";
 import { Label } from "@/components/ui/label";
 
+const items = [
+  { id: 1, title: "Plus d'informations" },
+  { id: 2, title: "Campus du Benelux" },
+  { id: 3, title: "Espace Admin" },
+];
+
 export default function Home() {
   return (
     <main className="relative text-white flex flex-col md:flex-row gap-10 justify-center items-center  h-screen md:px-2">
@@ -30,15 +36,15 @@ export default function Home() {
 
         <h1 className="relative  mb-3 font-bold max-md:flex max-md:flex-col items-start mt-4">
           {" "}
-          <span className="text-orange-400 absolute z-10 text-sm md:text-lg left-24 -top-4">
+          <span className="text-white absolute z-10 text-sm md:text-lg left-24 -top-4">
             Rejoins les
           </span>
-          <p className="text-8xl max-md:text-6xl">
-            Cellules<strong className="text-orange-400">{" d'Impact"}</strong>
+          <p className="text-8xl max-md:text-6xl text-orange-400">
+            Cellules<strong className="text-white">{" de maison"}</strong>
           </p>
         </h1>
         <p className="font-normal md:text-xl px-4 md:px-36 xl:px-96 my-4">
-          Les <strong>cellules {"d'Impact"}</strong> sont des cellules de{" "}
+          Les <strong>cellules {"de maison"}</strong> sont des cellules de{" "}
           {"l'Eglise "}
           <Link
             className="text-yellow-400"
@@ -49,9 +55,10 @@ export default function Home() {
             <br />
           </Link>{" "}
           Les membres des cellules se {"réunissent "}
-          <strong>tous les jeudis de 19h00 a 20h15 </strong>
-          dans les maisons {"hôtes"} <br /> pour {"s'édifier"} et influencer
-          leurs villes et leurs quartiers avec les valeurs de Christ !
+          <strong>tous les jeudis de 19h00 {"à"} 20h15 </strong>
+          dans les maisons {"hôtes"} <br /> pour {"s'édifier"} afin {"d'"}
+          influencer leurs villes et leurs quartiers avec les valeurs de Christ
+          !
         </p>
         {/*         <p className="md:text-xl px-4 md:px-36 xl:px-96">
           {
@@ -64,7 +71,7 @@ export default function Home() {
         </p> */}
 
         <Link href="/cellules" className="text-center p-1  mt-8 md:mt-24">
-          <div className="text-lg hover:bg-gradient-to-r hover:from-red-700/80 hover:to-orange-400 bg-gradient-to-r from-red-800/80 to-orange-500 text-white py-1 px-20 rounded-full">
+          <div className="text-lg hover:bg-gradient-to-r hover:from-red-700/80 hover:to-orange-400 bg-gradient-to-r from-red-800/80 to-orange-500 text-white py-1 px-20 max-md:px-14 rounded-full">
             {" "}
             <p className="flex justify-center font-semibold">
               {" "}
@@ -75,38 +82,38 @@ export default function Home() {
             </p>
             <p className="block md:text-lg  font-semibold">
               {" "}
-              {" une cellule d'impact !"}
+              {" une cellule de maison !"}
             </p>
           </div>
         </Link>
 
         <div className=" w-full flex justify-center gap-4">
           <Link
-            className="mt-24 underline hover:text-yellow-400 max-md:text-xs"
+            className="mt-24 max-md:mt-16 underline hover:text-yellow-400 max-md:text-xs"
             href="/infos"
           >
             <div className="flex flex-col justify-center items-center">
-              <MdInfo className="" size={30} />
+              <MdInfo className="text-orange-400" size={30} />
 
               <p>{"Plus d'informations"}</p>
             </div>
           </Link>
           <Link
             href="/benelux"
-            className="mt-24 underline hover:text-yellow-400 max-md:text-xs"
+            className="mt-24  max-md:mt-16  underline hover:text-yellow-400 max-md:text-xs"
           >
             <div className="flex flex-col justify-center items-center">
-              <BiBuildingHouse className="" size={30} />
+              <BiBuildingHouse className="text-sky-400" size={30} />
 
               <p>Nos campus du Benelux</p>
             </div>
           </Link>
           <Link
-            className="mt-24 underline hover:text-yellow-400 max-md:text-xs"
+            className="mt-24  max-md:mt-16  underline hover:text-yellow-400 max-md:text-xs"
             href="/auth/login"
           >
             <div className="flex flex-col justify-center items-center">
-              <GrUserAdmin className="" size={30} />
+              <GrUserAdmin className="text-slate-400" size={30} />
 
               <p>Espace Admin</p>
             </div>

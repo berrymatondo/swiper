@@ -41,6 +41,8 @@ export const celFormSchema = z.object({
   days: z.string().min(1, {
     message: "Indiquez le début et la fin du la réunion",
   }),
+
+  grpWhatsApp: z.string().optional(),
   status: z.string(),
 
   zoneId: z.string().optional(),
@@ -80,6 +82,7 @@ export const adrFormSchema = z.object({
 
   longitude: z.string().optional(),
   latitude: z.string().optional(),
+  grpWhatsApp: z.string().optional(),
 });
 
 export const cadrFormSchema = z.object({

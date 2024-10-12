@@ -29,7 +29,7 @@ const UpdateAdrPage = async ({ params }: UpdateAdrPageProps) => {
   const allZones = await res1?.data; */
 
   //console.log("params.zoneId", params.zoneId);
-  console.log("adr", adr);
+  //console.log("adr", adr);
 
   return (
     <PageLayout

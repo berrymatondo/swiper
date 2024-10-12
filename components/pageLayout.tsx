@@ -53,9 +53,9 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
             quality={100}
             className="absolute top-0 left-0 rounded-lg -z-10 "
           />
-          <p className=" text-white max-sm:text-2xl text-6xl">
-            {"Cellules d'"}
-            <span className="text-orange-400 font-semibold">Impact</span>
+          <p className=" text-orange-400 max-sm:text-2xl text-6xl">
+            {"Cellules "}
+            <span className="text-white font-semibold">de maison</span>
           </p>
           <div className="hover:cursor-pointer hover:text-white flex-col items-center text-yellow-300 md:flex">
             {/*             <Button onClick={toggleNavbar}>{openNav ? <X /> : <Menu />}</Button>
@@ -76,14 +76,10 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
       {/*       <Title title={title} description={description} />
        */}{" "}
       <div className="grid md:grid-cols-5 gap-4 mt-4 h-full ">
-        <div className="max-md:hidden col-span-1 rounded-lg ">
-          {/*           <DesktopNav />
-           */}{" "}
+        {/*         <div className="max-md:hidden col-span-1 rounded-lg ">
           <InfosNav />
-        </div>
-        {/*         <div className="col-span-4 rounded-lg bg-gradient-to-tr from-purple-400 to-teal-400 md:p-2">
-         */}{" "}
-        <div className="col-span-4 rounded-lg bg-transparent md:p-2">
+        </div> */}
+        <div className="col-span-5 rounded-lg bg-transparent md:p-2">
           {children}
         </div>
       </div>

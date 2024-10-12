@@ -20,6 +20,7 @@ export const addCel = async (data: Inputs) => {
           name: data.name,
           days: data.days,
           hours: data.hours,
+          grpWhatsApp: data.grpWhatsApp,
 
           zoneId: data.zoneId ? +data.zoneId : undefined,
           addressId: data.addressId ? +data.addressId : undefined,
@@ -72,6 +73,7 @@ export const updateCel = async (data: Inputs) => {
           name: data.name,
           days: data.days,
           hours: data.hours,
+          grpWhatsApp: data.grpWhatsApp,
           zoneId: data?.zoneId ? +data?.zoneId : undefined,
           addressId: data?.addressId ? +data?.addressId : undefined,
           statut: data.status as CelStatuses,
@@ -114,7 +116,7 @@ export const getCel = async (celId: number) => {
       },
     });
 
-    console.log("CEL vaut:", cel);
+    //  console.log("CEL vaut:", cel);
 
     //  revalidatePath("/zones");
 

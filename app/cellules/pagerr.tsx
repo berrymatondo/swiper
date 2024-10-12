@@ -128,8 +128,8 @@ const CellulesPage = async ({
             </Link>
           )}
         </div>
-        <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-5 ">
-          <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-1">
+        <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-6 ">
+          <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-2">
             <div>
               {cellules?.map((cel: any) => (
                 <CelItem userSession={session} cel={cel} key={cel.id} />

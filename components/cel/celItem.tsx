@@ -38,14 +38,14 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
         className="flex items-start justify-between gap-2 w-full "
       >
         <div className="flex flex-col lg:gap-2 items-start">
-          <p className="text-lg opacity-70 flex justify-between  font-semibold text-blue-800 w-full ">
+          <p className="text-xl opacity-70 flex justify-between  font-semibold text-blue-800 w-full ">
             {cel.name}
           </p>
 
           <p className="text-sm font-semibold">
-            {/*             {cel?.address?.street as string}, {cel?.address?.number as string}{" "}
+            {/*             {cel?.address?.street as string}, {cel?.address?.number as string}{" "} {cel?.address?.box as string}
              */}{" "}
-            {cel?.address?.street as string} {cel?.address?.box as string}
+            {cel?.address?.street as string}
           </p>
           <p className="text-xs">
             {cel?.address?.postalCode as string}{" "}
@@ -62,14 +62,14 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
         </Badge> */}
         {cel.grpWhatsApp && (
           <div className="flex flex-col">
-            <Badge className="border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-2">
+            <Badge className="border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
               {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
                */}{" "}
               <IoLogoWhatsapp size={30} className="mr-2" />
               <Link
                 target="_blank"
                 href={cel.grpWhatsApp}
-                className="font-semibold text-xl"
+                className="font-semibold text-lg"
               >
                 Rejoindre
               </Link>
