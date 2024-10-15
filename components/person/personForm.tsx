@@ -324,7 +324,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                           />
                         </FormControl>
                         <Label className="ml-2" htmlFor="isStar">
-                          {"Etes-vous pilote d'une celle d'impact ?"}
+                          {"Etes-vous pilote d'une celle de maison ?"}
                         </Label>
 
                         <FormMessage />
@@ -348,7 +348,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                           />
                         </FormControl>
                         <Label className="ml-2" htmlFor="isStar">
-                          {"Etes-vous hôte d'une cellule d'impact ?"}
+                          {"Etes-vous hôte d'une cellule de maison ?"}
                         </Label>
 
                         <FormMessage />

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { MdAddCircle } from "react-icons/md";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 import AdrItem from "@/components/address/adrItem";
 import SearchAdr from "@/components/searchAdr";

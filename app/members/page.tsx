@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { MdAddCircle } from "react-icons/md";
-import { prisma } from "@/lib/prisma";
 import { Cellule } from "@prisma/client";
 import CelItem from "@/components/cel/celItem";
 import PersonItem from "@/components/person/personItem";
 import SearchPer from "@/components/searchPer";
 import { auth } from "@/auth";
+import prisma from "@/lib/prisma";
 
 const MembersPage = async ({
   searchParams,

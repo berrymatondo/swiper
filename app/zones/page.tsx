@@ -18,7 +18,7 @@ import { getAllZones } from "@/lib/_zoneActions";
 import { log } from "console";
 import { Zone } from "@prisma/client";
 import Title from "@/components/title";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 const ZonesPage = async ({
   searchParams,

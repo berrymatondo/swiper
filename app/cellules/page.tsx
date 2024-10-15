@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { MdAddCircle } from "react-icons/md";
-import { prisma } from "@/lib/prisma";
 import { Cellule } from "@prisma/client";
 import CelItem from "@/components/cel/celItem";
 import SearchCel from "@/components/searchCel";
 import Map from "@/components/map/map";
 import { auth } from "@/auth";
+import prisma from "@/lib/prisma";
 
 const CellulesPage = async ({
   searchParams,
@@ -120,7 +120,7 @@ const CellulesPage = async ({
             )}
           </div> */}
           {session && session.user && (
-            <Link className="" href="/admin/cellules/new">
+            <Link className="m-2" href="/admin/cellules/new">
               <MdAddCircle size={50} className="md:hidden text-blue-800" />
               <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-blue-600 hover:cursor-pointer bg-blue-800 text-white ">
                 Nouveau
@@ -128,7 +128,7 @@ const CellulesPage = async ({
             </Link>
           )}
         </div>
-        <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-5 ">
+        <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-4">
           <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-1">
             <div>
               {cellules?.map((cel: any) => (
@@ -141,7 +141,7 @@ const CellulesPage = async ({
             <Map cels={cellules} haut="250px" show={false} />
           </div>
 
-          <div className="max-md:hidden col-span-4 p-1 max-h-1/2">
+          <div className="max-md:hidden col-span-3 p-1 max-h-1/2">
             <Map cels={cellules} show={true} />
           </div>
         </div>

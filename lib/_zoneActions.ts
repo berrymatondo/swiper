@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { zoneFormSchema } from "./schemas";
-import { prisma } from "./prisma";
+import prisma from "./prisma";
 import { revalidatePath } from "next/cache";
 import { ZonesStatuses } from "@prisma/client";
 

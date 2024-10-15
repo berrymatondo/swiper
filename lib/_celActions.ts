@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { celFormSchema } from "./schemas";
-import { prisma } from "./prisma";
+import prisma from "./prisma";
 import { revalidatePath } from "next/cache";
 import { CelStatuses } from "@prisma/client";
 

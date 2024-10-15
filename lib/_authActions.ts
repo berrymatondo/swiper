@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { LoginSchema, RegisterSchema, zoneFormSchema } from "./schemas";
-import { prisma } from "./prisma";
+import prisma from "./prisma";
 import bcrypt from "bcrypt";
 import { signIn, signOut } from "auth";
 import { revalidatePath } from "next/cache";

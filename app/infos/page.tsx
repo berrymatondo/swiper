@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { MdAddCircle, MdDirectionsRun } from "react-icons/md";
-import { prisma } from "@/lib/prisma";
 import { Cellule } from "@prisma/client";
 import CelItem from "@/components/cel/celItem";
 import SearchCel from "@/components/searchCel";
@@ -100,7 +99,7 @@ const CellulesPage = async () => {
               </span>
               <span className="block md:text-lg  font-semibold">
                 {" "}
-                {" une cellule d'impact !"}
+                {" une cellule de maison !"}
               </span>
             </div>
           </Link>

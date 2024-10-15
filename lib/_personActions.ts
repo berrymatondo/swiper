@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { personFormSchema } from "./schemas";
-import { prisma } from "./prisma";
+import prisma from "./prisma";
 import { revalidatePath } from "next/cache";
 
 type Inputs = z.infer<typeof personFormSchema>;

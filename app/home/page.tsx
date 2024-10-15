@@ -7,7 +7,7 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { GrUserAdmin } from "react-icons/gr";
 import { Label } from "@/components/ui/label";
 import SearchCel from "@/components/searchCel";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import Map from "@/components/map/map";
 import ComboCels from "@/components/cel/comboCels";
 
