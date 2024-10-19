@@ -16,7 +16,7 @@ type UserFormDeleteProps = {
 const UserFormDelete = ({ usr }: UserFormDeleteProps) => {
   const router = useRouter();
 
-  console.log("USRUSR: ", usr);
+  //console.log("USRUSR: ", usr);
 
   const form = useForm({
     defaultValues: {

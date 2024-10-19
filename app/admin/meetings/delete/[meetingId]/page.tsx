@@ -1,3 +1,4 @@
+import MeetingFormDelete from "@/components/meeting/meetingFormDelete";
 import PageLayout from "@/components/pageLayout";
 import Title from "@/components/title";
 import {
@@ -9,38 +10,45 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import ZoneForm from "@/components/zone/zoneForm";
+import ZoneFormDelete from "@/components/zone/zoneFormDelete";
 import { getZone } from "@/lib/_zoneActions";
 import React from "react";
 
-type UpdateZonePageProps = {
-  params: {
-    zoneId: number;
-  };
-};
+const MeetingDeletePage = async ({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | undefined };
+}) => {
+  // console.log("params: ", searchParams);
 
-const UpdateZonePage = async ({ params }: UpdateZonePageProps) => {
-  const res = await getZone(params.zoneId);
-  const zone = await res?.data;
+  // const res = await getZone(searchParams.zoneId);
+  //const zone = await res?.data;
   //console.log("params.zoneId", params.zoneId);
-  console.log("ZONE", zone); //
+  //console.log("ZONE", zone);
 
   return (
     <PageLayout
-      title="Editer une zone"
-      description="Cette page permet d'éditer une zone d'impact"
+      title="Supprimerr un rapport"
+      description="Cette page permet de supprimer un raport"
     >
+      <CustomBreadcrumb name="Suppression rapport" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <ZoneForm zone={zone} />
+        <MeetingFormDelete
+          date={searchParams?.date}
+          meetingId={searchParams?.meetingId}
+          celluleId={searchParams?.celluleId}
+          name={searchParams?.name}
+        />
       </div>
     </PageLayout>
   );
 };
 
-export default UpdateZonePage;
+export default MeetingDeletePage;
 
 const CustomBreadcrumb = ({ name }: { name: string }) => {
   return (
-    <Breadcrumb>
+    <Breadcrumb className=" p-2  bg-gray-100">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Accueil</BreadcrumbLink>
@@ -48,7 +56,7 @@ const CustomBreadcrumb = ({ name }: { name: string }) => {
         <BreadcrumbSeparator />
 
         <BreadcrumbItem>
-          <BreadcrumbLink href="/zones">Zones</BreadcrumbLink>
+          <BreadcrumbLink href="/meetings">Meetings</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

@@ -9,7 +9,7 @@ type Inputs = z.infer<typeof personFormSchema>;
 
 // ADD NEW PERSON
 export const addPerson = async (data: Inputs) => {
-  console.log("new person:", data);
+  // console.log("new person:", data);
 
   const resut = personFormSchema.safeParse(data);
   if (resut.success) {

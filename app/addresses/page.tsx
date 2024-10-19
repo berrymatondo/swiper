@@ -48,7 +48,7 @@ const AddressesPage = async ({
     },
   });
 
-  console.log("ADRS:", addresses);
+  //console.log("ADRS:", addresses);
 
   return (
     <PageLayout

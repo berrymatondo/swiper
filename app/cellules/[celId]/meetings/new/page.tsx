@@ -1,5 +1,6 @@
+import { auth } from "@/auth";
+import MeetingForm from "@/components/meeting/meetingForm";
 import PageLayout from "@/components/pageLayout";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,37 +9,38 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import UserFormDelete from "@/components/user/userFormDelete";
-import { getUser } from "@/lib/_authActions";
-
+import { getAllCels } from "@/lib/_celActions";
 import React from "react";
 
-type DeleteUserPageProps = {
-  params: {
-    userId: number;
-  };
-};
-
-const DeleteUserPage = async ({ params }: DeleteUserPageProps) => {
-  const res = await getUser(params.userId);
-  const usr = await res?.data;
-  //console.log("params.zoneId", params.zoneId);
-  //console.log("USR", usr);
+const AddMeetingPage = async ({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | undefined };
+}) => {
+  //console.log("Paramsxxx", searchParams);
+  const session = await auth();
+  const usr: any = session?.user;
+  const res = await getAllCels();
+  const cellules = await res?.data;
 
   return (
     <PageLayout
-      title="Supprimer utilisateur"
-      description="Cette page permet de supprimer un utlisateur (pilote/ administrateur)"
+      title="Nouveau rapport"
+      description="Cette page permet de créer  un nouveau membre lié à une cellule d'impact"
     >
-      <CustomBreadcrumb name="Suppression utilisateur" />
+      <CustomBreadcrumb name={`Raport ${searchParams?.name}`} />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <UserFormDelete usr={usr} />
+        <MeetingForm
+          cels={cellules}
+          userSession={usr}
+          celId={searchParams?.id}
+        />
       </div>
     </PageLayout>
   );
 };
 
-export default DeleteUserPage;
+export default AddMeetingPage;
 
 const CustomBreadcrumb = ({ name }: { name: string }) => {
   return (
@@ -50,7 +52,7 @@ const CustomBreadcrumb = ({ name }: { name: string }) => {
         <BreadcrumbSeparator />
 
         <BreadcrumbItem>
-          <BreadcrumbLink href="/auth/users">Utilisateurs</BreadcrumbLink>
+          <BreadcrumbLink href="/cellules">Cellules</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import PageLayout from "@/components/pageLayout";
 import PersonForm from "@/components/person/personForm";
 import {
@@ -13,6 +14,8 @@ import { getAllZones } from "@/lib/_zoneActions";
 import React from "react";
 
 const AddMemberPage = async () => {
+  const session = await auth();
+  const usr: any = session?.user;
   const res = await getAllCels();
   const cellules = await res?.data;
 
@@ -23,7 +26,7 @@ const AddMemberPage = async () => {
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <PersonForm cels={cellules} />
+        <PersonForm cels={cellules} userSession={usr} />
       </div>
     </PageLayout>
   );

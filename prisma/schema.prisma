@@ -143,14 +143,11 @@ model Person {
 
 model Meeting {
   id Int @id @default(autoincrement())
-  date DateTime @default(now())
-  nCon Int @default(0)
-  nPar Int @default(0)
-  nStar Int @default(0)
-  nIcc Int @default(0)
-  nNIcc Int @default(0)
+  date String
+  nHom Int @default(0)
+  nFem Int @default(0)
+  nEnf Int @default(0)
   nNew Int @default(0)
-  onLine Boolean @default(true)
   notes String?
   
   celluleId Int?

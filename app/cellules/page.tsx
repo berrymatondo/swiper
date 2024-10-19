@@ -17,6 +17,8 @@ import SearchCel from "@/components/searchCel";
 import Map from "@/components/map/map";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+import CelDetails from "@/components/cel/celDetails";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const CellulesPage = async ({
   searchParams,
@@ -39,6 +41,7 @@ const CellulesPage = async ({
     include: {
       address: true,
       zone: true,
+      persons: true,
     },
     where: {
       OR: [
@@ -76,7 +79,9 @@ const CellulesPage = async ({
   });
 
   const session = await auth();
-  //console.log("Session: ", session);
+  const usr: any = session?.user;
+  const role = usr?.role;
+  console.log("Session: ", role);
 
   return (
     <PageLayout
@@ -88,60 +93,34 @@ const CellulesPage = async ({
         <div className="flex items-center justify-between max-md:m-1 md:mt-2 md:w-1/2">
           <div className="flex items-center text-xs gap-1 w-full">
             <SearchCel search={search} />
-            {/*             <span className="max-md:hidden ">Ex: Anderlecht</span>
-             */}{" "}
           </div>
-          {/*           <div className="flex justify-normal gap-2 ">
-            {skip == 0 ? null : (
-              <Link
-                href={{
-                  pathname: "/cellules",
-                  query: {
-                    ...(search ? { search } : {}),
-                    skip: skip > 0 ? skip - take : 0,
-                  },
-                }}
-              >
-                {"Précédent"}
-              </Link>
-            )}
-            {skip + cellules.length >= celCount ? null : (
-              <Link
-                href={{
-                  pathname: "/cellules",
-                  query: {
-                    ...(search ? { search } : {}),
-                    skip: skip + take,
-                  },
-                }}
-              >
-                {"Suivant"}
-              </Link>
-            )}
-          </div> */}
           {session && session.user && (
             <Link className="m-2" href="/admin/cellules/new">
               <MdAddCircle size={50} className="md:hidden text-blue-800" />
-              <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-blue-600 hover:cursor-pointer bg-blue-800 text-white ">
+              <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-sky-600 hover:cursor-pointer bg-sky-800 text-white ">
                 Nouveau
               </span>
             </Link>
           )}
         </div>
-        <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-4">
-          <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-1">
-            <div>
-              {cellules?.map((cel: any) => (
-                <CelItem userSession={session} cel={cel} key={cel.id} />
-              ))}
-            </div>
+        <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-6">
+          <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-2">
+            <ScrollArea className="h-[600px]  rounded-md border">
+              <div>
+                {cellules?.map((cel: any) => (
+                  <CelDetails userSession={session} cel={cel} key={cel.id} />
+                  /*                 <CelItem userSession={session} cel={cel} key={cel.id} />
+                   */
+                ))}
+              </div>
+            </ScrollArea>
           </div>
 
-          <div className="md:hidden col-span-3 p-1 max-h-1/2">
-            <Map cels={cellules} haut="250px" show={false} />
+          <div className="md:hidden col-span-4 p-1 max-h-1/2">
+            <Map cels={cellules} haut="250px" show={true} />
           </div>
 
-          <div className="max-md:hidden col-span-3 p-1 max-h-1/2">
+          <div className="max-md:hidden col-span-4 p-1 max-h-1/2">
             <Map cels={cellules} show={true} />
           </div>
         </div>

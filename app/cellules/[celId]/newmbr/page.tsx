@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import PageLayout from "@/components/pageLayout";
 import PersonForm from "@/components/person/personForm";
 import {
@@ -19,8 +20,9 @@ type AddMemberPublicPage = {
 };
 
 const AddMemberPublicPage = async ({ params }: AddMemberPublicPage) => {
-  console.log("Params: ", params);
-
+  //console.log("Params: ", params);
+  const session = await auth();
+  const usr: any = session?.user;
   const res = await getAllCels();
   const cellules = await res?.data;
 
@@ -31,7 +33,7 @@ const AddMemberPublicPage = async ({ params }: AddMemberPublicPage) => {
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <PersonForm cels={cellules} celId={params.celId} />
+        <PersonForm cels={cellules} celId={params.celId} userSession={usr} />
       </div>
     </PageLayout>
   );

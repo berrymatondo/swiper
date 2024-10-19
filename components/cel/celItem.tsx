@@ -29,16 +29,16 @@ const CelItem = ({ cel, userSession }: CelItemProps) => {
       key={cel.id}
       // className="shadow-xl rounded-lg my-2 bg-gradient-to-r from-slate-200 to-transparent hover:bg-slate-300 hover:cursor-pointer"
       //  className="w-full bg-gradient-to-l from-orange-300 to-transparent p-2 my-1 mx-autu rounded-md"
-      className="hover:bg-orange-300/20 hover:cursor-pointer mb-2 w-full border shadow-md
+      className="hover:bg-orange-300/20 hover:cursor-pointer mb-2 w-full border-2 border-sky-700/20 shadow-md
 
  p-2  mx-auto rounded-md"
     >
       <div
-        // onClick={() => router.push(`/cellules/${cel.id}`)}
-        className="flex items-start justify-between gap-2 w-full "
+        onClick={() => router.push(`/cellules/${cel.id}`)}
+        className="flex items-start justify-between gap-2 w-full my-2 "
       >
         <div className="flex flex-col lg:gap-2 items-start">
-          <p className="text-xl opacity-70 flex justify-between  font-semibold text-blue-800 w-full ">
+          <p className="text-2xl opacity-70 flex justify-between  font-semibold text-blue-900 w-full ">
             {cel.name}
           </p>
 

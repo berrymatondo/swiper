@@ -27,8 +27,6 @@ const ZoneDetailsPage = async ({ params }: ZoneDetailsPageProps) => {
   const res = await getZone(params.zoneId);
   const zone = await res?.data;
 
-  console.log("RES:", zone);
-
   return (
     <PageLayout
       title="Trouver une cellule d'impact"

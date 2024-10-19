@@ -120,7 +120,7 @@ const BeneluxPage = async () => {
       <div className="">
         <CustomBreadcrumb name="Campus du Benelux" />
         <div className="md:col-span-3 rounded-lg overflow-hidden">
-          <Map campus={CAMPUS} zoom={6} />
+          <Map campus={CAMPUS} show={true} zoom={6} />
         </div>
       </div>
     </PageLayout>

@@ -72,8 +72,6 @@ const RegisterForm = ({ usr }: RegisterFormProps) => {
 
   const procesForm = async (values: z.infer<typeof RegisterSchema>) => {
     setLoading(true);
-    console.log("Value: ", values);
-    console.log("usr: ", usr);
 
     // const result = await registerUser(values);
     let res;

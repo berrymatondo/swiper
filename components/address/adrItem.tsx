@@ -14,8 +14,6 @@ type AdrItemProps = {
 const AdrItem = ({ adr }: AdrItemProps) => {
   const router = useRouter();
 
-  console.log("ADR Item:", adr);
-
   return (
     <div
       key={adr.id}

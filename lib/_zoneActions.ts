@@ -115,7 +115,7 @@ export const getZone = async (zoneId: number) => {
     });
 
     //  revalidatePath("/zones");
-    console.log("ZZZZZZ", zone);
+    // console.log("ZZZZZZ", zone);
 
     return {
       success: true,

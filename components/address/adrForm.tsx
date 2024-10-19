@@ -92,7 +92,6 @@ export const AdrForm = ({ adr, allZones }: AdrFormProps) => {
 
     if (adr) res = await updateAddress(values);
     else res = await addAddress(values);
-    //console.log("RES:", res);
 
     if (!res) {
       console.log("Une erreur est srvenue...");

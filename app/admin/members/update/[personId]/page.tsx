@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import CelForm from "@/components/cel/celForm";
 import PageLayout from "@/components/pageLayout";
 import PersonForm from "@/components/person/personForm";
@@ -22,13 +23,16 @@ type UpdatePerPageProps = {
 };
 
 const UpdatePerPage = async ({ params }: UpdatePerPageProps) => {
+  const session = await auth();
+  const usr: any = session?.user;
+
   const res = await getPerson(params.personId);
   const per = await res?.data;
 
   const res1 = await getAllCels();
   const cels = await res1?.data;
 
-  console.log("CELS:", cels);
+  //console.log("CELS:", cels);
 
   //const res1 = await getAllZones();
   //const allZones = await res1?.data;
@@ -44,7 +48,7 @@ const UpdatePerPage = async ({ params }: UpdatePerPageProps) => {
     >
       <CustomBreadcrumb name="Editer un membre" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <PersonForm mbr={per} cels={cels} />
+        <PersonForm mbr={per} cels={cels} userSession={usr} />
       </div>
     </PageLayout>
   );

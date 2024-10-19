@@ -17,6 +17,7 @@ import CelItem from "@/components/cel/celItem";
 import SearchCel from "@/components/searchCel";
 import Map from "@/components/map/map";
 import { auth } from "@/auth";
+import CelDetails from "@/components/cel/celDetails";
 
 const CellulesPage = async ({
   searchParams,
@@ -132,7 +133,9 @@ const CellulesPage = async ({
           <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-2">
             <div>
               {cellules?.map((cel: any) => (
-                <CelItem userSession={session} cel={cel} key={cel.id} />
+                <CelDetails userSession={session} cel={cel} key={cel.id} />
+                /*                 <CelItem userSession={session} cel={cel} key={cel.id} />
+                 */
               ))}
             </div>
           </div>

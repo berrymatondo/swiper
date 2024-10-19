@@ -5,7 +5,13 @@ import { RiMapPinFill, RiUserReceived2Line } from "react-icons/ri";
 import { BiEditAlt, BiMap } from "react-icons/bi";
 
 import { Button } from "../ui/button";
-import { MdHome, MdOutlineDeleteForever } from "react-icons/md";
+import {
+  MdEmail,
+  MdHome,
+  MdOutlineDeleteForever,
+  MdPerson,
+  MdPhone,
+} from "react-icons/md";
 import { GrUserPolice } from "react-icons/gr";
 
 import Link from "next/link";
@@ -32,26 +38,31 @@ const PersonItem = ({ per }: PersonItemProps) => {
           <RiMapPinFill size={30} className="text-orange-400" />
         </div> */}
         <div className="w-full relative col-span-3 flex flex-col items-start my-2 ml-2 gap-2">
-          <p
-            onClick={() => router.push(`/members/${per.id}`)}
-            className="text-sm  "
-          >
-            {per.firstname}
-          </p>
+          <div className="flex items-end gap-2">
+            <MdPerson size={25} />
+            <p
+              onClick={() => router.push(`/members/${per.id}`)}
+              className="text-sm  "
+            >
+              {per.firstname}
+            </p>
 
+            <p
+              onClick={() => router.push(`/members/${per.id}`)}
+              className="text-sm font-semibold "
+            >
+              {per.lastname}
+            </p>
+          </div>
           <p
             onClick={() => router.push(`/members/${per.id}`)}
-            className="text-sm font-semibold "
+            className="p-1 text-sm flex items-end gap-2"
           >
-            {per.lastname}
+            <MdPhone size={20} /> {per.mobile}
           </p>
-          <p
-            onClick={() => router.push(`/members/${per.id}`)}
-            className="text-sm "
-          >
-            {per.mobile}
+          <p className="text-sm flex items-end gap-2 p-1">
+            <MdEmail size={20} /> {per.email}
           </p>
-          <p className="text-sm ">{per.email}</p>
           <div className="flex justify-between items-end  w-full">
             <div className="flex items-center gap-2 my-2">
               <Link

@@ -9,6 +9,16 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    serverActions: {
+      allowedOrigins: [
+        "127.0.0.1:3000",
+        "localhost:3000",
+        "cellulesicc.be",
+        "*.cellulesicc.be",
+      ],
+    },
+  },
 };
 
 export default nextConfig;

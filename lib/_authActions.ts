@@ -18,16 +18,15 @@ export const registerUser = async (data: Inputs2) => {
   if (result.success) {
     const { username, isAdmin, password, confirmPassword, celluleId } =
       result.data;
-
+    /* 
     console.log(
       "{email,name,isAdmin,  password, confirmPassword, celluleID }",
-      //email,
       username,
       isAdmin,
       password,
       confirmPassword,
       celluleId
-    );
+    ); */
 
     try {
       //const session = await auth();
@@ -98,7 +97,7 @@ export const updateUser = async (data: Inputs2) => {
         // Hash password
         // const hashedPassword = await bcrypt.hash("wwwwww", 12);
 
-        console.log("data:", data);
+        //console.log("data:", data);
 
         const usr = await prisma.user.update({
           where: {
@@ -224,7 +223,7 @@ export const deleteUser = async (userId: number) => {
 type Inputs = z.infer<typeof LoginSchema>;
 
 export const loginlogin = async (data: Inputs) => {
-  console.log("data", data);
+  //console.log("data", data);
 
   const result = LoginSchema.safeParse(data);
 
@@ -236,13 +235,13 @@ export const loginlogin = async (data: Inputs) => {
         },
       });
 
-      console.log("foundUser", foundUser);
+      //console.log("foundUser", foundUser);
 
       if (!foundUser) return { error: "Cet utilisateur n'existe pas" };
 
       const checkPass = await bcrypt.compare(data.password, foundUser.password);
 
-      console.log("checkPass:", checkPass);
+      //console.log("checkPass:", checkPass);
 
       if (!checkPass) {
         return { error: "Le mot de passe n'est pas correct" };
@@ -254,18 +253,18 @@ export const loginlogin = async (data: Inputs) => {
     return { success: false, error: result.error.format() };
   }
 
-  console.log("Call sinin", data);
+  //console.log("Call sinin", data);
 
   const res = await signIn("credentials", {
     ...data,
     redirectTo: "/cellules",
   });
 
-  console.log("RESSSS", res);
+  //console.log("RESSSS", res);
 };
 
 export const logoutUser = async () => {
-  console.log("SORTIEEEEEEEEEEEEEEEEEEEEE");
+  //("SORTIEEEEEEEEEEEEEEEEEEEEE");
 
   await signOut();
 };

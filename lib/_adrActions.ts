@@ -50,7 +50,7 @@ export const getAddressesPages = async ({
         id: "asc",
       },
     });
-    console.log(" addresses: ", addresses);
+    //console.log(" addresses: ", addresses);
 
     return addresses;
   } catch (error) {
@@ -113,8 +113,8 @@ export const addAddress = async (data: Inputs) => {
 export const updateAddress = async (data: Inputs) => {
   const resut = adrFormSchema.safeParse(data);
 
-  console.log("UPDATE DATA: ", data);
-  console.log("UPDATE resut: ", resut);
+  //console.log("UPDATE DATA: ", data);
+  //console.log("UPDATE resut: ", resut);
 
   try {
     if (resut.success && data.id) {
@@ -181,7 +181,7 @@ export const deleteAddress = async (data: any) => {
 
 // GET GEOLOC
 export const setGeoLoc = async (data: any) => {
-  console.log("DATA", data);
+  //console.log("DATA", data);
 
   // https://geocode.maps.co/search?q=152+frans+hals+anderlecht+1070&api_key=662909d16b764219098658gole8341e
 

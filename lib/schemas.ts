@@ -49,6 +49,31 @@ export const celFormSchema = z.object({
   addressId: z.string().optional(),
 });
 
+export const meetingFormSchema = z.object({
+  id: z.number().optional(),
+  date: z.string().min(1, {
+    message: "La date du rapport est obligatoire",
+  }),
+  nHom: z.string().min(1, {
+    message: "Le nomdre d'hommes est obligatoire",
+  }),
+  nFem: z.string().min(1, {
+    message: "Le nomdre de femmes est obligatoire",
+  }),
+
+  nEnf: z.string().min(1, {
+    message: "Le nomdre d'enfants est obligatoire",
+  }),
+
+  nNew: z.string().min(1, {
+    message: "Le nomdre de nouveaux est obligatoire",
+  }),
+
+  notes: z.string().optional(),
+
+  celluleId: z.string().optional(),
+});
+
 export const adrFormSchema = z.object({
   id: z.string().optional(),
   /*   street: z.string().optional(),

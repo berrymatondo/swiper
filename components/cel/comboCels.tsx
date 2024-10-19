@@ -81,8 +81,6 @@ const ComboCels = ({ cellules }: ComboCelsProps) => {
                   value={framework.address.street}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
-                    console.log("Yesss ", value);
-                    console.log("Yesss", currentValue);
 
                     setOpen(false);
                   }}

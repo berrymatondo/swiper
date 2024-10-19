@@ -35,9 +35,15 @@ type PersonFormProps = {
   mbr?: any;
   cels?: any;
   celId?: any;
+  userSession: any;
 };
 
-export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
+export const PersonForm = ({
+  cels,
+  mbr,
+  celId,
+  userSession,
+}: PersonFormProps) => {
   const router = useRouter();
   const [zones, setZones] = useState<any>();
   const [addresses, setAddresses] = useState<any>();
@@ -310,7 +316,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                 />
               )}
 
-              {!celId && icc && (
+              {!celId && icc && userSession?.role == "ADMIN" && (
                 <FormField
                   control={form.control}
                   name="isPilote"
@@ -334,7 +340,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                 />
               )}
 
-              {!celId && icc && (
+              {!celId && icc && userSession?.role == "ADMIN" && (
                 <FormField
                   control={form.control}
                   name="isRespo"
@@ -358,7 +364,7 @@ export const PersonForm = ({ cels, mbr, celId }: PersonFormProps) => {
                 />
               )}
 
-              {!celId && icc && star && (
+              {!celId && icc && star && userSession?.role == "ADMIN" && (
                 <FormField
                   control={form.control}
                   name="isGest"

@@ -153,7 +153,7 @@ export const getCelPilotes = async (celId: number) => {
       }, */
     });
 
-    console.log("Pilotes vaut:", pilotes);
+    //console.log("Pilotes vaut:", pilotes);
 
     //  revalidatePath("/zones");
 
@@ -181,7 +181,7 @@ export const getAllPilotes = async (celId: number) => {
       },
     });
 
-    console.log("All Pilotes:", pilotes);
+    //console.log("All Pilotes:", pilotes);
 
     //  revalidatePath("/zones");
 
