@@ -15,9 +15,10 @@ import { Badge } from "../ui/badge";
 
 type MeetingItemProps = {
   meeting: any;
+  usr: any;
 };
 
-const MeetingItem = ({ meeting }: MeetingItemProps) => {
+const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
   const router = useRouter();
 
   // console.log("meeting: ", meeting);
@@ -32,14 +33,13 @@ const MeetingItem = ({ meeting }: MeetingItemProps) => {
         // onClick={() => router.push(`/zones/${zone.id}`)}
         className=" grid grid-cols-4  w-2/3"
       >
-        <div className="rounded-lg col-span-1  bg-gradient-to-r from-blue-50 to-transparent flex flex-col  justify-center items-center">
+        <div className="  rounded-lg col-span-1 max-md:col-span-2  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-center items-center">
           <MdEditDocument size={20} className="text-sky-600" />
-        </div>
-        <div className="relative col-span-3 flex justify-end gap-2 items-end my-2 ml-2 ">
           <p className="text-md font-semibold max-md:text-xs ">
             {meeting.date.split("-").reverse().join("-")}
           </p>
-
+        </div>
+        <div className="relative col-span-3  max-md:col-span-2 flex justify-end gap-2 items-end my-2 ml-2 ">
           <Badge className="flex gap-2 bg-sky-800 md:hidden">
             {" "}
             <MdPeople />{" "}
@@ -49,63 +49,63 @@ const MeetingItem = ({ meeting }: MeetingItemProps) => {
           </Badge>
 
           <div className=" max-md:hidden">
-            <Badge className="flex justify-center gap-2 bg-sky-800">
-              {" "}
-              Total:
-              <span className="text-md">
+            <div className="text-sm w-full items-center justify-between mx-2 flex gap-2">
+              <div className="w-8 h-8 text-white flex justify-center items-center rounded-full bg-sky-800">
                 {+meeting?.nHom + +meeting?.nFem + +meeting?.nEnf}
-              </span>
-            </Badge>
-            <div className="w-full justify-between mx-2 flex gap-2">
-              <span>Hommes: {+meeting?.nHom}</span>
-              <span>Femmes: {+meeting?.nFem}</span>
-              <span>Enfants: {+meeting?.nEnf}</span>
-              <span>Nouveaux: {+meeting?.nNew}</span>
+              </div>
+              <span>Hom: {+meeting?.nHom}</span>
+              <span>Fem: {+meeting?.nFem}</span>
+              <span>Enf: {+meeting?.nEnf}</span>
+              <span>New: {+meeting?.nNew}</span>
+              <span>Icc: {+meeting?.nIcc}</span>
+              <span>Star: {+meeting?.nSta}</span>
             </div>
           </div>
-
-          {/*         <p className="flex items-end text-md font-semibold ">
-            <MdPeople size={30} className="text-sky-800" /> {meeting?.nHom}
-          </p> */}
-          <span className="max-md:text-xs font-semibold flex flex-col items-start gap-2 text-purple-900">
-            {/*             <span>
-              {meeting?.cellules.length}
-              {" Rapport(s)"}
-            </span> */}
-          </span>
         </div>
       </div>
       <div className="md:hidden flex justify-between gap-4 items-center mx-4 ">
-        <MdOutlineDeleteForever
-          className="text-red-400"
+        {usr?.role == "ADMIN" && (
+          <MdOutlineDeleteForever
+            className="text-red-400"
+            onClick={() =>
+              router.push(
+                `/admin/meetings/delete/${meeting.id}?date=${meeting.date}&name=${meeting.cellule.name}&celluleId=${meeting.celluleId}&meetingId=${meeting.id}`
+              )
+            }
+            size={20}
+          />
+        )}
+        <BiEditAlt
           onClick={() =>
             router.push(
-              `/admin/meetings/delete/${meeting.id}?date=${meeting.date}&name=${meeting.cellule.name}&celluleId=${meeting.celluleId}&meetingId=${meeting.id}`
+              `/admin/meetings/${meeting.id}/update/?meetingId=${meeting.id}&celluleId=${meeting.celluleId}`
             )
           }
-          size={20}
-        />
-        <BiEditAlt
-          onClick={() => router.push(`/admin/meetings/update/${meeting.id}`)}
           className="text-gray-600"
           size={20}
         />
       </div>
       <div className="flex justify-between gap-4 items-center mx-4 max-md:hidden">
-        <Button
-          className=" text-red-400"
-          variant="secondary"
-          onClick={() =>
-            router.push(
-              `/admin/meetings/delete/${meeting.id}?date=${meeting.date}&name=${meeting.cellule.name}&celluleId=${meeting.celluleId}&meetingId=${meeting.id}`
-            )
-          }
-        >
-          Supprimer
-        </Button>
+        {usr?.role == "ADMIN" && (
+          <Button
+            className=" text-red-400"
+            variant="secondary"
+            onClick={() =>
+              router.push(
+                `/admin/meetings/delete/${meeting.id}?date=${meeting.date}&name=${meeting.cellule.name}&celluleId=${meeting.celluleId}&meetingId=${meeting.id}`
+              )
+            }
+          >
+            Supprimer
+          </Button>
+        )}
         <Button
           className=""
-          onClick={() => router.push(`/admin/meetings/update/${meeting.id}`)}
+          onClick={() =>
+            router.push(
+              `/admin/meetings/${meeting.id}/update/?meetingId=${meeting.id}&celluleId=${meeting.celluleId}`
+            )
+          }
         >
           Modifier
         </Button>

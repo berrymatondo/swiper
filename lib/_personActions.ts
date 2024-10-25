@@ -23,7 +23,7 @@ export const addPerson = async (data: Inputs) => {
           isIcc: data.isIcc,
           isStar: data.isStar,
           isPilote: data.isPilote,
-          // isGest: data.isGest,
+          isGest: data.isGest,
           isRespo: data.isRespo,
           celluleId: data.celluleId ? +data.celluleId : undefined,
           addressId: data.addressId ? +data.addressId : undefined,
@@ -66,7 +66,7 @@ export const updatePerson = async (data: Inputs) => {
           isStar: data.isStar,
           isPilote: data.isPilote,
           isRespo: data.isRespo,
-          //isGest: data.isGest,
+          isGest: data.isGest,
           //statut: data.status as CelStatuses,
           /*           respoId: data.respoId ? +data.respoId : undefined,
            */

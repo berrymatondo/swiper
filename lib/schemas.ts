@@ -50,7 +50,7 @@ export const celFormSchema = z.object({
 });
 
 export const meetingFormSchema = z.object({
-  id: z.number().optional(),
+  id: z.string().optional(),
   date: z.string().min(1, {
     message: "La date du rapport est obligatoire",
   }),
@@ -67,6 +67,13 @@ export const meetingFormSchema = z.object({
 
   nNew: z.string().min(1, {
     message: "Le nomdre de nouveaux est obligatoire",
+  }),
+  nIcc: z.string().min(1, {
+    message: "Le nomdre de membres ICC est obligatoire",
+  }),
+
+  nSta: z.string().min(1, {
+    message: "Le nomdre de star est obligatoire",
   }),
 
   notes: z.string().optional(),
@@ -174,3 +181,42 @@ export const RegisterSchema = z
       path: ["confirmPassword"],
     }
   );
+
+export const evangFormSchema = z.object({
+  id: z.string().optional(),
+  place: z.string().min(1, {
+    message: "Le lieu de l'évangélisation est obligatoire",
+  }),
+  date: z.string().min(1, {
+    message: "La date de l'évangélisation est obligatoire",
+  }),
+  start: z.string().min(1, {
+    message: "L'heure de début de l'évangélisation est obligatoire",
+  }),
+  end: z.string().min(1, {
+    message: "L'heure de fin de l'évangélisation est obligatoire",
+  }),
+  nPar: z.string().min(1, {
+    message: "Le nomdre de participants est obligatoire",
+  }),
+  nEva: z.string().min(1, {
+    message: "Le nomdre de personnes évangélisées est obligatoire",
+  }),
+  nGag: z.string().min(1, {
+    message: "Le nomdre d'âmes gagnées est obligatoire",
+  }),
+  nCon: z.string().min(1, {
+    message: "Le nomdre de contacts pris est obligatoire",
+  }),
+  nInv: z.string().min(1, {
+    message: "Le nomdre d'invités est obligatoire",
+  }),
+  nVen: z.string().min(1, {
+    message: "Le nomdre d'invités venus est obligatoire",
+  }),
+
+  notes: z.string().optional(),
+
+  celluleId: z.string().optional(),
+  zoneId: z.string().optional(),
+});

@@ -47,7 +47,13 @@ export const getAllCels = async () => {
   //const resut = zoneFormSchema.safeParse(data);
   //if (resut.success) {
   try {
-    const cels = await prisma.cellule.findMany();
+    const cels = await prisma.cellule.findMany({
+      include: {
+        address: true,
+        persons: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
 
     revalidatePath("/cellules");
 

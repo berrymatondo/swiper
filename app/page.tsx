@@ -1,6 +1,7 @@
 import Image from "next/image";
 import im from "../public/home.jpg";
 import logoicc0 from "../public/logoicc0.png";
+import logoicc1 from "../public/bcbc.png";
 import Link from "next/link";
 import { MdDirectionsRun, MdInfo } from "react-icons/md";
 import { BiBuildingHouse } from "react-icons/bi";

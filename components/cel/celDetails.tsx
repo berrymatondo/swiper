@@ -92,7 +92,8 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
           </div> */}
         </div>
 
-        <div className="flex flex-col items-start mt-2">
+        <div className="flex  items-start mt-2">
+          <GiPoliceOfficerHead size={25} className="text-purple-600 mr-2" />{" "}
           {cel?.persons &&
             cel?.persons
               ?.filter((per: Person) => per.isPilote == true)
@@ -101,9 +102,8 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
                   className="flex justify-start items-center gap-2"
                   key={person.id}
                 >
-                  <GiPoliceOfficerHead size={25} className="text-purple-600" />{" "}
                   {/*  {person.mobile}  */}
-                  Pilotée par: <strong>{person.firstname}</strong>
+                  <strong className="mr-2">{person.firstname}</strong>
                 </div>
               ))}
         </div>
@@ -119,7 +119,7 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
             >
               Ajouter un membre
             </Link>
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end max-md:mt-4">
               <CelUpdateBar usr={usr} cel={cel} />
             </div>
           </div>

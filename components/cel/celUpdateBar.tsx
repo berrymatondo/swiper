@@ -39,12 +39,14 @@ const CelUpdateBar = ({ usr, cel }: celUpdateBarProps) => {
           </Button>
         )}
 
-        <Button
-          onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
-          className="bg-gray-600 text-white rounded-full"
-        >
-          Editer
-        </Button>
+        {usr && (usr.role == "ADMIN" || usr.celluleId == cel.id) && (
+          <Button
+            onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
+            className="bg-gray-600 text-white rounded-full"
+          >
+            Editer
+          </Button>
+        )}
       </div>
     </div>
   );

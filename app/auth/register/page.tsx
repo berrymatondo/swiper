@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import RegisterForm from "@/components/auth/registerForm";
 import PageLayout from "@/components/pageLayout";
 import {
@@ -10,7 +11,14 @@ import {
 } from "@/components/ui/breadcrumb";
 import React from "react";
 
-const RagisterPage = () => {
+const RagisterPage = async () => {
+  const session = await auth();
+  const usr: any = session?.user;
+
+  if (usr?.role != "ADMIN") {
+    return <div>{"Vous n'avez pas les autorisations nécessaires!"}</div>;
+  }
+
   return (
     <PageLayout
       title="Création compte utilisateur"

@@ -29,13 +29,14 @@ import { addCel, updateCel } from "@/lib/_celActions";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
 import { meetingFormSchema } from "@/lib/schemas";
-import { addMeeting, updateMeeting } from "@/lib/_meetingActions";
+import { addMeeting, getMeeting, updateMeeting } from "@/lib/_meetingActions";
 import { Textarea } from "../ui/textarea";
 
 type PersonFormProps = {
   mbr?: any;
   cels?: any;
   celId?: any;
+  meetingId?: any;
   userSession: any;
 };
 
@@ -43,18 +44,19 @@ export const MeetingForm = ({
   cels,
   mbr,
   celId,
+  meetingId,
   userSession,
 }: PersonFormProps) => {
   const router = useRouter();
-  const [zones, setZones] = useState<any>();
+  const [meeting, setMeeting] = useState<any>();
   const [addresses, setAddresses] = useState<any>();
 
-  //console.log("allZones:", allZones);
+  //console.log("meetingId: ", meetingId);
   //console.log("mbr:", mbr);
-  //  console.log("cels:", cels);
+  // console.log("cels:", cels);
 
   // console.log("Date:", new Date().toISOString().split("T")[0].toString());
-  // console.log("celId", celId);
+  //console.log("celId", celId);
   //console.log("mbr", mbr);
 
   const form = useForm<z.infer<typeof meetingFormSchema>>({
@@ -66,10 +68,60 @@ export const MeetingForm = ({
       nFem: mbr?.nFem ? mbr?.nFem : "0",
       nEnf: mbr?.nEnf ? mbr?.nEnf : "0",
       nNew: mbr?.nNew ? mbr?.nNew : "0",
+      nIcc: mbr?.nIcc ? mbr?.nIcc : "0",
+      nSta: mbr?.nSta ? mbr?.nSta : "0",
       celluleId: celId ? celId.toString() : "",
       notes: mbr?.notes ? mbr?.notes : "",
     },
   });
+
+  useEffect(() => {
+    const fetchMeeting = async () => {
+      const res = await getMeeting(meetingId);
+      const data = await res?.data;
+
+      //  console.log("Meeting:", data);
+      //  console.log("meetingId:", meetingId);
+
+      setMeeting(data);
+
+      form.setValue("id", meetingId);
+      form.setValue("date", data?.date as string);
+      form.setValue("celluleId", data?.celluleId?.toString());
+      form.setValue("nHom", data?.nHom ? data?.nHom.toString() : "0");
+      form.setValue("nFem", data?.nFem ? data?.nFem.toString() : "0");
+      form.setValue("nEnf", data?.nEnf ? data?.nEnf.toString() : "0");
+      form.setValue("nNew", data?.nNew ? data?.nNew.toString() : "0");
+      form.setValue("nIcc", data?.nIcc ? data?.nIcc.toString() : "0");
+      form.setValue("nSta", data?.nSta ? data?.nSta.toString() : "0");
+      form.setValue("notes", data?.notes?.toString());
+    };
+    if (meetingId) fetchMeeting();
+  }, [form, meetingId]);
+
+  //console.log("meetingId", meetingId);
+
+  /* useEffect(() => {
+    form.setValue("id", optIn?.id);
+   form.setValue("code", pathname.split("/")[3]);
+    form.setValue("valuationType", optIn?.valType);
+    form.setValue("maturityDate", optIn?.maturityDate);
+    form.setValue("issueDate", optIn?.issueDate);
+    form.setValue("firstCouponDate", optIn?.firstCouponDate);
+ 
+    form.setValue("modality", optIn?.modality.toString());
+    form.setValue("couponRate", optIn?.couponRate.toString());
+    form.setValue("couponBasis", optIn?.couponBasis.toString());
+
+    form.setValue("maturity", optIn?.maturity?.toString());
+    form.setValue("rating", optIn?.rating?.toString());
+    form.setValue("notional", optIn?.notional?.toString());
+
+    form.setValue("issuePrice", (optIn?.bondPrice * 100).toFixed(2).toString());
+    form.setValue("obsPrice", (optIn?.bondPrice * 100).toFixed(2).toString());
+    form.setValue("duration", optIn?.duration?.toFixed(2).toString());
+    form.setValue("recovering", optIn?.recovering?.toString()); 
+  }, [form]);*/
 
   /*   useEffect(() => {
     //   console.log("iciiiiiiii");
@@ -105,11 +157,12 @@ export const MeetingForm = ({
   //const sel = form.watch("giId");
 
   const procesForm = async (values: z.infer<typeof meetingFormSchema>) => {
-    //console.log("Value:", values);
+    console.log("Value:", values);
+    console.log("meetingId:", meetingId);
     // console.log("Zone:", zone);
 
     let res;
-    if (mbr) res = await updateMeeting(values);
+    if (meetingId) res = await updateMeeting(values, meetingId);
     else res = await addMeeting(values);
 
     if (!res) {
@@ -121,7 +174,7 @@ export const MeetingForm = ({
       return;
     }
 
-    if (mbr)
+    if (meetingId)
       toast.success(`Le rapport a été modifié avec succès.`, {
         description: new Date().toISOString().split("T")[0],
       });
@@ -143,26 +196,25 @@ export const MeetingForm = ({
         <form onSubmit={form.handleSubmit(procesForm)}>
           <div className="grid gap-4 py-4">
             <div className="grid md:grid-cols-2 md:gap-4 ">
-              {/*               <FormField
+              <FormField
                 control={form.control}
-                name="firstname"
+                name="id"
                 render={({ field }) => {
                   return (
-                    <FormItem>
-                      <FormLabel>{"Date du rapport"}</FormLabel>
+                    <FormItem className="hidden">
+                      <FormLabel>{"Id"}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           placeholder="Entrer le prénom"
                           type="text"
-                          className=""
                         />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   );
                 }}
-              /> */}
+              />
 
               <FormField
                 control={form.control}
@@ -297,6 +349,49 @@ export const MeetingForm = ({
               />
             </div>
 
+            <div className="grid md:grid-cols-2 md:gap-4 ">
+              <FormField
+                control={form.control}
+                name="nIcc"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>{"Membres ICC"}</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Entrer le nombre de membres ICC"
+                          type="number"
+                          step={1}
+                          className=""
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+              <FormField
+                control={form.control}
+                name="nSta"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>{"Star"}</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Entrer le nombre de star"
+                          type="number"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+            </div>
+
             <FormField
               control={form.control}
               name="notes"
@@ -307,7 +402,7 @@ export const MeetingForm = ({
                     <FormControl>
                       <Textarea
                         {...field}
-                        placeholder="Entrer le nombre de nouveaux"
+                        placeholder="Entrer une note si nécessaire..."
                       />
                     </FormControl>
                     <FormMessage />

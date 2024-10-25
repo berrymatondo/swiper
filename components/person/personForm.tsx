@@ -378,7 +378,7 @@ export const PersonForm = ({
                           />
                         </FormControl>
                         <Label className="ml-2" htmlFor="isStar">
-                          Etes-vous membre du MCI (MGI) ?
+                          Etes-vous membre de la coordination des cellules ?
                         </Label>
 
                         <FormMessage />

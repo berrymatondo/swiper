@@ -9,7 +9,7 @@ type Inputs = z.infer<typeof meetingFormSchema>;
 
 // ADD NEW MEETING REPORT
 export const addMeeting = async (data: Inputs) => {
-  console.log("new cel:", data);
+  // console.log("new cel:", data);
 
   const resut = meetingFormSchema.safeParse(data);
   if (resut.success) {
@@ -21,6 +21,8 @@ export const addMeeting = async (data: Inputs) => {
           nFem: +data.nFem,
           nEnf: +data.nEnf,
           nNew: +data.nNew,
+          nIcc: +data.nIcc,
+          nSta: +data.nSta,
           celluleId: data.celluleId ? +data.celluleId : undefined,
           notes: data.notes,
         },
@@ -48,7 +50,7 @@ export const getAllMeetings = async () => {
   //const resut = zoneFormSchema.safeParse(data);
   //if (resut.success) {
   try {
-    const cels = await prisma.cellule.findMany();
+    const cels = await prisma.meeting.findMany();
 
     revalidatePath("/cellules");
 
@@ -82,15 +84,16 @@ export const getAllMeetingsByCel = async (celluledId: number) => {
 };
 
 // UPDATE CELLULE
-export const updateMeeting = async (data: Inputs) => {
+export const updateMeeting = async (data: Inputs, meetingId: number) => {
   //console.log("update zone:", data);
+  //console.log("update meetingId:", meetingId);
 
   const resut = meetingFormSchema.safeParse(data);
   if (resut.success) {
     try {
       const cel = await prisma.meeting.update({
         where: {
-          id: data.id,
+          id: +meetingId,
         },
         data: {
           date: data?.date ? data?.date : " ",
@@ -98,6 +101,8 @@ export const updateMeeting = async (data: Inputs) => {
           nFem: +data.nFem,
           nEnf: +data.nEnf,
           nNew: +data.nNew,
+          nIcc: +data.nIcc,
+          nSta: +data.nSta,
           celluleId: data.celluleId ? +data.celluleId : undefined,
           notes: data.notes,
         },

@@ -62,11 +62,12 @@ const MembersPage = async ({
   const hote =
     typeof searchParams.hote === "string" ? searchParams.hote : false;
 
-  const perCount = await prisma.person.count();
+  //const perCount = await prisma.person.count();
 
   let persons;
 
-  //console.log("pilote", pilote);
+  console.log("pilote ", pilote);
+  console.log("hote ", hote);
 
   if (search)
     persons = await prisma.person.findMany({
@@ -131,7 +132,7 @@ const MembersPage = async ({
     );
   } else personbise = [...personbise0];
 
-  //console.log("personbise", personbise);
+  console.log("personbise ", personbise);
 
   return (
     <PageLayout
@@ -141,8 +142,12 @@ const MembersPage = async ({
       <div className="">
         <CustomBreadcrumb name={`Membres (${personbise?.length})`} />
         <div className="flex items-center justify-between my-2">
-          <SearchPer search={search} />
-          <div className="flex justify-normal gap-2 ">
+          <SearchPer
+            search={search}
+            pilote={pilote == "true" ? true : false}
+            hote={hote == "true" ? true : false}
+          />
+          {/*   <div className="flex justify-normal gap-2 ">
             {skip == 0 ? null : (
               <Link
                 href={{
@@ -169,7 +174,7 @@ const MembersPage = async ({
                 {"Suivant"}
               </Link>
             )}
-          </div>
+          </div> */}
           {/*           <div>Total:{personbise?.length}</div>
            */}{" "}
           <Link className="" href="/admin/members/new">

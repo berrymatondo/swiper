@@ -45,7 +45,7 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
   });
 
   return (
-    <div>
+    <div className="">
       <div className="md:hidden">
         {showIn ? (
           <p
@@ -71,7 +71,7 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
             center={[50.85, 4.4]}
             zoom={zoom ? zoom : 10}
             scrollWheelZoom={true}
-            style={{ height: h, width: "100%" }}
+            style={{ height: h, width: "100%", zIndex: 10 }}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

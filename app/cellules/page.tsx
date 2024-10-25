@@ -90,19 +90,29 @@ const CellulesPage = async ({
     >
       <div className="">
         <CustomBreadcrumb name="Choisissez une cellule près de chez vous!" />
-        <div className="flex items-center justify-between max-md:m-1 md:mt-2 md:w-1/2">
-          <div className="flex items-center text-xs gap-1 w-full">
+        <div className="flex items-center justify-start max-md:m-1 md:mt-2">
+          <div className="flex items-center text-xs gap-1 md:w-1/2">
             <SearchCel search={search} />
           </div>
           {session && session.user && (
-            <Link className="m-2" href="/admin/cellules/new">
-              <MdAddCircle size={50} className="md:hidden text-blue-800" />
-              <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-sky-600 hover:cursor-pointer bg-sky-800 text-white ">
-                Nouveau
-              </span>
-            </Link>
+            <div className="flex items-center">
+              <Link className="m-2" href="/admin/cellules/new">
+                <MdAddCircle size={50} className="md:hidden text-blue-800" />
+                <span className="text-sm font-semibold max-md:hidden  px-4 py-3 rounded-full hover:bg-sky-600 hover:cursor-pointer bg-sky-800 text-white ">
+                  Nouveau
+                </span>
+              </Link>
+
+              <Link
+                className="italic underline text-sky-600"
+                href="/cellules/details"
+              >
+                {"Liste détaillée"}
+              </Link>
+            </div>
           )}
         </div>
+
         <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-6">
           <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-2">
             <ScrollArea className="h-[600px]  rounded-md border">
