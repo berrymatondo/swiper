@@ -81,7 +81,7 @@ const CellulesPage = async ({
   const session = await auth();
   const usr: any = session?.user;
   const role = usr?.role;
-  console.log("Session: ", role);
+  //console.log("Session: ", role);
 
   return (
     <PageLayout

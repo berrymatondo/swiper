@@ -43,12 +43,12 @@ const DetailsPage = async () => {
   const session = await auth();
   const usr: any = session?.user;
   const role = usr?.role;
-  console.log("Session: ", role);
+  //console.log("Session: ", role);
 
   const res = await getAllCels();
   const cellules = res?.data;
 
-  console.log("Cellules: ", cellules);
+  //console.log("Cellules: ", cellules);
 
   if (role != "ADMIN" && role != "PILOTE")
     return <div>{"Vous n'avez pas les droits"}</div>;

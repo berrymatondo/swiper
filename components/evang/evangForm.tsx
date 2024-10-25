@@ -85,7 +85,7 @@ export const EvangForm = ({
       const res = await getEvang(evangId);
       const data = res?.data;
 
-      console.log("Enag: ", data);
+      //console.log("Enag: ", data);
       //  console.log("meetingId:", meetingId);
 
       setEvang(data);
@@ -166,8 +166,8 @@ export const EvangForm = ({
   //const sel = form.watch("giId");
 
   const procesForm = async (values: z.infer<typeof evangFormSchema>) => {
-    console.log(" Value: ", values);
-    console.log("evangId :", evangId);
+    //console.log(" Value: ", values);
+    //console.log("evangId :", evangId);
     // console.log("Zone:", zone);
 
     let res;

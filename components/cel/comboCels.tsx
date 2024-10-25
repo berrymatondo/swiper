@@ -50,7 +50,7 @@ const ComboCels = ({ cellules }: ComboCelsProps) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
-  console.log("cels", cellules);
+  //console.log("cels", cellules);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

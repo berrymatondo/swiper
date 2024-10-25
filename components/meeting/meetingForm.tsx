@@ -157,8 +157,8 @@ export const MeetingForm = ({
   //const sel = form.watch("giId");
 
   const procesForm = async (values: z.infer<typeof meetingFormSchema>) => {
-    console.log("Value:", values);
-    console.log("meetingId:", meetingId);
+    // console.log("Value:", values);
+    //console.log("meetingId:", meetingId);
     // console.log("Zone:", zone);
 
     let res;

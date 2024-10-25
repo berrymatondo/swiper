@@ -22,7 +22,7 @@ const UpdateZonePage = async ({ params }: UpdateZonePageProps) => {
   const res = await getZone(params.zoneId);
   const zone = await res?.data;
   //console.log("params.zoneId", params.zoneId);
-  console.log("ZONE", zone); //
+  //console.log("ZONE", zone); //
 
   return (
     <PageLayout

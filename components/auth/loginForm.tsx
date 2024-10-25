@@ -39,13 +39,13 @@ const LoginForm = () => {
 
   const procesForm = async (values: z.infer<typeof LoginSchema>) => {
     setLoading(true);
-    console.log("Value:", values);
+    //console.log("Value:", values);
 
     const result = await loginlogin(values);
 
     //
 
-    console.log("RESRES:", result);
+    //console.log("RESRES:", result);
 
     if (result?.error) {
       toast.error(result?.error.toString());

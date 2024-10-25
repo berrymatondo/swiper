@@ -66,9 +66,6 @@ const MembersPage = async ({
 
   let persons;
 
-  console.log("pilote ", pilote);
-  console.log("hote ", hote);
-
   if (search)
     persons = await prisma.person.findMany({
       take: take,
@@ -132,7 +129,7 @@ const MembersPage = async ({
     );
   } else personbise = [...personbise0];
 
-  console.log("personbise ", personbise);
+  //console.log("personbise ", personbise);
 
   return (
     <PageLayout

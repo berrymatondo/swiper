@@ -172,7 +172,7 @@ const ListCelComplet = ({ cellules }: ListCelCompletProps) => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  console.log("cellules", cellules);
+  // console.log("cellules", cellules);
   const data: Payment[] = [];
   for (let i = 0; i < cellules.length; i++) {
     data.push({
