@@ -8,7 +8,7 @@ const BulleInfo = () => {
   return (
     <div>
       {!close && (
-        <div className="p-2 rounded-lg absolute top-2 left-2 w-[200px] h-[200px] bg-sky-900/60 z-20">
+        <div className="p-2 rounded-lg absolute top-2 left-2 w-[200px] h-[200px] bg-sky-900/80 z-20">
           <p className="flex justify-end">
             <MdClose className="" size={25} onClick={() => setClose(!close)} />
           </p>
