@@ -8,11 +8,11 @@ const BulleInfo = () => {
   return (
     <div>
       {!close && (
-        <div className="p-2 rounded-lg absolute top-2 left-2 w-[200px] h-[200px] bg-white/20 z-20">
+        <div className="p-2 rounded-lg absolute top-2 left-2 w-[200px] h-[200px] bg-sky-900/60 z-20">
           <p className="flex justify-end">
             <MdClose className="" size={25} onClick={() => setClose(!close)} />
           </p>
-          <Badge className="flex flex-col my-2 bg-sky-800">
+          <Badge className="flex flex-col my-2 bg-sky-600">
             Veillée de prière{" "}
             <span className="text-yellow-400 font-semibold text-sm">
               08/11/2024
