@@ -31,7 +31,7 @@ const PersonItem = ({ per }: PersonItemProps) => {
     <div
       key={per.id}
       // className="shadow-xl rounded-lg my-2 bg-gradient-to-r from-slate-200 to-transparent hover:bg-slate-300 hover:cursor-pointer"
-      className="border gap-2 flex justify-between shadow-md rounded-lg m-2 bg-white hover:cursor-pointer"
+      className="border gap-2 flex max-md:flex-col justify-between shadow-md rounded-lg m-2 bg-white hover:cursor-pointer"
     >
       <div className=" grid grid-cols-3 w-full">
         {/*         <div className="rounded-lg col-span-1  bg-gradient-to-r from-gray-300 to-transparent flex flex-col  justify-center items-center">
@@ -108,35 +108,18 @@ const PersonItem = ({ per }: PersonItemProps) => {
           </div>
         </div>
       </div>
-      <div className="md:hidden flex justify-between gap-4 items-center mx-4 ">
+      <div className="md:hidden flex justify-end gap-4 items-center m-2 ">
         <MdOutlineDeleteForever
           className="text-red-400"
           onClick={() => router.push(`/admin/members/delete/${per.id}`)}
           size={30}
         />
-
         <BiEditAlt
           onClick={() => router.push(`/admin/members/update/${per.id}`)}
           className="text-gray-600"
           size={30}
         />
       </div>
-
-      {/*       <div className="flex justify-between gap-4 items-center mx-4 max-md:hidden">
-        <Button
-          className=" text-red-400"
-          variant="secondary"
-          onClick={() => router.push(`/admin/members/delete/${per.id}`)}
-        >
-          Supprimer
-        </Button>
-        <Button
-          className=""
-          onClick={() => router.push(`/admin/members/update/${per.id}`)}
-        >
-          Modifier
-        </Button>
-      </div> */}
     </div>
   );
 };

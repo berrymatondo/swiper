@@ -50,6 +50,8 @@ import { getAllMeetings, getAllMeetingsByCel } from "@/lib/_meetingActions";
 import MeetingItem from "@/components/meeting/meetingItem";
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import ParticipationGraph from "@/components/graph/participation";
+import { getAllEvangs } from "@/lib/_evangActions";
+import EvangelisationGraph from "@/components/graph/evangelisation";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -65,6 +67,9 @@ const DashboardPage = async () => {
   const re5 = await getAllMeetings();
   const totmeet = re5?.data;
 
+  const re6 = await getAllEvangs();
+  const toteva = re6?.data;
+
   //console.log("totper", totper);
 
   const totpil = re1?.data.filter((p: Person) => p.isPilote == true);
@@ -77,7 +82,7 @@ const DashboardPage = async () => {
   const members = resu?.data;
 
   const resur = await getAllPersons();
-  const allMembers = resur?.data;
+  const allMembers = resur?.data?.filter((mb: any) => mb.isGest == true);
 
   /*   const reso = await getAllMeetingsByCel(10);
   const meetings = reso?.data; */
@@ -90,7 +95,7 @@ const DashboardPage = async () => {
     latitude: cel?.address?.latitude,
   });
  */
-  //console.log("GEOLOCS", geolocs);
+  //console.log("allMembers", allMembers);
 
   let cels = [];
   cels.push(cel);
@@ -200,7 +205,42 @@ const DashboardPage = async () => {
     }
   }
 
-  // console.log("tmp3 ", tmp3);
+  // Evangélisés et gagnées
+  let tmp4: any = [];
+  if (toteva)
+    for (let i = 0; i < toteva?.length; i++) {
+      /*       console.log(
+          "i",
+          i,
+          totmeet[i].date.substring(0, 4) + "" + totmeet[i].date.substring(5, 7)
+        ); */
+
+      const ym =
+        toteva[i].date.substring(0, 4) + "" + toteva[i].date.substring(5, 7);
+
+      let found = tmp4.find((el: any) => el.date == ym);
+      if (found) {
+        //  console.log("FOUND");
+
+        (found.evangelisees += toteva[i].nEva),
+          (found.gagnees += toteva[i].nGag);
+        found.occ += 1;
+      } else {
+        //  console.log("NOTTTT FOUND");
+        tmp4.push({
+          evangelisees: toteva[i].nEva,
+          gagnees: toteva[i].nGag,
+          date: ym,
+          occ: 1,
+          dateout:
+            toteva[i].date.substring(5, 7) +
+            "-" +
+            toteva[i].date.substring(0, 4),
+        });
+      }
+    }
+
+  //console.log("tmp4 ", tmp4);
 
   return (
     <PageLayout
@@ -398,6 +438,7 @@ const DashboardPage = async () => {
                 tmp={tmp}
                 tmp2={tmp2}
                 tmp3={tmp3}
+                tmp4={tmp4}
                 totper={totper}
                 usr={usr}
                 allMembers={allMembers}
@@ -450,6 +491,7 @@ type TabsDEmoProps = {
   totper: any;
   tmp: any;
   tmp3: any;
+  tmp4: any;
   usr: any;
   allMembers: any;
 };
@@ -460,12 +502,13 @@ function TabsDemo({
   tmp,
   tmp2,
   tmp3,
+  tmp4,
   totper,
   usr,
   allMembers,
 }: TabsDEmoProps) {
   return (
-    <Tabs defaultValue="account" className="w-full">
+    <Tabs defaultValue="evang" className="w-full">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">Cellules</TabsTrigger>
         <TabsTrigger value="evang">Evangélisation</TabsTrigger>
@@ -511,11 +554,11 @@ function TabsDemo({
       </TabsContent>
       <TabsContent value="evang">
         <div className="md:flex gap-2 justify-between">
-          <ParticipationGraph
+          <EvangelisationGraph
             meetings={tmp2}
             persons={totper}
             cellules={tmp}
-            data={tmp3}
+            data={tmp4}
           />
           <Card>
             <CardHeader>
@@ -564,20 +607,14 @@ function TabsDemo({
               <Label htmlFor="new">New password</Label>
               <Input id="new" type="password" />
             </div> */}
-            {allMembers
-              ?.filter((mb: any) => mb.isGest == true)
-              ?.map((mbr: any, index: number) => (
-                <div
-                  key={index}
-                  className="flex gap-2 max-md:flex-col max-md:text-xs"
-                >
-                  <p>
-                    {index + 1}. {mbr?.firstname}{" "}
-                    <strong>{mbr?.lastname}</strong>{" "}
-                  </p>
-                  <p>{mbr?.mobile}</p>
-                </div>
-              ))}
+            {allMembers?.map((mbr: any, index: number) => (
+              <div key={index} className="flex gap-2 max-md:text-xs">
+                <p>
+                  {index + 1}. {mbr?.firstname} <strong>{mbr?.lastname}</strong>{" "}
+                </p>
+                <p>{mbr?.mobile}</p>
+              </div>
+            ))}
           </CardContent>
           {/*         <CardFooter>
             <Button>Save password</Button>

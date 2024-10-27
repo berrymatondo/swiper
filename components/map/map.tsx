@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { MdPerson } from "react-icons/md";
 //import { Address, Gi } from "@prisma/client";
 
 type MapProps = {
@@ -105,15 +106,18 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
                           {gi.address.municipality}
                         </p>
                         {gi?.persons &&
-                          gi?.persons?.map((person: Person) => (
-                            <p
-                              className="flex items-center gap-2"
-                              key={person.id}
-                            >
-                              <FaMobileAlt /> {person.mobile} (
-                              {person.firstname})
-                            </p>
-                          ))}
+                          gi?.persons
+                            ?.filter((el: any) => el.isPilote == true)
+                            ?.map((person: Person) => (
+                              <p
+                                className="flex items-center gap-2"
+                                key={person.id}
+                              >
+                                {/* <FaMobileAlt /> {person.mobile} (
+                              {person.firstname}) */}
+                                <MdPerson /> {person.firstname}
+                              </p>
+                            ))}
                       </Popup>{" "}
                     </Marker>
                   ))}

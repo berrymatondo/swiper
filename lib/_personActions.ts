@@ -140,7 +140,11 @@ export const getAllPersons = async () => {
   //const resut = zoneFormSchema.safeParse(data);
   //if (resut.success) {
   try {
-    const persons = await prisma.person.findMany();
+    const persons = await prisma.person.findMany({
+      orderBy: {
+        lastname: "asc",
+      },
+    });
 
     revalidatePath("/members");
 

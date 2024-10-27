@@ -19,6 +19,7 @@ import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import CelDetails from "@/components/cel/celDetails";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { getAllFilterCels } from "@/lib/_celActions";
 
 const CellulesPage = async ({
   searchParams,
@@ -28,14 +29,14 @@ const CellulesPage = async ({
   const skip =
     typeof searchParams.skip === "string" ? Number(searchParams.skip) : 0;
   const take =
-    typeof searchParams.take === "string" ? Number(searchParams.take) : 10;
+    typeof searchParams.take === "string" ? Number(searchParams.take) : 100;
 
   const search =
     typeof searchParams.search === "string" ? searchParams.search : undefined;
 
   // const celCount = await prisma.cellule.count();
 
-  const cellules = await prisma.cellule.findMany({
+  /*   const cels = await prisma.cellule.findMany({
     take: take,
     skip: skip,
     include: {
@@ -77,11 +78,20 @@ const CellulesPage = async ({
       name: "asc",
     },
   });
+ */
+  const res = await getAllFilterCels(search);
+  const cels = res?.data;
 
   const session = await auth();
   const usr: any = session?.user;
   const role = usr?.role;
-  //console.log("Session: ", role);
+
+  let cellules: any;
+  if (role != "ADMIN" || role == undefined) {
+    cellules = cels?.filter((cl: any) => cl?.statut == "ACTIF");
+  } else {
+    cellules = cels;
+  }
 
   return (
     <PageLayout

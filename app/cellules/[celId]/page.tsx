@@ -159,6 +159,8 @@ usr={usr} */
   //console.log("tmp2", tmp4);
   //const taille = cel?.persons ? cel?.persons.length : 0;
 
+  console.log("usr", usr);
+
   return (
     <PageLayout
       title="Détails d'une cellule d'impact"
@@ -182,14 +184,6 @@ usr={usr} */
                     {/*                 {cel?.name} ({cel?.persons.length} membre(s))
                      */}{" "}
                     <MdHome size={20} /> {cel?.name}
-                    {/*                 {taille > 1 ? (
-                  <TbAlertTriangleFilled
-                    size={30}
-                    className=" block text-red-700 p-1 rounded-full"
-                  />
-                ) : (
-                  ""
-                )} */}
                   </span>
                 </p>
               </div>
@@ -243,10 +237,10 @@ usr={usr} */
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between">
-                {cel?.grpWhatsApp && (
-                  <div className="flex flex-col">
-                    <Badge className="border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
+              <div className="flex justify-end w-full ">
+                {cel?.grpWhatsApp ? (
+                  <div className="flex flex-col justify-end">
+                    <Badge className="my-4 border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
                       {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
                        */}{" "}
                       <IoLogoWhatsapp size={30} className="mr-2" />
@@ -262,16 +256,21 @@ usr={usr} */
                 le groupe WhatsApp
               </span> */}
                   </div>
+                ) : (
+                  <p className=" my-4 max-md:text-xs text-sm italic">
+                    Pas de groupe Whatsapp disponible
+                  </p>
                 )}
               </div>
               {usr && (
-                <div className=" flex items-center justify-between pt-4">
-                  <Link
+                <div className=" flex items-center justify-end pt-4">
+                  {/*                   <Link
                     href={`/cellules/${cel?.id}/newmbr`}
                     className="p-2 rounded-full bg-sky-800 text-sm text-white"
                   >
                     Ajouter un membre
-                  </Link>
+                  </Link> */}
+
                   <CelUpdateBar usr={usr} cel={cel} />
                 </div>
               )}
@@ -280,13 +279,20 @@ usr={usr} */
             <div className="p-2 max-h-1/3 md:w-2/3">
               <Map
                 cels={cels}
-                show={usr?.role != "ADMIN" && usr?.role != "PILOTE"}
+                //show={usr?.role != "ADMIN" && usr?.role != "PILOTE"}
+                show={
+                  usr?.role != "ADMIN" &&
+                  usr?.role == "PILOTE" &&
+                  usr.celluleId != cel?.id
+                }
                 haut={300}
               />
             </div>
           </div>
+
           <div className="p-2">
-            {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
+            {(usr?.role == "ADMIN" ||
+              (usr?.role == "PILOTE" && usr.celluleId == cel?.id)) && (
               /*             <CelMembers members={members} />
                */
               <div className="w-full flex  max-md:flex-col gap-2 ">
@@ -307,17 +313,6 @@ usr={usr} */
             )}
           </div>
         </div>
-        {/*         <div className="p-2">
-          {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
-
-            <div className="w-full flex gap-2 ">
-              <div className="w-2/5 p-2 bg-blue-50 border-2 rounded-lg">
-                text
-              </div>
-              <TabsDemo meetings={meetings} name={cel?.name} cel={cel} />
-            </div>
-          )}
-        </div> */}
       </div>
     </PageLayout>
   );

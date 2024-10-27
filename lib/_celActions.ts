@@ -52,7 +52,7 @@ export const getAllCels = async () => {
         address: true,
         persons: true,
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: { name: "asc" },
     });
 
     revalidatePath("/cellules");
@@ -62,6 +62,124 @@ export const getAllCels = async () => {
       data: cels,
     };
   } catch (error) {}
+};
+
+// Get all cellules
+export const getAllFilterCels = async (search: any) => {
+  //const resut = zoneFormSchema.safeParse(data);
+  //if (resut.success) {
+
+  if (search) {
+    try {
+      const cels = await prisma.cellule.findMany({
+        //  take: take,
+        //  skip: skip,
+        include: {
+          address: true,
+          zone: true,
+          persons: true,
+        },
+        where: {
+          OR: [
+            {
+              address: {
+                postalCode: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            {
+              address: {
+                street: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            {
+              address: {
+                municipality: {
+                  contains: search as string,
+                  mode: "insensitive",
+                },
+              },
+            },
+            {
+              address: {
+                number: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            {
+              address: {
+                country: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            { name: { contains: search as string, mode: "insensitive" } },
+          ],
+        },
+        orderBy: {
+          name: "asc",
+        },
+      });
+
+      revalidatePath("/cellules");
+
+      return {
+        success: true,
+        data: cels,
+      };
+    } catch (error) {}
+  } else {
+    try {
+      const cels = await prisma.cellule.findMany({
+        //  take: take,
+        //  skip: skip,
+        include: {
+          address: true,
+          zone: true,
+          persons: true,
+        },
+        /*         where: {
+          OR: [
+            {
+              address: {
+                postalCode: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            {
+              address: {
+                street: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            {
+              address: {
+                municipality: {
+                  contains: search as string,
+                  mode: "insensitive",
+                },
+              },
+            },
+            {
+              address: {
+                number: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            {
+              address: {
+                country: { contains: search as string, mode: "insensitive" },
+              },
+            },
+            { name: { contains: search as string, mode: "insensitive" } },
+          ],
+        }, */
+        orderBy: {
+          name: "asc",
+        },
+      });
+
+      revalidatePath("/cellules");
+
+      return {
+        success: true,
+        data: cels,
+      };
+    } catch (error) {}
+  }
 };
 
 // UPDATE CELLULE

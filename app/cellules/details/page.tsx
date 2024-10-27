@@ -38,6 +38,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 const DetailsPage = async () => {
   const session = await auth();
@@ -59,7 +60,11 @@ const DetailsPage = async () => {
       description="La liste de toutes les cellules d'impact"
     >
       <div className="">
-        <CustomBreadcrumb name="Choisissez une cellule près de chez vous!" />
+        <CustomBreadcrumb
+          name={`Choisissez une cellule près de chez vous! - ${
+            cellules?.filter((cl: any) => cl.statut == "ACTIF").length
+          }`}
+        />
 
         <div className="p-1">
           <ScrollArea className="h-[600px]  rounded-md border">
@@ -110,22 +115,26 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Cellule</TableHead>
+          <TableHead className="w-[150px]">Cellule</TableHead>
           <TableHead>Pilote</TableHead>
           <TableHead>Hôte</TableHead>
           <TableHead>Adresse</TableHead>
-          <TableHead className="text-right">Whatsapp</TableHead>
+          <TableHead>Whatsapp</TableHead>
+          {/*           <TableHead className="text-right">Statut</TableHead>
+           */}{" "}
         </TableRow>
       </TableHeader>
       <TableBody>
         {cellules
           ?.filter((cl: any) => cl.statut == "ACTIF")
-          .map((cel: any) => (
+          .map((cel: any, index: number) => (
             <TableRow key={cel?.id}>
               <TableCell className="font-medium">
-                <Link className="text-sky-700" href={`/cellules/${cel?.id}`}>
-                  {cel?.name}
-                </Link>
+                <Badge className="bg-sky-600">
+                  <Link className="text-white" href={`/cellules/${cel?.id}`}>
+                    {cel?.name}
+                  </Link>
+                </Badge>
               </TableCell>
               <TableCell>
                 {cel?.persons
@@ -166,6 +175,11 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                   <MdQuestionMark className="text-red-600" size={20} />
                 )}
               </TableCell>
+              {/*               <TableCell>
+                <Badge className={cel?.statut ? "bg-green-600" : "bg-red-600"}>
+                  {cel?.statut}
+                </Badge>
+              </TableCell> */}
             </TableRow>
           ))}
       </TableBody>

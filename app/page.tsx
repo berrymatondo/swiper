@@ -7,6 +7,7 @@ import { MdDirectionsRun, MdInfo } from "react-icons/md";
 import { BiBuildingHouse } from "react-icons/bi";
 import { GrUserAdmin } from "react-icons/gr";
 import { Label } from "@/components/ui/label";
+import BulleInfo from "@/components/bulleInfo";
 
 const items = [
   { id: 1, title: "Plus d'informations" },
@@ -17,6 +18,7 @@ const items = [
 export default function Home() {
   return (
     <main className="relative text-white flex flex-col md:flex-row gap-10 justify-center items-center  h-screen md:px-2">
+      <BulleInfo />
       <Image
         alt="bcg"
         src={im}

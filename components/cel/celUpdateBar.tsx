@@ -22,11 +22,13 @@ const CelUpdateBar = ({ usr, cel }: celUpdateBarProps) => {
             size={30}
           />
         )}
-        <BiEditAlt
-          onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
-          className="bg-blue-800 text-white rounded-full p-1"
-          size={30}
-        />{" "}
+        {usr && (usr.role == "ADMIN" || usr.celluleId == cel?.id) && (
+          <BiEditAlt
+            onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
+            className="bg-blue-800 text-white rounded-full p-1"
+            size={30}
+          />
+        )}
       </div>
 
       <div className="max-md:hidden flex justify-between w-full gap-8">
@@ -39,7 +41,7 @@ const CelUpdateBar = ({ usr, cel }: celUpdateBarProps) => {
           </Button>
         )}
 
-        {usr && (usr.role == "ADMIN" || usr.celluleId == cel.id) && (
+        {usr && (usr.role == "ADMIN" || usr.celluleId == cel?.id) && (
           <Button
             onClick={() => router.push(`/admin/cellules/update/${cel.id}`)}
             className="bg-gray-600 text-white rounded-full"

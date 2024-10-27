@@ -48,7 +48,7 @@ const PerFormDelete = ({ per }: PerFormDeleteProps) => {
   return (
     <div>
       <p className="text-center mb-4">
-        {"Etes-vous sûr(e) de vouloir supprimer la zone "}{" "}
+        {"Etes-vous sûr(e) de vouloir supprimer le membre"}{" "}
         <span className="font-semibold text-orange-600">
           {per.firstname} {per.lastname}
         </span>{" "}

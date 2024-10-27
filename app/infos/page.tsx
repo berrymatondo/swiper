@@ -33,13 +33,13 @@ import {
 const CellulesPage = async () => {
   return (
     <PageLayout
-      title="Informations cellules d'impact"
-      description="Voici quelques informations à propos des cellules d'impact"
+      title="Informations cellules de maison"
+      description="Voici quelques informations à propos des cellules de maison"
     >
       <div className="">
         <CustomBreadcrumb name="Informations" />
         <p className="text-orange-600 border mb-8  rounded-bl-full rounded-tr-full m-1 uppercase text-xl max-md:text-sm  text-center p-4 font-bold bg-gradient-to-r to-orange-100 from-white">
-          {"7 bonnes raisons d'être membre d'une cellule d'Impact "}
+          {"7 bonnes raisons d'être membre d'une cellule de maison "}
         </p>
         <div className="flex">
           <div className="max-md:text-xs max-md:mx-1 flex flex-col items-start justify-between my-2">
