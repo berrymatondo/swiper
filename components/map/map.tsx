@@ -70,7 +70,8 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
           <MapContainer
             preferCanvas={true}
             center={[50.85, 4.4]}
-            zoom={zoom ? zoom : 10}
+            // zoom={zoom ? zoom : 10}
+            zoom={7}
             scrollWheelZoom={true}
             style={{ height: h, width: "100%", zIndex: 10 }}
           >
@@ -105,7 +106,7 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
                           {gi.address.street}, {gi.address.postalCode}{" "}
                           {gi.address.municipality}
                         </p>
-                        {gi?.persons &&
+                        {/*                         {gi?.persons &&
                           gi?.persons
                             ?.filter((el: any) => el.isPilote == true)
                             ?.map((person: Person) => (
@@ -113,11 +114,9 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
                                 className="flex items-center gap-2"
                                 key={person.id}
                               >
-                                {/* <FaMobileAlt /> {person.mobile} (
-                              {person.firstname}) */}
                                 <MdPerson /> {person.firstname}
                               </p>
-                            ))}
+                            ))} */}
                       </Popup>{" "}
                     </Marker>
                   ))}
@@ -192,7 +191,8 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
         <MapContainer
           preferCanvas={true}
           center={[50.85, 4.4]}
-          zoom={zoom ? zoom : 10}
+          //zoom={zoom ? zoom : 10}
+          zoom={8}
           scrollWheelZoom={true}
           style={{ height: h, width: "100%" }}
         >
@@ -227,7 +227,7 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
                         {gi.address.street}, {gi.address.postalCode}{" "}
                         {gi.address.municipality}
                       </p>
-                      {gi?.persons &&
+                      {/*                       {gi?.persons &&
                         gi?.persons?.map((person: Person) => (
                           <p
                             className="flex items-center gap-2"
@@ -235,7 +235,7 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
                           >
                             <FaMobileAlt /> {person.mobile} ({person.firstname})
                           </p>
-                        ))}
+                        ))} */}
                     </Popup>{" "}
                   </Marker>
                 ))}

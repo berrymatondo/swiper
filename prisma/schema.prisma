@@ -106,6 +106,7 @@ model Address {
   postalCode String
   city String
   country String
+  hide Boolean @default(false)
 
   longitude String?
   latitude String?

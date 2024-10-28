@@ -68,11 +68,13 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
           <div className="  rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
             <BiMap size={25} className="text-green-600" />
             <div className="font-semibold flex flex-col  md:gap-2 items-start">
-              <p className="">
-                {cel?.address?.street as string},{" "}
-                {/*                 {cel?.address?.number as string} {cel?.address?.box as string}
-                 */}{" "}
-              </p>
+              {!cel?.address?.hide && (
+                <p className="">
+                  {cel?.address?.street as string},{" "}
+                  {/*                 {cel?.address?.number as string} {cel?.address?.box as string}
+                   */}{" "}
+                </p>
+              )}
               <p className="">
                 {cel?.address?.postalCode as string}{" "}
                 {cel?.address?.municipality as string}
@@ -107,6 +109,15 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
                 </div>
               ))}
         </div>
+        {cel?.address?.hide && (
+          <div className="border flex  items-start mt-2 p-2 bg-white rounded-lg">
+            <p className="text-sm  italic">
+              {
+                "Veuillez contacter le pilote via le groupe Whatsapp pour avoir l'adresse de la cellule de maison!"
+              }
+            </p>
+          </div>
+        )}
 
         {usr && (usr.role == "ADMIN" || usr.celluleId == cel.id) && (
           <Separator className="my-4 text-black" />

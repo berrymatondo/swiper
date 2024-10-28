@@ -26,6 +26,8 @@ import { Input } from "../ui/input";
 import { useRouter } from "next/navigation";
 
 import { addAddress, setGeoLoc, updateAddress } from "@/lib/_adrActions";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
 
 type AdrFormProps = {
   adr?: any;
@@ -53,11 +55,14 @@ export const AdrForm = ({ adr, allZones }: AdrFormProps) => {
       country: adr?.country ? adr?.country : "",
       latitude: adr?.latitude ? adr?.latitude : "",
       longitude: adr?.longitude ? adr?.longitude : "",
+      hide: adr?.hide ? adr?.hide : false,
       /*       respoId: zone?.respoId ? zone?.respoId : undefined,
        */
       //status: cel?.statut ? cel?.statut : "INACTIF",
     },
   });
+
+  const hide = form.watch("hide");
 
   /*   useEffect(() => {
     //   console.log("iciiiiiiii");
@@ -85,7 +90,7 @@ export const AdrForm = ({ adr, allZones }: AdrFormProps) => {
  */
   // Process Form
   const procesForm = async (values: z.infer<typeof adrFormSchema>) => {
-    console.log("Value:", values);
+    //console.log("Value:", values);
     // console.log("Zone:", zone);
 
     let res;
@@ -310,6 +315,29 @@ export const AdrForm = ({ adr, allZones }: AdrFormProps) => {
                           type="text"
                         />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+            </div>
+            <div className="flex max-md:flex-col justify-between gap-4  max-md:gap-2">
+              <FormField
+                control={form.control}
+                name="hide"
+                render={({ field }) => {
+                  return (
+                    <FormItem className="w-full">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <Label className="ml-2" htmlFor="isIcc">
+                        Cacher mon adresse ?
+                      </Label>
+
                       <FormMessage />
                     </FormItem>
                   );

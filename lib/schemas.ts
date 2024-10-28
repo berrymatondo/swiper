@@ -115,6 +115,7 @@ export const adrFormSchema = z.object({
   longitude: z.string().optional(),
   latitude: z.string().optional(),
   grpWhatsApp: z.string().optional(),
+  hide: z.boolean().default(false),
 });
 
 export const cadrFormSchema = z.object({

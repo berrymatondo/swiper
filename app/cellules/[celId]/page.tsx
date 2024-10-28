@@ -18,6 +18,7 @@ import {
   MdCalendarMonth,
   MdHome,
   MdHouse,
+  MdPolicy,
 } from "react-icons/md";
 import { GoClock } from "react-icons/go";
 
@@ -54,6 +55,7 @@ import ExportEva from "@/components/reports/expEva";
 import EvaGraphe from "@/components/graph/evaGraph";
 import MbrGraphe from "@/components/graph/mbrGraph";
 import ExportMbr from "@/components/reports/expMbr";
+import { GiPoliceOfficerHead } from "react-icons/gi";
 
 type CelDetailsPageProps = {
   params: {
@@ -77,6 +79,8 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
 
   const resoo = await getAllEvangsByCel(params.celId);
   const evangs = resoo?.data;
+
+  console.log("cells: ", cel);
 
   //
   /* 
@@ -159,7 +163,7 @@ usr={usr} */
   //console.log("tmp2", tmp4);
   //const taille = cel?.persons ? cel?.persons.length : 0;
 
-  console.log("usr", usr);
+  //console.log("usr", usr);
 
   return (
     <PageLayout
@@ -188,7 +192,7 @@ usr={usr} */
                 </p>
               </div>
 
-              {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
+              {usr?.role == "ADMIN" && (
                 <div className="flex flex-col items-start">
                   {cel?.persons &&
                     cel?.persons
@@ -198,8 +202,10 @@ usr={usr} */
                           className="flex justify-start items-center gap-2"
                           key={person.id}
                         >
-                          <FaMobileAlt className="text-orange-600" />{" "}
-                          {person.mobile} ({person.firstname})
+                          <GiPoliceOfficerHead className="text-orange-600" />{" "}
+                          {/*                           {person.mobile} ({person.firstname})
+                           */}{" "}
+                          {person.firstname}
                         </div>
                       ))}
                 </div>
@@ -209,16 +215,20 @@ usr={usr} */
                 <div className="  rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
                   <BiMap size={20} className="text-green-600" />
                   <div className="font-semibold flex md:gap-2 items-start">
-                    <p className="">
-                      {cel?.address?.street as string}{" "}
-                      {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
-                        <span>
-                          {" "}
-                          {cel?.address?.number as string},{" "}
-                          {cel?.address?.box as string}{" "}
-                        </span>
-                      )}
-                    </p>
+                    {!cel?.address?.hide && (
+                      <p className="">
+                        {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
+                          <>
+                            <span>{cel?.address?.street as string} </span>
+                            <span>
+                              {" "}
+                              {cel?.address?.number as string},{" "}
+                              {cel?.address?.box as string}{" "}
+                            </span>
+                          </>
+                        )}
+                      </p>
+                    )}
                     <p className="">
                       {cel?.address?.postalCode as string}{" "}
                       {cel?.address?.municipality as string}
@@ -236,6 +246,15 @@ usr={usr} */
                     <p>{cel?.hours}</p>
                   </div>
                 </div>
+                {cel?.address?.hide && (
+                  <div className=" border flex  items-start mt-2 p-2 bg-white rounded-lg">
+                    <p className="text-sm  italic">
+                      {
+                        "Veuillez contacter le pilote via le groupe Whatsapp pour avoir l'adresse de la cellule de maison!"
+                      }
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="flex justify-end w-full ">
                 {cel?.grpWhatsApp ? (
@@ -281,9 +300,8 @@ usr={usr} */
                 cels={cels}
                 //show={usr?.role != "ADMIN" && usr?.role != "PILOTE"}
                 show={
-                  usr?.role != "ADMIN" &&
-                  usr?.role == "PILOTE" &&
-                  usr.celluleId != cel?.id
+                  usr?.role != "ADMIN" ||
+                  (usr?.role == "PILOTE" && usr.celluleId != cel?.id)
                 }
                 haut={300}
               />

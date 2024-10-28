@@ -91,6 +91,7 @@ export const addAddress = async (data: Inputs) => {
           country: data.country,
           longitude: data.longitude,
           latitude: data.latitude,
+          hide: data.hide,
         },
       });
 
@@ -132,6 +133,7 @@ export const updateAddress = async (data: Inputs) => {
           country: data.country,
           longitude: " ",
           latitude: " ",
+          hide: data.hide,
         },
       });
 
