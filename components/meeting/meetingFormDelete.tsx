@@ -26,8 +26,8 @@ const MeetingFormDelete = ({
 }: MeetingFormDeleteProps) => {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof meetingFormSchema>>({
-    resolver: zodResolver(meetingFormSchema),
+  const form = useForm({
+    //resolver: zodResolver(meetingFormSchema),
     defaultValues: {
       id: meetingId ? meetingId : undefined,
       //  name: meeting?.name ? meeting?.name : "",
@@ -35,8 +35,9 @@ const MeetingFormDelete = ({
     },
   });
 
-  const procesForm = async (values: z.infer<typeof meetingFormSchema>) => {
-    // console.log("Value:", values);
+  //const procesForm = async (values: z.infer<typeof meetingFormSchema>) => {
+  const procesForm = async (values: any) => {
+    console.log("Value:", values);
     // console.log("Zone:", zone);
 
     const res = await deleteMeeting(meetingId, celluleId);
@@ -80,7 +81,15 @@ const MeetingFormDelete = ({
               Annuler
             </Button>
 
-            <Button className="max-md:mt-4" type="submit">
+            <Button
+              onClick={async () => {
+                // console.log("ICCCCC");
+                await deleteMeeting(meetingId, celluleId);
+                router.push(`/cellules/${celluleId}`);
+              }}
+              className="max-md:mt-4"
+              type="button"
+            >
               Confirmer
             </Button>
           </div>

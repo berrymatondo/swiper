@@ -51,8 +51,7 @@ const DetailsPage = async () => {
 
   //console.log("Cellules: ", cellules);
 
-  if (role != "ADMIN" && role != "PILOTE")
-    return <div>{"Vous n'avez pas les droits"}</div>;
+  if (role != "ADMIN") return <div>{"Vous n'avez pas les droits"}</div>;
 
   return (
     <PageLayout
@@ -116,10 +115,10 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[150px]">Cellule</TableHead>
-          <TableHead>Pilote</TableHead>
-          <TableHead>Hôte</TableHead>
-          <TableHead>Adresse</TableHead>
-          <TableHead>Whatsapp</TableHead>
+          <TableHead className="max-md:hidden">Pilote</TableHead>
+          <TableHead className="max-md:hidden">Hôte</TableHead>
+          <TableHead className="max-md:hidden">Adresse</TableHead>
+          <TableHead className="max-md:hidden">Whatsapp</TableHead>
           {/*           <TableHead className="text-right">Statut</TableHead>
            */}{" "}
         </TableRow>
@@ -129,14 +128,63 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
           ?.filter((cl: any) => cl.statut == "ACTIF")
           .map((cel: any, index: number) => (
             <TableRow key={cel?.id}>
-              <TableCell className="font-medium">
-                <Badge className="bg-sky-600">
-                  <Link className="text-white" href={`/cellules/${cel?.id}`}>
+              <TableCell className="font-medium max-md:bg-sky-100 max-md:my-1 max-md:border max-md:rounded-lg max-md:flex max-md:flex-col max-md:gap-2">
+                <Badge className="bg-sky-600 ">
+                  <Link
+                    className="text-white text-sm w-full text-center"
+                    href={`/cellules/${cel?.id}`}
+                  >
                     {cel?.name}
                   </Link>
                 </Badge>
+                <div className="md:hidden">
+                  {cel?.persons
+                    .filter(
+                      (pp: any) => pp?.isPilote == true && pp?.isRepo != true
+                    )
+                    .map((per: any, index: number) => (
+                      <div key={index} className="flex justify-between">
+                        <p className="flex gap-2">
+                          {per.firstname}{" "}
+                          <strong className="uppercase">{per.lastname}</strong>
+                        </p>
+                        <p>{per.mobile}</p>
+                      </div>
+                    ))}
+                </div>
+                <div className="md:hidden">
+                  {cel.persons
+                    .filter(
+                      (pp: any) => pp?.isRespo == true && pp?.isPilote != true
+                    )
+                    .map((per: any, index: number) => (
+                      <div
+                        key={index}
+                        className="md:hidden flex justify-between"
+                      >
+                        <p className="flex gap-2">
+                          {per?.firstname}{" "}
+                          <strong className="uppercase">{per?.lastname}</strong>
+                        </p>
+                        <p>{per?.mobile}</p>
+                      </div>
+                    ))}
+                </div>
+                <div className="md:hidden">
+                  {cel?.address?.street} {cel?.address?.number}{" "}
+                  {cel?.address?.box},{cel?.address?.postalCode}{" "}
+                  {cel?.address?.municipality}
+                </div>
+                <div className="text-right md:hidden">
+                  {" "}
+                  {cel?.grpWhatsApp ? (
+                    <MdCheckBox className="text-green-600" size={20} />
+                  ) : (
+                    <MdQuestionMark className="text-red-600" size={20} />
+                  )}
+                </div>
               </TableCell>
-              <TableCell>
+              <TableCell className="max-md:hidden">
                 {cel?.persons
                   .filter((pp: any) => pp?.isPilote == true)
                   .map((per: any, index: number) => (
@@ -149,7 +197,7 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                     </div>
                   ))}
               </TableCell>
-              <TableCell>
+              <TableCell className="max-md:hidden">
                 {cel.persons
                   .filter((pp: any) => pp?.isRespo == true)
                   .map((per: any, index: number) => (
@@ -162,12 +210,12 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                     </div>
                   ))}
               </TableCell>
-              <TableCell>
+              <TableCell className="max-md:hidden">
                 {cel?.address?.street} {cel?.address?.number}{" "}
                 {cel?.address?.box},{cel?.address?.postalCode}{" "}
                 {cel?.address?.municipality}
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-right max-md:hidden">
                 {" "}
                 {cel?.grpWhatsApp ? (
                   <MdCheckBox className="text-green-600" size={20} />

@@ -167,7 +167,7 @@ export const deleteMeeting = async (meetingId: number, celluledId: number) => {
   //const resut = zoneFormSchema.safeParse(data);
   //if (resut.success) {
 
-  // console.log("zoneId: " + zoneId);
+  //console.log("zoneId: ", meetingId, celluledId);
 
   try {
     const cel = await prisma.meeting.delete({
@@ -176,7 +176,7 @@ export const deleteMeeting = async (meetingId: number, celluledId: number) => {
       },
     });
 
-    revalidatePath(`/meetings/${celluledId}`);
+    revalidatePath(`/cellules/${celluledId}`);
 
     return {
       success: true,

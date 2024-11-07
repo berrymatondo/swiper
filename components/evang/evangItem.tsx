@@ -14,9 +14,10 @@ import { Evang } from "@prisma/client";
 
 type EvangItemProps = {
   evang: any;
+  usr: any;
 };
 
-const EvangItem = ({ evang }: EvangItemProps) => {
+const EvangItem = ({ evang, usr }: EvangItemProps) => {
   const router = useRouter();
 
   // console.log("meeting: ", meeting);
@@ -55,16 +56,19 @@ const EvangItem = ({ evang }: EvangItemProps) => {
           </div>
         </div>
       </div>
+
       <div className="md:hidden flex justify-between gap-4 items-center mx-4 ">
-        <MdOutlineDeleteForever
-          className="text-red-400"
-          onClick={() =>
-            router.push(
-              `/admin/evangs/delete/${evang.id}?date=${evang.date}&name=${evang.cellule.name}&celluleId=${evang.celluleId}&evangId=${evang.id}&zoneId=${evang.zoneId}`
-            )
-          }
-          size={20}
-        />
+        {usr?.role == "ADMIN" && (
+          <MdOutlineDeleteForever
+            className="text-red-400"
+            onClick={() =>
+              router.push(
+                `/admin/evangs/delete/${evang.id}?date=${evang.date}&name=${evang.cellule.name}&celluleId=${evang.celluleId}&evangId=${evang.id}&zoneId=${evang.zoneId}`
+              )
+            }
+            size={20}
+          />
+        )}
         <BiEditAlt
           onClick={() =>
             router.push(
@@ -75,18 +79,21 @@ const EvangItem = ({ evang }: EvangItemProps) => {
           size={20}
         />
       </div>
+
       <div className="flex justify-between gap-4 items-center mx-4 max-md:hidden">
-        <Button
-          className=" text-red-400"
-          variant="secondary"
-          onClick={() =>
-            router.push(
-              `/admin/evangs/delete/${evang.id}?date=${evang.date}&name=${evang.cellule.name}&celluleId=${evang.celluleId}&evangId=${evang.id}&zoneId=${evang.zoneId}`
-            )
-          }
-        >
-          Supprimer
-        </Button>
+        {usr?.role == "ADMIN" && (
+          <Button
+            className=" text-red-400"
+            variant="secondary"
+            onClick={() =>
+              router.push(
+                `/admin/evangs/delete/${evang.id}?date=${evang.date}&name=${evang.cellule.name}&celluleId=${evang.celluleId}&evangId=${evang.id}&zoneId=${evang.zoneId}`
+              )
+            }
+          >
+            Supprimer
+          </Button>
+        )}
         <Button
           className=""
           onClick={() =>

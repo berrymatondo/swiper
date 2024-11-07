@@ -43,9 +43,10 @@ type CelFormProps = {
   cel?: any;
   allZones?: any;
   addresses?: any;
+  usr?: any;
 };
 
-export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
+export const CelForm = ({ cel, allZones, addresses, usr }: CelFormProps) => {
   const router = useRouter();
   const [zones, setZones] = useState<any>();
   const [open, setOpen] = React.useState(false);
@@ -141,6 +142,7 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
                         {...field}
                         placeholder="Entrer le nom la cellule"
                         type="text"
+                        disabled={usr?.role == "ADMIN" ? false : true}
                       />
                     </FormControl>
                     <FormMessage />
@@ -160,6 +162,7 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled={usr?.role == "ADMIN" ? false : true}
                     >
                       <SelectTrigger id="framework">
                         <SelectValue placeholder="Sélectionner une zone" />
@@ -259,6 +262,7 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
+                        disabled={usr?.role == "ADMIN" ? false : true}
                       >
                         <SelectTrigger id="framework">
                           <SelectValue placeholder="Sélectionner une zone" />
@@ -421,6 +425,7 @@ export const CelForm = ({ cel, allZones, addresses }: CelFormProps) => {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      disabled={usr?.role == "ADMIN" ? false : true}
                     >
                       <SelectTrigger id="framework">
                         <SelectValue placeholder="Sélectionner une adresse" />

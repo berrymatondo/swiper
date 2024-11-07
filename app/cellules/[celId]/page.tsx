@@ -80,7 +80,7 @@ const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
   const resoo = await getAllEvangsByCel(params.celId);
   const evangs = resoo?.data;
 
-  console.log("cells: ", cel);
+  //console.log("cells: ", cel);
 
   //
   /* 
@@ -191,7 +191,6 @@ usr={usr} */
                   </span>
                 </p>
               </div>
-
               {usr?.role == "ADMIN" && (
                 <div className="flex flex-col items-start">
                   {cel?.persons &&
@@ -210,12 +209,11 @@ usr={usr} */
                       ))}
                 </div>
               )}
-
               <div className="flex flex-col gap-2 mt-2">
                 <div className="  rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
                   <BiMap size={20} className="text-green-600" />
                   <div className="font-semibold flex md:gap-2 items-start">
-                    {!cel?.address?.hide && (
+                    {cel?.address?.hide && (
                       <p className="">
                         {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
                           <>
@@ -234,6 +232,19 @@ usr={usr} */
                       {cel?.address?.municipality as string}
                     </p>
                   </div>
+                </div>
+
+                <div className="p-2 bg-neutral-100 rounded-xl">
+                  {/* {(usr?.role == "ADMIN" ||
+                    (usr?.role == "PILOTE" && usr.celluleId == cel?.id)) && ( */}
+                  <CelMembers
+                    vue={true}
+                    members={members?.filter(
+                      (mbr: any) =>
+                        mbr?.isPilote == true || mbr?.isRespo == true
+                    )}
+                  />
+                  {/*   )} */}
                 </div>
 
                 <div className="flex gap-4">
@@ -298,11 +309,11 @@ usr={usr} */
             <div className="p-2 max-h-1/3 md:w-2/3">
               <Map
                 cels={cels}
-                //show={usr?.role != "ADMIN" && usr?.role != "PILOTE"}
-                show={
+                /*                 show={
                   usr?.role != "ADMIN" ||
                   (usr?.role == "PILOTE" && usr.celluleId != cel?.id)
-                }
+                } */
+                show={!(usr?.role == "PILOTE" && usr.celluleId == cel?.id)}
                 haut={300}
               />
             </div>
@@ -310,7 +321,7 @@ usr={usr} */
 
           <div className="p-2">
             {(usr?.role == "ADMIN" ||
-              (usr?.role == "PILOTE" && usr.celluleId == cel?.id)) && (
+              (usr?.role == "PILOTE" && usr?.celluleId == cel?.id)) && (
               /*             <CelMembers members={members} />
                */
               <div className="w-full flex  max-md:flex-col gap-2 ">
@@ -391,7 +402,7 @@ function TabsDemo({
   mbr,
 }: TabsDEmoProps) {
   return (
-    <Tabs defaultValue="evang" className="w-full">
+    <Tabs defaultValue="account" className="w-full">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">Cellules</TabsTrigger>
         <TabsTrigger value="evang">Evangélisation</TabsTrigger>
@@ -464,7 +475,7 @@ function TabsDemo({
           <CardContent className="space-y-2">
             <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
               {evangs?.map((meet: any) => (
-                <EvangItem key={meet.id} evang={meet} />
+                <EvangItem key={meet.id} evang={meet} usr={usr} />
               ))}
             </div>
             {/*             <div className="space-y-1">

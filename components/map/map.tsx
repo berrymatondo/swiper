@@ -34,7 +34,7 @@ type MapProps = {
 export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
   //console.log("Adresses", addresses);
   //console.log("secteurId", secteurId);
-  //console.log("gis", gis);
+  // console.log("gis", cels);
 
   let h = haut ? haut : "500px";
   const [showIn, setShowIn] = useState(show);

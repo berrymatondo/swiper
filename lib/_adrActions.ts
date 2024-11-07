@@ -187,8 +187,8 @@ export const setGeoLoc = async (data: any) => {
 
   // https://geocode.maps.co/search?q=152+frans+hals+anderlecht+1070&api_key=662909d16b764219098658gole8341e
 
-  const street = data.street.split(" ").join("+");
-  const number = data.number.split(" ").join("+");
+  const street = data.hide ? "" : data.street.split(" ").join("+");
+  const number = data.hide ? "" : data.number.split(" ").join("+");
   //const box = data.box.split(' ').join('+')
   const municipality = data.municipality.split(" ").join("+");
   const postalCode = data.postalCode.split(" ").join("+");

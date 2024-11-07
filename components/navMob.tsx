@@ -193,6 +193,16 @@ const NavMob = ({ usr }: NavMobProps) => {
               Utilisateurs
             </Button>
           )}
+
+          <Button
+            onClick={() => {
+              router.push("/docs");
+              setOpen(false);
+            }}
+            className="bg-gradient-to-r from-sky-600 to-transparent"
+          >
+            Documentation
+          </Button>
         </div>
 
         <SheetFooter>

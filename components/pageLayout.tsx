@@ -58,15 +58,13 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
             <span className="text-white font-semibold">de maison</span>
           </p>
           <div className="hover:cursor-pointer hover:text-white flex-col items-center text-yellow-300 md:flex">
-            {/*             <Button onClick={toggleNavbar}>{openNav ? <X /> : <Menu />}</Button>
-             */}{" "}
             <MdLogin
               className="mx-2 "
               onClick={() => router.push("/auth/login")}
             />
-            <p className=" text-yellow-300 max-md:hidden text-sm md:text-muted">
+            {/*             <p className=" text-yellow-300 max-md:hidden text-sm md:text-muted">
               Se Connecter
-            </p>
+            </p> */}
           </div>{" "}
         </div>
       </div>

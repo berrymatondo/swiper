@@ -23,7 +23,7 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
   // const session = await auth();
   const usr = userSession?.user;
   const router = useRouter();
-  //console.log("USR ", usr);
+  //  console.log("cel ", cel);
 
   return (
     <div>
@@ -109,8 +109,18 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
                 </div>
               ))}
         </div>
-        {cel?.address?.hide && (
+        {/*         {cel?.address?.hide && (
           <div className="border flex  items-start mt-2 p-2 bg-white rounded-lg">
+            <p className="text-sm  italic">
+              {
+                "Veuillez contacter le pilote via le groupe Whatsapp pour avoir l'adresse de la cellule de maison!"
+              }
+            </p>
+          </div>
+        )} */}
+
+        {cel?.address?.hide && (
+          <div className=" border flex  items-start mt-2 p-2 bg-white rounded-lg">
             <p className="text-sm  italic">
               {
                 "Veuillez contacter le pilote via le groupe Whatsapp pour avoir l'adresse de la cellule de maison!"

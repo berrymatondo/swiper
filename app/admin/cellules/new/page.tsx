@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import CelForm from "@/components/cel/celForm";
 import PageLayout from "@/components/pageLayout";
 import Title from "@/components/title";
@@ -14,6 +15,8 @@ import { getAllZones } from "@/lib/_zoneActions";
 import React from "react";
 
 const AddCelPage = async () => {
+  const session = await auth();
+  const usr: any = session?.user;
   const res = await getAllZones();
   const allZones = await res?.data;
 
@@ -27,7 +30,7 @@ const AddCelPage = async () => {
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <CelForm allZones={allZones} addresses={allAddresses} />
+        <CelForm allZones={allZones} addresses={allAddresses} usr={usr} />
       </div>
     </PageLayout>
   );

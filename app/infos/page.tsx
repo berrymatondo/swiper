@@ -45,12 +45,12 @@ const CellulesPage = async () => {
           <div className="max-md:text-xs max-md:mx-1 flex flex-col items-start justify-between my-2">
             <p className="text-end flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl">
               <TbCircleNumber1Filled size={40} className="text-orange-600" />{" "}
-              <span> {"Mieux comprendre la parole de Dieu"}</span>
+              <span> {"Mieux comprendre la Parole de Dieu"}</span>
             </p>
 
             <p className="flex items-center bg-white  p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
               <TbCircleNumber2Filled size={40} className="text-orange-600" />
-              <span> {"Apprendre à prier avec et pourles autres"}</span>
+              <span> {"Apprendre à prier avec et pour les autres"}</span>
             </p>
 
             <p className="flex items-center bg-white p-1 px-2 rounded-bl-3xl rounded-tr-3xl mt-4">
@@ -73,7 +73,7 @@ const CellulesPage = async () => {
               <span>
                 {" "}
                 {
-                  "Contribuer à la croissance de l'église en invitantles voisins à l'église"
+                  "Contribuer à la croissance de l'église en invitant les voisins à l'église"
                 }
               </span>
             </p>
@@ -119,7 +119,7 @@ const CellulesPage = async () => {
             </p>
             <p className="block md:text-lg  font-semibold">
               {" "}
-              {" une cellule d'impact !"}
+              {" une cellule de maison !"}
             </p>
           </div>
         </Link>

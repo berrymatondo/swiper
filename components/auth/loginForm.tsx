@@ -39,7 +39,7 @@ const LoginForm = () => {
 
   const procesForm = async (values: z.infer<typeof LoginSchema>) => {
     setLoading(true);
-    //console.log("Value:", values);
+    //console.log("Value:", values?.username);
 
     const result = await loginlogin(values);
 
@@ -92,6 +92,7 @@ const LoginForm = () => {
                         {...field}
                         placeholder="Entrer l'utilisateur"
                         type="text"
+                        className="lowercase"
                       />
                     </FormControl>
                     <FormMessage />

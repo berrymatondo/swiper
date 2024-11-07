@@ -17,12 +17,16 @@ import CelItem from "@/components/cel/celItem";
 import SearchCel from "@/components/searchCel";
 import SearchUser from "@/components/searchPerson";
 import UserItem from "@/components/user/userItem";
+import { auth } from "@/auth";
 
 const UsersPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
+  const session = await auth();
+  const usr: any = session?.user;
+
   const skip =
     typeof searchParams.skip === "string" ? Number(searchParams.skip) : 0;
   const take =
@@ -50,6 +54,16 @@ const UsersPage = async ({
       username: "asc",
     },
   });
+
+  if (usr?.role != "ADMIN")
+    return (
+      <div className="flex flex-col items-center justify-center">
+        {"Vous n'avez pas les droits d'accès à cette page"}
+        <Link className="text-sky-600 italic underline" href="/">
+          {"Page d'accueil"}
+        </Link>{" "}
+      </div>
+    );
 
   return (
     <PageLayout

@@ -20,6 +20,7 @@ import prisma from "@/lib/prisma";
 import CelDetails from "@/components/cel/celDetails";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getAllFilterCels } from "@/lib/_celActions";
+import { Badge } from "@/components/ui/badge";
 
 const CellulesPage = async ({
   searchParams,
@@ -113,16 +114,25 @@ const CellulesPage = async ({
                 </span>
               </Link>
 
-              <Link
-                className="italic underline text-sky-600"
-                href="/cellules/details"
-              >
-                {"Liste détaillée"}
-              </Link>
+              {usr?.role == "ADMIN" && (
+                <Link
+                  className="italic underline text-sky-600"
+                  href="/cellules/details"
+                >
+                  {"Liste détaillée"}
+                </Link>
+              )}
             </div>
           )}
         </div>
 
+        <div className="w-full flex  justify-center">
+          <Badge className="bg-sky-700 p-2 m-2">
+            {
+              "Veuillez contacter le pilote via le groupe Whatsapp pour avoir l'adresse de la cellule de maison!"
+            }
+          </Badge>
+        </div>
         <div className="p-1 max-md:flex-col-reverse max-md:flex max-md:justify-center md:grid md:grid-cols-6">
           <div className="max-sm:max-h-[600px] grid mx-auto w-full md:col-span-2">
             <ScrollArea className="h-[600px]  rounded-md border">

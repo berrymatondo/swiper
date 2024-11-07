@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import CelForm from "@/components/cel/celForm";
 import PageLayout from "@/components/pageLayout";
 import {
@@ -21,6 +22,9 @@ type UpdateCelPageProps = {
 };
 
 const UpdateCelPage = async ({ params }: UpdateCelPageProps) => {
+  const session = await auth();
+  const usr: any = session?.user;
+
   const res = await getCel(params.celId);
   const cel = await res?.data;
 
@@ -40,7 +44,12 @@ const UpdateCelPage = async ({ params }: UpdateCelPageProps) => {
     >
       <CustomBreadcrumb name="Editer une cellule" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <CelForm cel={cel} allZones={allZones} addresses={allAddresses} />
+        <CelForm
+          cel={cel}
+          allZones={allZones}
+          addresses={allAddresses}
+          usr={usr}
+        />
       </div>
     </PageLayout>
   );

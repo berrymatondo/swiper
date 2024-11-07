@@ -223,7 +223,7 @@ export const deleteUser = async (userId: number) => {
 type Inputs = z.infer<typeof LoginSchema>;
 
 export const loginlogin = async (data: Inputs) => {
-  //console.log("data", data);
+  console.log("data", data);
 
   const result = LoginSchema.safeParse(data);
 
@@ -231,7 +231,7 @@ export const loginlogin = async (data: Inputs) => {
     try {
       const foundUser = await prisma.user.findUnique({
         where: {
-          username: data.username,
+          username: data.username.toLowerCase(),
         },
       });
 
@@ -253,6 +253,7 @@ export const loginlogin = async (data: Inputs) => {
     return { success: false, error: result.error.format() };
   }
 
+  data = { ...data, username: data.username.toLowerCase() };
   //console.log("Call sinin", data);
 
   const res = await signIn("credentials", {

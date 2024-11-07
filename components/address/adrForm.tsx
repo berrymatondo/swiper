@@ -107,6 +107,8 @@ export const AdrForm = ({ adr, allZones }: AdrFormProps) => {
       return;
     }
 
+    //if (res?.data) console.log("res?.data", res?.data);
+
     // Set GeoLoc
     const geoLoc = await setGeoLoc(res?.data);
     //console.log("LOG:", geoLoc?.data);
