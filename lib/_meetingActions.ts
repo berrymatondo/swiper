@@ -50,7 +50,11 @@ export const getAllMeetings = async () => {
   //const resut = zoneFormSchema.safeParse(data);
   //if (resut.success) {
   try {
-    const cels = await prisma.meeting.findMany();
+    const cels = await prisma.meeting.findMany({
+      include: {
+        cellule: true,
+      },
+    });
 
     revalidatePath("/cellules");
 

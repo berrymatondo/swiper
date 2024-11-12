@@ -29,7 +29,7 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
     <div>
       <div
         onClick={() => router.push(`/cellules/${cel.id}`)}
-        className="p-2 bg-gradient-to-l to-sky-100 from-transparent m-1 border-2 rounded-lg mb-2"
+        className="hover:cursor-pointer hover:bg-gradient-to-l hover:to-sky-200 hover:from-transparent p-2 bg-gradient-to-l to-sky-100 from-transparent m-1 border-2 rounded-lg mb-2"
       >
         <div className="flex items-center gap-2 mb-2 ">
           <p className="w-full flex justify-between font-semibold text-blue-800">

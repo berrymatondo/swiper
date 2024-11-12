@@ -72,7 +72,8 @@ export const PartGraph = ({ data }: PartGraphProps) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Badge className="mr-1 bg-[hsl(var(--chart-1))]">Nbr Cellules</Badge>
+        {/*         <Badge className="mr-1 bg-[hsl(var(--chart-1))]">Nbr Cellules</Badge>
+         */}{" "}
         <Badge className="mr-1 bg-[hsl(var(--chart-3))]">Nbr Rapports</Badge>
         <Badge className="bg-[hsl(var(--chart-2))]">Nbr Participants</Badge>
         <ChartContainer config={chartConfig}>
@@ -89,7 +90,8 @@ export const PartGraph = ({ data }: PartGraphProps) => {
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="nbrCel" fill="var(--color-cellule)" radius={4} />
+            {/*             <Bar dataKey="nbrCel" fill="var(--color-cellule)" radius={4} />
+             */}{" "}
             <Bar dataKey="nbrRap" fill="var(--color-desktop)" radius={4} />
             <Bar dataKey="nbrPar" fill="var(--color-mobile)" radius={4} />
           </BarChart>

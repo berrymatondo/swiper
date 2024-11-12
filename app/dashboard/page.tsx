@@ -52,6 +52,8 @@ import { GiPoliceOfficerHead } from "react-icons/gi";
 import ParticipationGraph from "@/components/graph/participation";
 import { getAllEvangs } from "@/lib/_evangActions";
 import EvangelisationGraph from "@/components/graph/evangelisation";
+import NotAccess from "@/components/notAccess";
+import ExportAllMeetings from "@/components/reports/expAllMeetings";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -70,7 +72,7 @@ const DashboardPage = async () => {
   const re6 = await getAllEvangs();
   const toteva = re6?.data;
 
-  //console.log("totper", totper);
+  // console.log("totmeet ", totmeet);
 
   const totpil = re1?.data.filter((p: Person) => p.isPilote == true);
   const tothot = re1?.data.filter((p: Person) => p.isRespo == true);
@@ -160,29 +162,23 @@ const DashboardPage = async () => {
       if (found) {
         //  console.log("FOUND");
 
-        found.count +=
-          totmeet[i].nHom +
-          totmeet[i].nFem +
-          totmeet[i].nEnf +
-          totmeet[i].nIcc +
-          totmeet[i].nSta;
+        found.count += totmeet[i].nHom + totmeet[i].nFem + totmeet[i].nEnf;
+        /*           totmeet[i].nIcc +
+          totmeet[i].nSta; */
         found.occ += 1;
       } else {
         //  console.log("NOTTTT FOUND");
         tmp2.push({
-          count:
-            totmeet[i].nHom +
-            totmeet[i].nFem +
-            totmeet[i].nEnf +
-            totmeet[i].nIcc +
-            totmeet[i].nSta,
+          count: totmeet[i].nHom + totmeet[i].nFem + totmeet[i].nEnf,
+          /*             totmeet[i].nIcc +
+            totmeet[i].nSta, */
           date: ym,
           occ: 1,
         });
       }
     }
 
-  //  console.log("TMP2 ", tmp2);
+  // console.log("TMP2 ", tmp2);
   const tmp3: any = [];
   for (let i = 0; i < tmp2.length && i < 6; i++) {
     const found = tmp.find((el: any) => el.date == tmp2[i].date);
@@ -241,6 +237,8 @@ const DashboardPage = async () => {
     }
 
   //console.log("tmp4 ", tmp4);
+
+  if (usr?.role != "ADMIN") return <NotAccess />;
 
   return (
     <PageLayout
@@ -507,8 +505,10 @@ function TabsDemo({
   usr,
   allMembers,
 }: TabsDEmoProps) {
+  //console.log("M", meetings);
+
   return (
-    <Tabs defaultValue="evang" className="w-full">
+    <Tabs defaultValue="account" className="w-full">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">Cellules</TabsTrigger>
         <TabsTrigger value="evang">Evangélisation</TabsTrigger>
@@ -532,6 +532,8 @@ function TabsDemo({
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
+              <ExportAllMeetings meetings={meetings} name={name} />
+
               <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
                 {meetings?.map((meet: any) => (
                   <MeetingItem key={meet.id} meeting={meet} usr={usr} />

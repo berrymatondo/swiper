@@ -21,7 +21,7 @@ type MeetingItemProps = {
 const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
   const router = useRouter();
 
-  // console.log("meeting: ", meeting);
+  //console.log("meeting:", meeting);
 
   return (
     <div
@@ -31,15 +31,15 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
     >
       <div
         // onClick={() => router.push(`/zones/${zone.id}`)}
-        className=" grid grid-cols-4  w-2/3"
+        className=" grid grid-cols-5  w-3/4"
       >
-        <div className="  rounded-lg col-span-1 max-md:col-span-2  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-center items-center">
+        <div className="  rounded-lg col-span-2 max-md:col-span-2  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-center items-center">
           <MdEditDocument size={20} className="text-sky-600" />
           <p className="text-md font-semibold max-md:text-xs ">
             {meeting.date.split("-").reverse().join("-")}
           </p>
         </div>
-        <div className="relative col-span-3  max-md:col-span-2 flex justify-end gap-2 items-end my-2 ml-2 ">
+        <div className=" relative col-span-3  max-md:col-span-3 flex justify-between gap-2 items-center my-2 ml-2 ">
           <Badge className="flex gap-2 bg-sky-800 md:hidden">
             {" "}
             <MdPeople />{" "}
@@ -47,18 +47,28 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
               {+meeting?.nHom + +meeting?.nFem + +meeting?.nEnf}
             </span>
           </Badge>
+          <p className="text-xs md:hidden">{meeting?.cellule?.name}</p>
 
-          <div className=" max-md:hidden">
+          <div className="w-full max-md:hidden">
             <div className="text-sm w-full items-center justify-between mx-2 flex gap-2">
-              <div className="w-8 h-8 text-white flex justify-center items-center rounded-full bg-sky-800">
-                {+meeting?.nHom + +meeting?.nFem + +meeting?.nEnf}
+              <div className="gap-2 p-1 text-white flex justify-center items-center rounded-full bg-sky-800">
+                <strong>
+                  {+meeting?.nHom + +meeting?.nFem + +meeting?.nEnf}
+                </strong>
+                <span>Participants</span>
               </div>
-              <span>Hom: {+meeting?.nHom}</span>
+              {/*               <span>Hom: {+meeting?.nHom}</span>
               <span>Fem: {+meeting?.nFem}</span>
               <span>Enf: {+meeting?.nEnf}</span>
               <span>New: {+meeting?.nNew}</span>
               <span>Icc: {+meeting?.nIcc}</span>
-              <span>Star: {+meeting?.nSta}</span>
+              <span>Star: {+meeting?.nSta}</span> */}
+              <Badge
+                onClick={() => router.push(`/cellules/${meeting.celluleId}`)}
+                className="bg-sky-700"
+              >
+                {meeting?.cellule?.name}
+              </Badge>
             </div>
           </div>
         </div>
@@ -87,19 +97,19 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
       </div>
       <div className="flex justify-between gap-4 items-center mx-4 max-md:hidden">
         {usr?.role == "ADMIN" && (
-          <Button
+          <Badge
             className=" text-red-400"
             variant="secondary"
             onClick={() =>
               router.push(
-                `/admin/meetings/delete/${meeting.id}?date=${meeting.date}&name=${meeting.cellule.name}&celluleId=${meeting.celluleId}&meetingId=${meeting.id}`
+                `/admin/meetings/delete/${meeting.id}?date=${meeting.date}&name=${meeting?.cellule?.name}&celluleId=${meeting.celluleId}&meetingId=${meeting.id}`
               )
             }
           >
             Supprimer
-          </Button>
+          </Badge>
         )}
-        <Button
+        <Badge
           className=""
           onClick={() =>
             router.push(
@@ -108,7 +118,7 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
           }
         >
           Modifier
-        </Button>
+        </Badge>
       </div>
     </div>
   );

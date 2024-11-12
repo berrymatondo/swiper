@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -31,6 +32,11 @@ import { Checkbox } from "../ui/checkbox";
 import { meetingFormSchema } from "@/lib/schemas";
 import { addMeeting, getMeeting, updateMeeting } from "@/lib/_meetingActions";
 import { Textarea } from "../ui/textarea";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "../ui/calendar";
 
 type PersonFormProps = {
   mbr?: any;
@@ -63,7 +69,8 @@ export const MeetingForm = ({
     resolver: zodResolver(meetingFormSchema),
     defaultValues: {
       id: mbr?.id ? mbr.id : undefined,
-      date: new Date().toISOString().split("T")[0].toString(),
+      date: "2024-11-07",
+      // date: new Date().toISOString().split("T")[0].toString(),
       nHom: mbr?.nHom ? mbr?.nHom : "0",
       nFem: mbr?.nFem ? mbr?.nFem : "0",
       nEnf: mbr?.nEnf ? mbr?.nEnf : "0",
@@ -215,7 +222,51 @@ export const MeetingForm = ({
                   );
                 }}
               />
-
+              {/*               xx
+              <FormField
+                control={form.control}
+                name="dob"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "P")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormDescription>
+                      Your date of birth is used to calculate your age.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              /> */}
               <FormField
                 control={form.control}
                 name="date"
@@ -228,6 +279,8 @@ export const MeetingForm = ({
                           {...field}
                           placeholder="Entrer la date"
                           type="date"
+                          step="7"
+                          // value="2024-11-07"
                         />
                       </FormControl>
                       <FormMessage />
@@ -235,7 +288,6 @@ export const MeetingForm = ({
                   );
                 }}
               />
-
               <FormField
                 control={form.control}
                 name="celluleId"
