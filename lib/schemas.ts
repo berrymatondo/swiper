@@ -221,3 +221,8 @@ export const evangFormSchema = z.object({
   celluleId: z.string().optional(),
   zoneId: z.string().optional(),
 });
+
+export const dateSchema = z.object({
+  dateId: z.string(),
+  byMonth: z.boolean().default(false),
+});

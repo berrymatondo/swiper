@@ -88,16 +88,17 @@ const CellulesPage = async ({
   const role = usr?.role;
 
   let cellules: any;
-  if (role != "ADMIN" || role == undefined) {
-    cellules = cels?.filter((cl: any) => cl?.statut == "ACTIF");
-  } else {
-    cellules = cels;
-  }
+  //if (role != "ADMIN" || role == undefined) {
+  cellules = cels?.filter((cl: any) => cl?.statut == "ACTIF");
+  //} else {
+  //  cellules = cels;
+  //}
 
   return (
     <PageLayout
       title="Liste des cellules d'impact"
       description="La liste de toutes les cellules d'impact"
+      usr={usr}
     >
       <div className="">
         <CustomBreadcrumb name="Choisissez une cellule près de chez vous!" />

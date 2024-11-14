@@ -39,9 +39,13 @@ const CelComplet = ({ cel, userSession }: CelCompletProps) => {
             </span>
           </p>
           {!cel.grpWhatsApp && (
-            <p className="max-md:text-xs text-sm italic">
-              Pas de groupe Whatsapp disponible
-            </p>
+            <div className="max-md:text-xs text-sm italic">
+              Pas de groupe Whatsapp disponible.
+              <div>
+                Contacter: <strong>0484/82.03.62</strong> ou{" "}
+                <strong>0485/80.22.78</strong>
+              </div>{" "}
+            </div>
           )}
           {cel.grpWhatsApp && (
             <div className="flex flex-col">

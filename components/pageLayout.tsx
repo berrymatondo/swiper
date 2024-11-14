@@ -26,8 +26,9 @@ type PageLayoutProps = {
   title: string;
   description?: string;
   children: React.ReactNode;
+  usr: any;
 };
-const PageLayout = ({ title, description, children }: PageLayoutProps) => {
+const PageLayout = ({ title, description, children, usr }: PageLayoutProps) => {
   const router = useRouter();
 
   const [openNav, setOpenNav] = useState(false);
@@ -57,15 +58,17 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
             {"Cellules "}
             <span className="text-white font-semibold">de maison</span>
           </p>
-          <div className="hover:cursor-pointer hover:text-white flex-col items-center text-yellow-300 md:flex">
-            <MdLogin
-              className="mx-2 "
-              onClick={() => router.push("/auth/login")}
-            />
-            {/*             <p className=" text-yellow-300 max-md:hidden text-sm md:text-muted">
+          {!usr && (
+            <div className="hover:cursor-pointer hover:text-white flex-col items-center text-yellow-300 md:flex">
+              <MdLogin
+                className="mx-2 "
+                onClick={() => router.push("/auth/login")}
+              />
+              {/*             <p className=" text-yellow-300 max-md:hidden text-sm md:text-muted">
               Se Connecter
             </p> */}
-          </div>{" "}
+            </div>
+          )}
         </div>
       </div>
       {/* <MobileNav /> */}

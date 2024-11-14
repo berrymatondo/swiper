@@ -103,12 +103,9 @@ usr={usr} */
     for (let i = 0; i < meetings?.length; i++) {
       tmp2.push({
         date: meetings[i].date,
-        participants:
-          meetings[i].nHom +
-          meetings[i].nFem +
-          meetings[i].nEnf +
-          meetings[i].nIcc +
-          meetings[i].nSta,
+        participants: meetings[i].nHom + meetings[i].nFem + meetings[i].nEnf,
+        /*           meetings[i].nIcc +
+          meetings[i].nSta, */
         datein:
           meetings[i].date.substring(0, 4) +
           meetings[i].date.substring(5, 7) +
@@ -136,6 +133,8 @@ usr={usr} */
           evangs[i].date.substring(8, 10),
       });
     }
+
+  console.log("mtp3", tmp3);
 
   tmp3 = tmp3.sort((a: any, b: any) => a.datein - b.datein);
 
@@ -287,9 +286,13 @@ usr={usr} */
               </span> */}
                   </div>
                 ) : (
-                  <p className=" my-4 max-md:text-xs text-sm italic">
+                  <div className=" my-4 max-md:text-xs text-sm italic">
                     Pas de groupe Whatsapp disponible
-                  </p>
+                    <p>
+                      Contacter: <strong>0484/82.03.62</strong> ou{" "}
+                      <strong>0485/80.22.78</strong>
+                    </p>
+                  </div>
                 )}
               </div>
               {usr && (

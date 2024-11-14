@@ -39,9 +39,13 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
             </span>
           </p>
           {!cel.grpWhatsApp && (
-            <p className="max-md:text-xs text-sm italic">
-              Pas de groupe Whatsapp disponible
-            </p>
+            <div className="max-md:text-xs text-sm italic">
+              Pas de groupe Whatsapp disponible.
+              <p>
+                Contacter: <strong>0484/82.03.62</strong> ou{" "}
+                <strong>0485/80.22.78</strong>
+              </p>{" "}
+            </div>
           )}
           {cel.grpWhatsApp && (
             <div className="flex flex-col">
@@ -69,29 +73,29 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
             <BiMap size={25} className="text-green-600" />
             <div className="font-semibold flex flex-col  md:gap-2 items-start">
               {!cel?.address?.hide && (
-                <p className="">
+                <p className="text-sm">
                   {cel?.address?.street as string},{" "}
                   {/*                 {cel?.address?.number as string} {cel?.address?.box as string}
                    */}{" "}
                 </p>
               )}
-              <p className="">
+              <p className="text-sm">
                 {cel?.address?.postalCode as string}{" "}
                 {cel?.address?.municipality as string}
               </p>
             </div>
           </div>
 
-          {/*           <div className="flex justify-between">
+          <div className="flex justify-between">
             <div className=" flex items-center gap-2 mb-2">
               <MdCalendarMonth size={30} className="text-blue-600" />
-              <p>{cel?.days}</p>
+              <p className="text-sm">{cel?.days}</p>
             </div>
             <div className="flex items-center gap-2 mb-2">
               <GoClock size={30} className="text-teal-600" />
-              <p>{cel?.hours}</p>
+              <p className="text-sm">{cel?.hours}</p>
             </div>
-          </div> */}
+          </div>
         </div>
 
         <div className="flex  items-start mt-2">
@@ -105,7 +109,7 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
                   key={person.id}
                 >
                   {/*  {person.mobile}  */}
-                  <strong className="mr-2">{person.firstname}</strong>
+                  <strong className="mr-2 text-sm">{person.firstname}</strong>
                 </div>
               ))}
         </div>

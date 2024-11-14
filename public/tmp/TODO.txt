@@ -1,0 +1,27 @@
+TO DO
+------
+
+* Pouvoir également modifier l'échéance d'un objectif fixé par l'ONE (En tant que Cellule Bilacc)
+* Problème de rafraichissement (PRO):
+ - Objectifs apparaissant en double dans le PA
+ - Problème d'affichage de statut après updload de la synthèse
+ - Affichage du bouton supprimer après soumission du PA
+* Avis CAL/ACA: la CAL/ACA
+  Elle ne doit pas pouvoir aujouter un commentaire sur un ojectif du bilan précédent
+  Elle ne doit pas pouvoir mettre un statut sur un objectif non conforme  
+  Mettre commentaire obligatoire lorsque la CAL/ACA modifie un objectif actuel (date)
+  Pouvoir jouter un champ commentaire sur un objectif du bilan actuel 
+* Vérifier les conditions d'activation du bouton "valider les status"
+ => Pour le moment, laisser la validation des status à la Cellule Bilacc et non aux CAL/ACA
+* Pouvoir uploader l'avis lorsque le PA est soumis et statuts validés
+* Pour la CAL/ACA, metrre un bouton "Enregistrer" à la place de "Valider les statuts"
+  Ce outon enregistre les statuts mais ne les fige pas
+  Une fois que la CAL/ACA a mis tous les 'D'accord/PAs d'accord', on active la possibilité d'uploader l'avis
+* Retirer le bouton "Valider les status", le bouton "cloturer le bilan" figera tou
+
+Mohamed Benrejeb
+
+
+=> Filtrer que les CAL/ACA de la DCAL
+
+exemple Anne Fortemps est DAC

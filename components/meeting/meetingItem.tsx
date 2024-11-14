@@ -22,6 +22,7 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
   const router = useRouter();
 
   //console.log("meeting:", meeting);
+  // tmp3 = tmp3.sort((a: any, b: any) => a.datein - b.datein);
 
   return (
     <div
@@ -33,13 +34,23 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
         // onClick={() => router.push(`/zones/${zone.id}`)}
         className=" grid grid-cols-5  w-3/4"
       >
-        <div className="  rounded-lg col-span-2 max-md:col-span-2  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-center items-center">
-          <MdEditDocument size={20} className="text-sky-600" />
-          <p className="text-md font-semibold max-md:text-xs ">
+        <div className=" rounded-lg col-span-4 max-md:col-span-4  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-between items-center">
+          {/*           <MdEditDocument size={20} className="text-sky-600" />
+           */}{" "}
+          {/*           <p className="text-md font-semibold max-md:text-xs ">
             {meeting.date.split("-").reverse().join("-")}
-          </p>
+          </p> */}
+          <Badge
+            onClick={() => router.push(`/cellules/${meeting.celluleId}`)}
+            className="bg-sky-700"
+          >
+            {meeting?.cellule?.name}
+          </Badge>
+          <span className="text-xs">
+            {meeting.date.split("-").reverse().join("-")}
+          </span>
         </div>
-        <div className=" relative col-span-3  max-md:col-span-3 flex justify-between gap-2 items-center my-2 ml-2 ">
+        <div className=" relative col-span-1  max-md:col-span-1 flex justify-between gap-2 items-center my-2 ml-2 ">
           <Badge className="flex gap-2 bg-sky-800 md:hidden">
             {" "}
             <MdPeople />{" "}
@@ -47,8 +58,8 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
               {+meeting?.nHom + +meeting?.nFem + +meeting?.nEnf}
             </span>
           </Badge>
-          <p className="text-xs md:hidden">{meeting?.cellule?.name}</p>
-
+          {/*           <p className="text-xs md:hidden">{meeting?.cellule?.name}</p>
+           */}
           <div className="w-full max-md:hidden">
             <div className="text-sm w-full items-center justify-between mx-2 flex gap-2">
               <div className="gap-2 p-1 text-white flex justify-center items-center rounded-full bg-sky-800">
@@ -63,12 +74,12 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
               <span>New: {+meeting?.nNew}</span>
               <span>Icc: {+meeting?.nIcc}</span>
               <span>Star: {+meeting?.nSta}</span> */}
-              <Badge
+              {/*               <Badge
                 onClick={() => router.push(`/cellules/${meeting.celluleId}`)}
                 className="bg-sky-700"
               >
                 {meeting?.cellule?.name}
-              </Badge>
+              </Badge> */}
             </div>
           </div>
         </div>

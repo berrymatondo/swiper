@@ -65,6 +65,25 @@ export const getAllMeetings = async () => {
   } catch (error) {}
 };
 
+// Group by date
+
+export const getAllGMeetings = async () => {
+  //const resut = zoneFormSchema.safeParse(data);
+  //if (resut.success) {
+  try {
+    const cels = await prisma.meeting.groupBy({
+      by: ["date"],
+    });
+
+    //   revalidatePath("/cellules");
+
+    return {
+      success: true,
+      data: cels,
+    };
+  } catch (error) {}
+};
+
 // Get all meetings by Cel
 export const getAllMeetingsByCel = async (celluledId: number) => {
   // console.log("celluledId", celluledId);
@@ -153,6 +172,28 @@ export const getMeetingsByDate = async (date: string) => {
     const cel = await prisma.meeting.findMany({
       where: {
         date: date,
+      },
+      include: {
+        cellule: true,
+      },
+    });
+
+    return {
+      success: true,
+      data: cel,
+    };
+  } catch (error) {}
+};
+
+export const getMeetingsByMonth = async (month: string) => {
+  // console.log("Month: ", month);
+
+  try {
+    const cel = await prisma.meeting.findMany({
+      where: {
+        date: {
+          startsWith: month,
+        },
       },
       include: {
         cellule: true,

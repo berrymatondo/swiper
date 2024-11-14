@@ -46,7 +46,11 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { getAllMeetings, getAllMeetingsByCel } from "@/lib/_meetingActions";
+import {
+  getAllGMeetings,
+  getAllMeetings,
+  getAllMeetingsByCel,
+} from "@/lib/_meetingActions";
 import MeetingItem from "@/components/meeting/meetingItem";
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import ParticipationGraph from "@/components/graph/participation";
@@ -54,6 +58,7 @@ import { getAllEvangs } from "@/lib/_evangActions";
 import EvangelisationGraph from "@/components/graph/evangelisation";
 import NotAccess from "@/components/notAccess";
 import ExportAllMeetings from "@/components/reports/expAllMeetings";
+import MeetingsByDate from "@/components/meeting/meetingsByDate";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -68,6 +73,12 @@ const DashboardPage = async () => {
 
   const re5 = await getAllMeetings();
   const totmeet = re5?.data;
+
+  // Get distinct meetings dates
+  const re5f = await getAllGMeetings();
+  const meetDates = re5f?.data;
+
+  //console.log("fff ", meetDates);
 
   const re6 = await getAllEvangs();
   const toteva = re6?.data;
@@ -255,11 +266,11 @@ const DashboardPage = async () => {
           <div className="flex md:w-1/2">
             <div className="w-1/2 md:w-full p-4 bg-gradient-to-l to-sky-100 from-transparent border-2 m-1 md:my-2 rounded-lg">
               <p className="flex justify-between items-center">
-                <span className="font-semibold">Cellules</span>
+                <span className="font-semibold">Cellules actives</span>
                 <MdHome size={20} className="text-sky-600" />
               </p>
               <p className="flex justify-between items-baseline text-4xl font-semibold text-blue-800">
-                {totcel?.length}
+                {totcel?.filter((cel: any) => cel.statut == "ACTIF")?.length}
                 <Link
                   className="font-thin text-sm text-black max-md:text-xs"
                   href="/cellules"
@@ -440,6 +451,7 @@ const DashboardPage = async () => {
                 totper={totper}
                 usr={usr}
                 allMembers={allMembers}
+                meetDates={meetDates}
               />
             </div>
           )}
@@ -492,6 +504,7 @@ type TabsDEmoProps = {
   tmp4: any;
   usr: any;
   allMembers: any;
+  meetDates: any;
 };
 function TabsDemo({
   meetings,
@@ -504,42 +517,48 @@ function TabsDemo({
   totper,
   usr,
   allMembers,
+  meetDates,
 }: TabsDEmoProps) {
-  //console.log("M", meetings);
+  // console.log("M", meetings);
 
   return (
-    <Tabs defaultValue="account" className="w-full">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="account">Cellules</TabsTrigger>
-        <TabsTrigger value="evang">Evangélisation</TabsTrigger>
-        <TabsTrigger value="password">Coordination</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <div className="md:flex gap-2 justify-between">
-          <ParticipationGraph
-            meetings={tmp2}
-            persons={totper}
-            cellules={tmp}
-            data={tmp3}
-          />
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                Rapports des cellules
-              </CardTitle>
-              <CardDescription>
-                Tous les rapports des cellules de maison.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <ExportAllMeetings meetings={meetings} name={name} />
+    <div className="flex flex-col w-full">
+      <Tabs defaultValue="account" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="account">Cellules</TabsTrigger>
+          <TabsTrigger value="evang">Evangélisation</TabsTrigger>
+          <TabsTrigger value="password">Coordination</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account">
+          <div className="md:flex gap-2 justify-between ">
+            <ParticipationGraph
+              meetings={tmp2}
+              persons={totper}
+              cellules={tmp}
+              data={tmp3}
+            />
+            <Card className=" md:w-3/4">
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  Rapports des cellules
+                </CardTitle>
+                <CardDescription>
+                  Tous les rapports des cellules de maison.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
+                  <MeetingsByDate dates={meetDates} usr={usr} />
+                </div>
 
-              <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
-                {meetings?.map((meet: any) => (
-                  <MeetingItem key={meet.id} meeting={meet} usr={usr} />
-                ))}
-              </div>
-              {/*             <div className="space-y-1">
+                {/*                 <ExportAllMeetings meetings={meetings} name={name} />
+
+                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
+                  {meetings?.map((meet: any) => (
+                    <MeetingItem key={meet.id} meeting={meet} usr={usr} />
+                  ))}
+                </div> */}
+                {/*             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
               <Input id="name" defaultValue="Pedro Duarte" />
             </div>
@@ -547,61 +566,61 @@ function TabsDemo({
               <Label htmlFor="username">Username</Label>
               <Input id="username" defaultValue="@peduarte" />
             </div> */}
-            </CardContent>
-            {/*           <CardFooter>
+              </CardContent>
+              {/*           <CardFooter>
             <Button>Save changes</Button>
           </CardFooter> */}
-          </Card>
-        </div>
-      </TabsContent>
-      <TabsContent value="evang">
-        <div className="md:flex gap-2 justify-between">
-          <EvangelisationGraph
-            meetings={tmp2}
-            persons={totper}
-            cellules={tmp}
-            data={tmp4}
-          />
+            </Card>
+          </div>
+        </TabsContent>
+        <TabsContent value="evang">
+          <div className="md:flex gap-2 justify-between">
+            <EvangelisationGraph
+              meetings={tmp2}
+              persons={totper}
+              cellules={tmp}
+              data={tmp4}
+            />
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  Rapports évangélisation
+                </CardTitle>
+                <CardDescription>
+                  {"Tous les rapports des sorties d'évangélisation."}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
+                  {meetings?.map((meet: any) => (
+                    <MeetingItem key={meet.id} meeting={meet} usr={usr} />
+                  ))}
+                </div>
+                {/*             <div className="space-y-1">
+              <Label htmlFor="name">Name</Label>
+              <Input id="name" defaultValue="Pedro Duarte" />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" defaultValue="@peduarte" />
+            </div> */}
+              </CardContent>
+              {/*           <CardFooter>
+            <Button>Save changes</Button>
+          </CardFooter> */}
+            </Card>
+          </div>
+        </TabsContent>
+        <TabsContent value="password">
           <Card>
             <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                Rapports évangélisation
-              </CardTitle>
+              <CardTitle>Coordination</CardTitle>
               <CardDescription>
-                {"Tous les rapports des sorties d'évangélisation."}
+                Equipe de coordination des cellules.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-2">
-              <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
-                {meetings?.map((meet: any) => (
-                  <MeetingItem key={meet.id} meeting={meet} usr={usr} />
-                ))}
-              </div>
               {/*             <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div> */}
-            </CardContent>
-            {/*           <CardFooter>
-            <Button>Save changes</Button>
-          </CardFooter> */}
-          </Card>
-        </div>
-      </TabsContent>
-      <TabsContent value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Coordination</CardTitle>
-            <CardDescription>
-              Equipe de coordination des cellules.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            {/*             <div className="space-y-1">
               <Label htmlFor="current">Current password</Label>
               <Input id="current" type="password" />
             </div>
@@ -609,20 +628,22 @@ function TabsDemo({
               <Label htmlFor="new">New password</Label>
               <Input id="new" type="password" />
             </div> */}
-            {allMembers?.map((mbr: any, index: number) => (
-              <div key={index} className="flex gap-2 max-md:text-xs">
-                <p>
-                  {index + 1}. {mbr?.firstname} <strong>{mbr?.lastname}</strong>{" "}
-                </p>
-                <p>{mbr?.mobile}</p>
-              </div>
-            ))}
-          </CardContent>
-          {/*         <CardFooter>
+              {allMembers?.map((mbr: any, index: number) => (
+                <div key={index} className="flex gap-2 max-md:text-xs">
+                  <p>
+                    {index + 1}. {mbr?.firstname}{" "}
+                    <strong>{mbr?.lastname}</strong>{" "}
+                  </p>
+                  <p>{mbr?.mobile}</p>
+                </div>
+              ))}
+            </CardContent>
+            {/*         <CardFooter>
             <Button>Save password</Button>
           </CardFooter> */}
-        </Card>
-      </TabsContent>
-    </Tabs>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }

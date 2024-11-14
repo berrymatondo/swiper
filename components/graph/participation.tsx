@@ -74,7 +74,7 @@ export const PartGraph = ({ data }: PartGraphProps) => {
       <CardContent>
         {/*         <Badge className="mr-1 bg-[hsl(var(--chart-1))]">Nbr Cellules</Badge>
          */}{" "}
-        <Badge className="mr-1 bg-[hsl(var(--chart-3))]">Nbr Rapports</Badge>
+        <Badge className="mr-1 bg-[hsl(var(--chart-1))]">Nbr Rapports</Badge>
         <Badge className="bg-[hsl(var(--chart-2))]">Nbr Participants</Badge>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={data}>
