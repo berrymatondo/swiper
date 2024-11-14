@@ -26,7 +26,7 @@ type PageLayoutProps = {
   title: string;
   description?: string;
   children: React.ReactNode;
-  usr: any;
+  usr?: any;
 };
 const PageLayout = ({ title, description, children, usr }: PageLayoutProps) => {
   const router = useRouter();

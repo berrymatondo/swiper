@@ -15,6 +15,7 @@ import prisma from "@/lib/prisma";
 
 import AdrItem from "@/components/address/adrItem";
 import SearchAdr from "@/components/searchAdr";
+import { auth } from "@/auth";
 
 const AddressesPage = async ({
   searchParams,
@@ -48,12 +49,17 @@ const AddressesPage = async ({
     },
   });
 
+  const session = await auth();
+  const usr: any = session?.user;
+  const role = usr?.role;
+
   //console.log("ADRS:", addresses);
 
   return (
     <PageLayout
       title="Liste des adresses hôtes des cellules d'impact"
       description="La liste de toutes les adresses hôtes des cellules d'impact"
+      usr={usr}
     >
       <div className="">
         <CustomBreadcrumb name="Adresses des hôtes" />
