@@ -33,6 +33,7 @@ type MeetingsByDateProps = {
   usr: any;
 };
 const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
+  const [total, setTotal] = useState(0);
   const [foundMeetings, setFoundMeetings] = useState<any>([]);
   //console.log("Dates", dates);
 
@@ -77,6 +78,15 @@ const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
       console.log("ou2t: ", out2); */
 
       setFoundMeetings(res?.data);
+
+      let tot = 0;
+      for (let i = 0; i < res?.data.length; i++) {
+        tot += res?.data[i].nHom + res?.data[i].nFem + res?.data[i].nEnf;
+      }
+
+      //console.log("TOT", tot);
+
+      setTotal(tot);
     }
 
     /*     if (!res) {
@@ -156,9 +166,17 @@ const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
               />
               {foundMeetings?.length > 0 && (
                 <div className="flex items-center">
-                  <div>
-                    <strong>{foundMeetings?.length}</strong>{" "}
-                    <span className="max-md:hidden">Enregistrements</span>
+                  <div className="text-xs">
+                    <p>
+                      <strong>{total}</strong> part./
+                      <strong>{foundMeetings?.length}</strong> cel.
+                    </p>
+                    <p className=" ">
+                      Moy:{" "}
+                      <strong>
+                        {(total / foundMeetings?.length).toFixed(2)}
+                      </strong>
+                    </p>
                   </div>
                   <ExportAllMeetings meetings={foundMeetings} name="" />
                 </div>

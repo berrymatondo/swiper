@@ -69,7 +69,7 @@ export const MeetingForm = ({
     resolver: zodResolver(meetingFormSchema),
     defaultValues: {
       id: mbr?.id ? mbr.id : undefined,
-      date: "2024-11-07",
+      date: "2024-11-14",
       // date: new Date().toISOString().split("T")[0].toString(),
       nHom: mbr?.nHom ? mbr?.nHom : "0",
       nFem: mbr?.nFem ? mbr?.nFem : "0",

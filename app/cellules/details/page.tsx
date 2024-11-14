@@ -39,6 +39,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import ExpAllCel from "@/components/reports/expAllCel";
 
 const DetailsPage = async () => {
   const session = await auth();
@@ -61,11 +62,13 @@ const DetailsPage = async () => {
       <div className="">
         <CustomBreadcrumb
           name={`Choisissez une cellule près de chez vous! - ${
-            cellules?.filter((cl: any) => cl.statut == "ACTIF").length
+            //cellules?.filter((cl: any) => cl.statut == "ACTIF").length
+            cellules?.length
           }`}
         />
 
         <div className="p-1">
+          <ExpAllCel celss={cellules} />
           <ScrollArea className="h-[600px]  rounded-md border">
             <div>
               <TableDemo cellules={cellules} />
@@ -119,13 +122,14 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
           <TableHead className="max-md:hidden">Hôte</TableHead>
           <TableHead className="max-md:hidden">Adresse</TableHead>
           <TableHead className="max-md:hidden">Whatsapp</TableHead>
+          <TableHead className="max-md:hidden">Statut</TableHead>
           {/*           <TableHead className="text-right">Statut</TableHead>
            */}{" "}
         </TableRow>
       </TableHeader>
       <TableBody>
         {cellules
-          ?.filter((cl: any) => cl.statut == "ACTIF")
+          //   ?.filter((cl: any) => cl.statut == "ACTIF")
           .map((cel: any, index: number) => (
             <TableRow key={cel?.id}>
               <TableCell className="font-medium max-md:bg-sky-100 max-md:my-1 max-md:border max-md:rounded-lg max-md:flex max-md:flex-col max-md:gap-2">
@@ -215,13 +219,16 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                 {cel?.address?.box},{cel?.address?.postalCode}{" "}
                 {cel?.address?.municipality}
               </TableCell>
-              <TableCell className="text-right max-md:hidden">
+              <TableCell className="max-md:hidden">
                 {" "}
                 {cel?.grpWhatsApp ? (
                   <MdCheckBox className="text-green-600" size={20} />
                 ) : (
                   <MdQuestionMark className="text-red-600" size={20} />
                 )}
+              </TableCell>
+              <TableCell className="text-right max-md:hidden">
+                {cel?.statut}
               </TableCell>
               {/*               <TableCell>
                 <Badge className={cel?.statut ? "bg-green-600" : "bg-red-600"}>
