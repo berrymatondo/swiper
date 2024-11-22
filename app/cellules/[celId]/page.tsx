@@ -183,7 +183,7 @@ usr={usr} */
           name={cel?.name as string}
           zoneName={cel?.zone?.name as string}
         />
-        <div className="overflow-hidden  rounded-lg mx-1 flex ">
+        {/*         <div className="md:hidden overflow-hidden  rounded-lg mx-1 flex ">
           <div className="relative">
             <Image
               alt="home"
@@ -193,18 +193,20 @@ usr={usr} */
               className=""
             />
 
+            <div className="bg-sky-900/30 absolute w-full h-full top-0 left-0"></div>
+
             <p className=" text-center text-5xl  font-bold my-2 boreder-4 border-black text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               {cel?.name}
             </p>
           </div>
-        </div>
+        </div> */}
         {/*         <p className=" text-center font-bold my-2 text-sky-600 text-xl">
           {" "}
           {cel?.name}
         </p> */}
         <div className="flex flex-col">
           <div className="flex max-md:flex-col">
-            <div className="md:w-1/3 p-2 bg-gradient-to-l to-sky-100 from-transparent border-2 m-2 rounded-lg">
+            <div className="md:w-1/3  bg-gradient-to-l to-sky-100 from-transparent border-2 m-2 backdrop: rounded-lg overflow-hidden">
               {/*               <div className="flex items-center gap-2 mb-2 ">
                 <p className="w-full flex justify-between font-semibold text-blue-800">
                   <span className="flex gap-2 items-center ">
@@ -230,12 +232,27 @@ usr={usr} */
                       ))}
                 </div>
               )} */}
-              <div className="flex flex-col gap-2 mt-2">
-                <div className="  rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
+              <div className=" flex flex-col gap-2">
+                <div className="relative w-full">
+                  <Image
+                    alt="home"
+                    src={im}
+                    layout="fixed"
+                    height={475}
+                    className="rounded-t-lg"
+                  />
+
+                  <div className="bg-sky-900/30 absolute w-full h-full top-0 left-0"></div>
+
+                  <p className=" text-center text-5xl  font-bold my-2 boreder-4 border-black text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    {cel?.name}
+                  </p>
+                </div>
+                <div className="p-2 rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
                   <BiMap size={20} className="text-green-600" />
-                  <div className="font-semibold flex md:gap-2 items-start">
+                  <div className="font-semibold flex  items-start">
                     {/*                {cel?.address?.hide && ( */}
-                    <p className="text-xs">
+                    <p className="max-md:text-xs">
                       {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
                         <>
                           <span>{cel?.address?.street as string}, </span>
@@ -248,7 +265,7 @@ usr={usr} */
                       )}
                     </p>
                     {/*      )} */}
-                    <p className="text-xs">
+                    <p className="max-md:text-xs ">
                       {" "}
                       {cel?.address?.postalCode as string}{" "}
                       {cel?.address?.municipality as string}
@@ -256,12 +273,12 @@ usr={usr} */
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="text-xs flex items-center gap-2 mb-2">
+                <div className="px-2 flex items-center gap-4  md:mb-2">
+                  <div className="max-md:text-xs flex items-center gap-2">
                     <MdCalendarMonth size={20} className="text-blue-600" />
                     <p>{cel?.days}</p>
                   </div>
-                  <div className="text-xs flex items-center gap-2 mb-2">
+                  <div className="max-md:text-xs flex items-center gap-2">
                     <GoClock size={20} className="text-teal-600" />
                     <p>{cel?.hours}</p>
                   </div>
@@ -292,7 +309,12 @@ usr={usr} */
                   </div>
                 )} */}
               </div>
-              <div className="flex justify-between items-center w-full">
+              <div className="flex justify-between items-center w-full p-2">
+                {usr && (
+                  <div className=" flex items-center justify-end">
+                    <CelUpdateBar usr={usr} cel={cel} />
+                  </div>
+                )}
                 {cel?.grpWhatsApp ? (
                   <div className="flex flex-col justify-end">
                     <Badge className=" border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
@@ -315,11 +337,6 @@ usr={usr} */
                       Contacter: <strong>0484/82.03.62</strong> ou{" "}
                       <strong>0485/80.22.78</strong>
                     </p>
-                  </div>
-                )}
-                {usr && (
-                  <div className=" flex items-center justify-end">
-                    <CelUpdateBar usr={usr} cel={cel} />
                   </div>
                 )}
               </div>
