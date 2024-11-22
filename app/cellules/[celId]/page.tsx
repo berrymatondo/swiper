@@ -58,6 +58,8 @@ import ExportMbr from "@/components/reports/expMbr";
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import PersonItem from "@/components/person/personItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Image from "next/image";
+import im from "../../../public/images/cellules/anderlecht4.jpg";
 
 type CelDetailsPageProps = {
   params: {
@@ -181,23 +183,37 @@ usr={usr} */
           name={cel?.name as string}
           zoneName={cel?.zone?.name as string}
         />
-        <p className=" text-center font-bold my-2 text-sky-600 text-xl">
+        <div className="overflow-hidden  rounded-lg mx-1 flex ">
+          <div className="relative">
+            <Image
+              alt="home"
+              src={im}
+              layout="fixed"
+              height={475}
+              className=""
+            />
+
+            <p className=" text-center text-5xl  font-bold my-2 boreder-4 border-black text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              {cel?.name}
+            </p>
+          </div>
+        </div>
+        {/*         <p className=" text-center font-bold my-2 text-sky-600 text-xl">
           {" "}
           {cel?.name}
-        </p>
+        </p> */}
         <div className="flex flex-col">
           <div className="flex max-md:flex-col">
             <div className="md:w-1/3 p-2 bg-gradient-to-l to-sky-100 from-transparent border-2 m-2 rounded-lg">
-              <div className="flex items-center gap-2 mb-2 ">
+              {/*               <div className="flex items-center gap-2 mb-2 ">
                 <p className="w-full flex justify-between font-semibold text-blue-800">
                   <span className="flex gap-2 items-center ">
-                    {/*                 {cel?.name} ({cel?.persons.length} membre(s))
-                     */}{" "}
+               
                     <MdHome size={20} /> {cel?.name}
                   </span>
                 </p>
-              </div>
-              {usr?.role == "ADMIN" && (
+              </div> */}
+              {/*               {usr?.role == "ADMIN" && (
                 <div className="flex flex-col items-start">
                   {cel?.persons &&
                     cel?.persons
@@ -208,61 +224,64 @@ usr={usr} */
                           key={person.id}
                         >
                           <GiPoliceOfficerHead className="text-orange-600" />{" "}
-                          {/*                           {person.mobile} ({person.firstname})
-                           */}{" "}
+        
                           {person.firstname}
                         </div>
                       ))}
                 </div>
-              )}
+              )} */}
               <div className="flex flex-col gap-2 mt-2">
                 <div className="  rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
                   <BiMap size={20} className="text-green-600" />
                   <div className="font-semibold flex md:gap-2 items-start">
-                    {cel?.address?.hide && (
-                      <p className="">
-                        {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
-                          <>
-                            <span>{cel?.address?.street as string} </span>
-                            <span>
-                              {" "}
-                              {cel?.address?.number as string},{" "}
-                              {cel?.address?.box as string}{" "}
-                            </span>
-                          </>
-                        )}
-                      </p>
-                    )}
-                    <p className="">
+                    {/*                {cel?.address?.hide && ( */}
+                    <p className="text-xs">
+                      {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
+                        <>
+                          <span>{cel?.address?.street as string}, </span>
+                          {/*                           <span>
+                            {" "}
+                            {cel?.address?.number as string},{" "}
+                            {cel?.address?.box as string}{" "}
+                          </span> */}
+                        </>
+                      )}
+                    </p>
+                    {/*      )} */}
+                    <p className="text-xs">
+                      {" "}
                       {cel?.address?.postalCode as string}{" "}
                       {cel?.address?.municipality as string}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-2 bg-neutral-100 rounded-xl">
-                  {/* {(usr?.role == "ADMIN" ||
-                    (usr?.role == "PILOTE" && usr.celluleId == cel?.id)) && ( */}
-                  <CelMembers
-                    vue={true}
-                    members={members?.filter(
-                      (mbr: any) =>
-                        mbr?.isPilote == true || mbr?.isRespo == true
-                    )}
-                  />
-                  {/*   )} */}
-                </div>
-
                 <div className="flex gap-4">
-                  <div className=" flex items-center gap-2 mb-2">
+                  <div className="text-xs flex items-center gap-2 mb-2">
                     <MdCalendarMonth size={20} className="text-blue-600" />
                     <p>{cel?.days}</p>
                   </div>
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="text-xs flex items-center gap-2 mb-2">
                     <GoClock size={20} className="text-teal-600" />
                     <p>{cel?.hours}</p>
                   </div>
                 </div>
+                {/* 
+                <div className="">
+           
+
+                  {members
+                    ?.filter(
+                      (mbr: any) =>
+                        mbr?.isPilote == true || mbr?.isRespo == true
+                    )
+                    ?.map((el: any) => (
+                      <div>{el.firstname}</div>
+                    ))}
+
+    
+                </div> */}
+                {/* 
                 {cel?.address?.hide && (
                   <div className=" border flex  items-start mt-2 p-2 bg-white rounded-lg">
                     <p className="text-sm  italic">
@@ -271,12 +290,12 @@ usr={usr} */
                       }
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
-              <div className="flex justify-end w-full ">
+              <div className="flex justify-between items-center w-full">
                 {cel?.grpWhatsApp ? (
                   <div className="flex flex-col justify-end">
-                    <Badge className="my-4 border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
+                    <Badge className=" border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
                       {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
                        */}{" "}
                       <IoLogoWhatsapp size={30} className="mr-2" />
@@ -288,12 +307,9 @@ usr={usr} */
                         Rejoindre
                       </Link>
                     </Badge>
-                    {/*             <span className="text-xs text-center mt-1">
-                le groupe WhatsApp
-              </span> */}
                   </div>
                 ) : (
-                  <div className=" my-4 max-md:text-xs text-sm italic">
+                  <div className="  max-md:text-xs text-sm italic">
                     Pas de groupe Whatsapp disponible
                     <p>
                       Contacter: <strong>0484/82.03.62</strong> ou{" "}
@@ -301,19 +317,12 @@ usr={usr} */
                     </p>
                   </div>
                 )}
+                {usr && (
+                  <div className=" flex items-center justify-end">
+                    <CelUpdateBar usr={usr} cel={cel} />
+                  </div>
+                )}
               </div>
-              {usr && (
-                <div className=" flex items-center justify-end pt-4">
-                  {/*                   <Link
-                    href={`/cellules/${cel?.id}/newmbr`}
-                    className="p-2 rounded-full bg-sky-800 text-sm text-white"
-                  >
-                    Ajouter un membre
-                  </Link> */}
-
-                  <CelUpdateBar usr={usr} cel={cel} />
-                </div>
-              )}
             </div>
 
             <div className="p-2 max-h-1/3 md:w-2/3">
