@@ -142,7 +142,7 @@ const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
                 Charger
               </Button>
             </div>
-            <div className="flex justify-center items-center">
+            <div className=" flex justify-between items-center pr-2">
               <FormField
                 control={form.control}
                 name="byMonth"
@@ -155,7 +155,7 @@ const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
                           onCheckedChange={field.onChange}
                         />
                       </FormControl>
-                      <Label className="ml-2" htmlFor="byMonth">
+                      <Label className="ml-2 max-md:text-xs" htmlFor="byMonth">
                         Mensuel ?
                       </Label>
 
@@ -165,8 +165,9 @@ const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
                 }}
               />
               {foundMeetings?.length > 0 && (
-                <div className="flex items-center">
-                  <div className="text-xs">
+                <div className="w-1/2 max-md:w-4/5 flex justify-between items-center">
+                  <ExportAllMeetings meetings={foundMeetings} name="" />
+                  <div className="text-xs flex gap-2">
                     <p>
                       <strong>{total}</strong> part./
                       <strong>{foundMeetings?.length}</strong> cel.
@@ -178,7 +179,6 @@ const MeetingsByDate = ({ dates, usr }: MeetingsByDateProps) => {
                       </strong>
                     </p>
                   </div>
-                  <ExportAllMeetings meetings={foundMeetings} name="" />
                 </div>
               )}
             </div>

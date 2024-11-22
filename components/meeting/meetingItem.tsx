@@ -28,13 +28,13 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
     <div
       key={meeting.id}
       // className="shadow-xl rounded-lg my-2 bg-gradient-to-r from-slate-200 to-transparent hover:bg-slate-300 hover:cursor-pointer"
-      className="mb-2 py-2 gap-2 flex justify-between shadow-md rounded-lg bg-gradient-to-r from-blue-100 to-transparent hover:cursor-pointer"
+      className="mb-2  gap-2 flex justify-between shadow-md rounded-lg bg-gradient-to-r from-blue-100 to-transparent hover:cursor-pointer"
     >
       <div
         // onClick={() => router.push(`/zones/${zone.id}`)}
         className=" grid grid-cols-5  w-3/4"
       >
-        <div className=" rounded-lg col-span-4 max-md:col-span-4  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-between items-center">
+        <div className="max-md:px-1 px-2 rounded-lg col-span-4 max-md:col-span-4  bg-gradient-to-r from-blue-50 to-transparent flex gap-2  justify-between items-center">
           {/*           <MdEditDocument size={20} className="text-sky-600" />
            */}{" "}
           {/*           <p className="text-md font-semibold max-md:text-xs ">
@@ -63,10 +63,10 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
           <div className="w-full max-md:hidden">
             <div className="text-sm w-full items-center justify-between mx-2 flex gap-2">
               <div className="gap-2 p-1 text-white flex justify-center items-center rounded-full bg-sky-800">
-                <strong>
+                <strong className="text-yellow-300">
                   {+meeting?.nHom + +meeting?.nFem + +meeting?.nEnf}
                 </strong>
-                <span>Participants</span>
+                <span className="text-xs">Participants</span>
               </div>
               {/*               <span>Hom: {+meeting?.nHom}</span>
               <span>Fem: {+meeting?.nFem}</span>

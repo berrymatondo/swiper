@@ -12,7 +12,7 @@ const AppBar = async () => {
   //console.log("usr", usr);
 
   return (
-    <div className="gap-2 ">
+    <div className="z-50 sticky top-0 gap-2 bg-white ">
       {session && session.user && (
         <div className="ml-auto">
           {session && session.user ? (

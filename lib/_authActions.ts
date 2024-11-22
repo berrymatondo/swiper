@@ -4,7 +4,7 @@ import { z } from "zod";
 import { LoginSchema, RegisterSchema, zoneFormSchema } from "./schemas";
 import prisma from "./prisma";
 import bcrypt from "bcrypt";
-import { signIn, signOut } from "auth";
+import { auth, signIn, signOut } from "auth";
 import { revalidatePath } from "next/cache";
 import { ZonesStatuses } from "@prisma/client";
 
@@ -223,7 +223,7 @@ export const deleteUser = async (userId: number) => {
 type Inputs = z.infer<typeof LoginSchema>;
 
 export const loginlogin = async (data: Inputs) => {
-  console.log("data", data);
+  //console.log("data", data);
 
   const result = LoginSchema.safeParse(data);
 
@@ -254,14 +254,19 @@ export const loginlogin = async (data: Inputs) => {
   }
 
   data = { ...data, username: data.username.toLowerCase() };
-  //console.log("Call sinin", data);
+  console.log("Call sinin", data);
 
   const res = await signIn("credentials", {
     ...data,
-    redirectTo: "/cellules",
+    redirectTo: "/transpil",
   });
 
-  //console.log("RESSSS", res);
+  /*   const session = await auth();
+  const usr: any = session?.user;
+
+  console.log("celluledID", usr?.cellule.Id);
+
+  console.log("RESSSS", res); */
 };
 
 export const logoutUser = async () => {

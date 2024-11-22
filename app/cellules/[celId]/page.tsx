@@ -56,17 +56,23 @@ import EvaGraphe from "@/components/graph/evaGraph";
 import MbrGraphe from "@/components/graph/mbrGraph";
 import ExportMbr from "@/components/reports/expMbr";
 import { GiPoliceOfficerHead } from "react-icons/gi";
+import PersonItem from "@/components/person/personItem";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type CelDetailsPageProps = {
   params: {
     celId: number;
   };
+  searchParams?: { [key: string]: string | undefined };
 };
 
-const CelDetailsPage = async ({ params }: CelDetailsPageProps) => {
+const CelDetailsPage = async ({
+  params,
+  searchParams,
+}: CelDetailsPageProps) => {
   const session = await auth();
   const usr: any = session?.user;
-  //console.log("ID", params.celId);
+  //console.log("ID", searchParams);
 
   const res = await getCel(params.celId);
   const cel = res?.data;
@@ -126,6 +132,7 @@ usr={usr} */
         date: evangs[i].date,
         gagnees: evangs[i].nGag,
         evangelisees: evangs[i].nEva,
+        venues: evangs[i].nVen,
 
         datein:
           evangs[i].date.substring(0, 4) +
@@ -134,7 +141,7 @@ usr={usr} */
       });
     }
 
-  console.log("mtp3", tmp3);
+  //  console.log("mtp3", tmp3);
 
   tmp3 = tmp3.sort((a: any, b: any) => a.datein - b.datein);
 
@@ -339,6 +346,7 @@ usr={usr} */
                     participants={tmp2}
                     gagnees={tmp3}
                     mbr={tmp4}
+                    defTab={searchParams?.defTab}
                   />
                 </div>
               </div>
@@ -392,6 +400,7 @@ type TabsDEmoProps = {
   participants: any;
   gagnees: any;
   mbr: any;
+  defTab?: any;
 };
 function TabsDemo({
   meetings,
@@ -403,9 +412,10 @@ function TabsDemo({
   participants,
   gagnees,
   mbr,
+  defTab,
 }: TabsDEmoProps) {
   return (
-    <Tabs defaultValue="account" className="w-full">
+    <Tabs defaultValue={defTab ? defTab : "account"} className="w-full">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">Cellules</TabsTrigger>
         <TabsTrigger value="evang">Evangélisation</TabsTrigger>
@@ -518,25 +528,11 @@ function TabsDemo({
             <CardDescription>Tous les membres de la cellule.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            {members?.map((mbr: any, index: number) => (
-              <div
-                key={index}
-                className="flex gap-2 max-md:flex-col max-md:text-xs"
-              >
-                <p>
-                  {index + 1}. {mbr?.firstname} <strong>{mbr?.lastname}</strong>{" "}
-                </p>
-                <p>{mbr?.mobile}</p>
-              </div>
-            ))}
-            {/*             <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div> */}
+            <ScrollArea className="h-[400px]">
+              {members?.map((per: any) => (
+                <PersonItem per={per} key={per.id} />
+              ))}
+            </ScrollArea>
           </CardContent>
           {/*           <CardFooter>
             <Button>Save password</Button>

@@ -2,7 +2,15 @@
 import React from "react";
 
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  Line,
+  LineChart,
+  XAxis,
+} from "recharts";
 import {
   Card,
   CardContent,
@@ -77,29 +85,112 @@ export const EvaGraph = ({ data }: EvaGraphProps) => {
         <Badge className="mr-1 bg-[hsl(var(--chart-1))]">Evangélisées</Badge>
         {/*         <Badge className="mr-1 bg-[hsl(var(--chart-3))]">Nbr Rapports</Badge>
          */}{" "}
-        <Badge className="bg-[hsl(var(--chart-2))]">Ames gagnées</Badge>
+        <Badge className="mr-1 bg-[hsl(var(--chart-2))]">Ames gagnées</Badge>
+        <Badge className="bg-[hsl(var(--chart-3))]">Ames venues</Badge>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={data}>
+          <LineChart
+            accessibilityLayer
+            data={data}
+            margin={{
+              top: 20,
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+
+              //    tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Line
+              dataKey="evangelisees"
+              type="natural"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+
+            <Line
+              dataKey="gagnees"
+              type="natural"
+              stroke="var(--color-cellule)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-cellule)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+
+            <Line
+              dataKey="venues"
+              type="natural"
+              stroke="var(--color-mobile)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-mobile)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+          </LineChart>
+          {/*           <BarChart accessibilityLayer data={data}>
             <CartesianGrid vertical={false} />
             <XAxis
               dataKey="dateout"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              // tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar
+             <Bar
               dataKey="evangelisees"
               fill="var(--color-cellule)"
               radius={4}
             />
             <Bar dataKey="nbrRap" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="gagnees" fill="var(--color-mobile)" radius={4} />
-          </BarChart>
+            <Bar dataKey="gagnees" fill="var(--color-mobile)" radius={4} /> 
+          </BarChart> */}
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">

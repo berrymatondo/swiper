@@ -52,7 +52,11 @@ export const getAllEvangs = async () => {
   //const resut = zoneFormSchema.safeParse(data);
   //if (resut.success) {
   try {
-    const cels = await prisma.evang.findMany();
+    const cels = await prisma.evang.findMany({
+      include: {
+        cellule: true,
+      },
+    });
 
     revalidatePath("/evangs");
 

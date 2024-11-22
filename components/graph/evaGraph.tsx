@@ -2,7 +2,15 @@
 import React from "react";
 
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  Line,
+  LineChart,
+  XAxis,
+} from "recharts";
 import {
   Card,
   CardContent,
@@ -56,7 +64,7 @@ export const PartiGraph = ({ data }: PartiGraphProps) => {
 
   const date = new Date();
   return (
-    <Card>
+    /*     <Card>
       <CardHeader>
         <CardTitle>Statistiques</CardTitle>
         <CardDescription>
@@ -90,6 +98,112 @@ export const PartiGraph = ({ data }: PartiGraphProps) => {
             />
             <Bar dataKey="gagnees" fill="var(--color-cellule)" radius={4} />
           </BarChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 font-medium leading-none">
+          {"Evolution mensuelle du nombre de d'âmes gagnées "}
+          <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Stats des 6 derniers mois
+        </div>
+      </CardFooter>
+    </Card> */
+
+    <Card>
+      <CardHeader>
+        <CardTitle>Statistiques</CardTitle>
+        <CardDescription>
+          <span>
+            au {date.toISOString().split("T")[0].split("-").reverse().join("-")}
+          </span>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={chartConfig}>
+          <LineChart
+            accessibilityLayer
+            data={data}
+            margin={{
+              top: 20,
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="date"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+
+              //    tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Line
+              dataKey="evangelisees"
+              type="natural"
+              stroke="var(--color-desktop)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+
+            <Line
+              dataKey="gagnees"
+              type="natural"
+              stroke="var(--color-cellule)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-cellule)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+
+            <Line
+              dataKey="venues"
+              type="natural"
+              stroke="var(--color-mobile)"
+              strokeWidth={2}
+              dot={{
+                fill: "var(--color-mobile)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            >
+              <LabelList
+                position="top"
+                offset={12}
+                className="fill-foreground"
+                fontSize={12}
+              />
+            </Line>
+          </LineChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">

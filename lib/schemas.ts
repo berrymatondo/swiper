@@ -52,7 +52,7 @@ export const celFormSchema = z.object({
 export const meetingFormSchema = z.object({
   id: z.string().optional(),
   date: z.string().min(1, {
-    message: "La date du rapport est obligatoire",
+    message: "La date de la réunion est obligatoire",
   }),
   nHom: z.string().min(1, {
     message: "Le nomdre d'hommes est obligatoire",
@@ -153,7 +153,7 @@ export const LoginSchema = z.object({
   username: z.string().min(1, {
     message: "Le nom d'utilisateur est obligatoire",
   }),
-  password: z.string().min(1, { message: "Le mot de pass est obligatoire" }),
+  password: z.string().min(1, { message: "Le mot de passe est obligatoire" }),
 });
 
 export const RegisterSchema = z

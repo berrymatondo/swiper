@@ -31,7 +31,7 @@ const PersonItem = ({ per }: PersonItemProps) => {
     <div
       key={per.id}
       // className="shadow-xl rounded-lg my-2 bg-gradient-to-r from-slate-200 to-transparent hover:bg-slate-300 hover:cursor-pointer"
-      className="border gap-2 flex max-md:flex-col justify-between shadow-md rounded-lg m-2 bg-white hover:cursor-pointer"
+      className="mb-2 border gap-2 flex max-md:flex-col justify-between shadow-md rounded-lg bg-white hover:cursor-pointer"
     >
       <div className=" grid grid-cols-3 w-full">
         {/*         <div className="rounded-lg col-span-1  bg-gradient-to-r from-gray-300 to-transparent flex flex-col  justify-center items-center">
@@ -56,12 +56,14 @@ const PersonItem = ({ per }: PersonItemProps) => {
           </div>
           <p
             onClick={() => router.push(`/members/${per.id}`)}
-            className="p-1 text-sm flex items-end gap-2"
+            className="p-1 text-sm flex max-md:flex-col max-md:items-start items-end gap-2"
           >
-            <MdPhone size={20} /> {per.mobile}
-          </p>
-          <p className="text-sm flex items-end gap-2 p-1">
-            <MdEmail size={20} /> {per.email}
+            <span className="text-sm flex items-end gap-2 md:p-1">
+              <MdPhone size={20} /> {per.mobile}
+            </span>
+            <span className="text-sm flex items-end gap-2 md:p-1">
+              <MdEmail size={20} /> {per.email}
+            </span>
           </p>
           <div className="flex justify-between items-end  w-full">
             <div className="flex items-center gap-2 my-2">

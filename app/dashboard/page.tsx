@@ -59,6 +59,7 @@ import EvangelisationGraph from "@/components/graph/evangelisation";
 import NotAccess from "@/components/notAccess";
 import ExportAllMeetings from "@/components/reports/expAllMeetings";
 import MeetingsByDate from "@/components/meeting/meetingsByDate";
+import EvangItem from "@/components/evang/evangItem";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -83,7 +84,7 @@ const DashboardPage = async () => {
   const re6 = await getAllEvangs();
   const toteva = re6?.data;
 
-  // console.log("totmeet ", totmeet);
+  // console.log("toteva ", toteva);
 
   const totpil = re1?.data.filter((p: Person) => p.isPilote == true);
   const tothot = re1?.data.filter((p: Person) => p.isRespo == true);
@@ -231,12 +232,14 @@ const DashboardPage = async () => {
 
         (found.evangelisees += toteva[i].nEva),
           (found.gagnees += toteva[i].nGag);
+        found.venues += toteva[i].nVen;
         found.occ += 1;
       } else {
         //  console.log("NOTTTT FOUND");
         tmp4.push({
           evangelisees: toteva[i].nEva,
           gagnees: toteva[i].nGag,
+          venues: toteva[i].nVen,
           date: ym,
           occ: 1,
           dateout:
@@ -452,6 +455,7 @@ const DashboardPage = async () => {
                 usr={usr}
                 allMembers={allMembers}
                 meetDates={meetDates}
+                evangs={toteva}
               />
             </div>
           )}
@@ -505,6 +509,7 @@ type TabsDEmoProps = {
   usr: any;
   allMembers: any;
   meetDates: any;
+  evangs: any;
 };
 function TabsDemo({
   meetings,
@@ -518,8 +523,9 @@ function TabsDemo({
   usr,
   allMembers,
   meetDates,
+  evangs,
 }: TabsDEmoProps) {
-  // console.log("M", meetings);
+  //  console.log("M", evangs);
 
   return (
     <div className="flex flex-col w-full">
@@ -574,14 +580,14 @@ function TabsDemo({
           </div>
         </TabsContent>
         <TabsContent value="evang">
-          <div className="md:flex gap-2 justify-between">
+          <div className="md:grid md:grid-cols-3 gap-2 justify-between">
             <EvangelisationGraph
               meetings={tmp2}
               persons={totper}
               cellules={tmp}
               data={tmp4}
             />
-            <Card>
+            <Card className="col-span-2">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
                   Rapports évangélisation
@@ -591,11 +597,18 @@ function TabsDemo({
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
+                {/*                                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
                   {meetings?.map((meet: any) => (
                     <MeetingItem key={meet.id} meeting={meet} usr={usr} />
                   ))}
+                </div>  */}
+
+                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
+                  {evangs?.map((meet: any) => (
+                    <EvangItem key={meet.id} evang={meet} usr={usr} />
+                  ))}
                 </div>
+
                 {/*             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>
               <Input id="name" defaultValue="Pedro Duarte" />

@@ -193,7 +193,9 @@ export const EvangForm = ({
       });
 
     // if (!mbr?.id && celId) {
-    router.push(`/cellules/${celId}`);
+    //router.push(`/cellules/${celId}`);
+    router.push(`/cellules/${celId}/?defTab=evang`);
+
     /*     } else {
       router.push("/members");
     } */
@@ -324,7 +326,7 @@ export const EvangForm = ({
                 render={({ field }) => {
                   return (
                     <FormItem className="w-1/2">
-                      <FormLabel>{"Date du rapport "}</FormLabel>
+                      <FormLabel>{"Date de sortie "}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -366,7 +368,7 @@ export const EvangForm = ({
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>{"heure de Début "}</FormLabel>
+                      <FormLabel>{"Heure de début "}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -469,7 +471,7 @@ export const EvangForm = ({
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>{"Contacts "}</FormLabel>
+                      <FormLabel>{"Contacts pris"}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -491,7 +493,7 @@ export const EvangForm = ({
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>{"Invités"}</FormLabel>
+                      <FormLabel>{"Invitées"}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -512,7 +514,7 @@ export const EvangForm = ({
                 render={({ field }) => {
                   return (
                     <FormItem>
-                      <FormLabel>{"Invités venus"}</FormLabel>
+                      <FormLabel>{"Invitées venues"}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -533,7 +535,7 @@ export const EvangForm = ({
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>{"Notes "}</FormLabel>
+                    <FormLabel>{"Notes, faits marquants, ... "}</FormLabel>
                     <FormControl>
                       <Textarea
                         {...field}
@@ -551,7 +553,8 @@ export const EvangForm = ({
               type="button"
               variant="secondary"
               className="text-red-600 max-md:mt-4"
-              onClick={() => router.back()}
+              // onClick={() => router.back()}
+              onClick={() => router.push(`/cellules/${celId}/?defTab=evang`)}
             >
               Annuler
             </Button>

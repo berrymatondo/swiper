@@ -69,7 +69,7 @@ export const MeetingForm = ({
     resolver: zodResolver(meetingFormSchema),
     defaultValues: {
       id: mbr?.id ? mbr.id : undefined,
-      date: "2024-11-14",
+      date: dernierJeudi().toISOString().split("T")[0].toString(),
       // date: new Date().toISOString().split("T")[0].toString(),
       nHom: mbr?.nHom ? mbr?.nHom : "0",
       nFem: mbr?.nFem ? mbr?.nFem : "0",
@@ -162,6 +162,21 @@ export const MeetingForm = ({
   const respo = form.watch("isRespo");
   const gest = form.watch("isGest"); */
   //const sel = form.watch("giId");
+
+  function dernierJeudi() {
+    const today = new Date(); // On récupère la date d'aujourd'hui
+    const dayOfWeek = today.getDay(); // On récupère le jour de la semaine (0 = dimanche, 1 = lundi, etc.)
+
+    // Calcul du nombre de jours à soustraire pour atteindre le dernier jeudi
+    const daysToSubtract = dayOfWeek >= 4 ? dayOfWeek - 4 : dayOfWeek + 3; // 4 = jeudi
+
+    // On crée une nouvelle date en soustrayant les jours nécessaires
+    today.setDate(today.getDate() - daysToSubtract);
+
+    return today;
+  }
+
+  console.log("dernierJeudi()", dernierJeudi());
 
   const procesForm = async (values: z.infer<typeof meetingFormSchema>) => {
     // console.log("Value:", values);
@@ -273,7 +288,7 @@ export const MeetingForm = ({
                 render={({ field }) => {
                   return (
                     <FormItem className="w-1/2">
-                      <FormLabel>{"Date du rapport "}</FormLabel>
+                      <FormLabel>{"Date de la réunion "}</FormLabel>
                       <FormControl>
                         <Input
                           {...field}

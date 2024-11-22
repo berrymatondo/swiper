@@ -20,7 +20,7 @@ type EvangItemProps = {
 const EvangItem = ({ evang, usr }: EvangItemProps) => {
   const router = useRouter();
 
-  // console.log("meeting: ", meeting);
+  //console.log("meeting: ", evang);
 
   return (
     <div
@@ -30,15 +30,18 @@ const EvangItem = ({ evang, usr }: EvangItemProps) => {
     >
       <div
         // onClick={() => router.push(`/zones/${zone.id}`)}
-        className=" grid grid-cols-4  w-2/3"
+        className=" grid grid-cols-4  w-2/3 max-md:w-full"
       >
-        <div className="gap-2 rounded-lg col-span-1  max-md:col-span-2 bg-gradient-to-r from-blue-50 to-transparent flex   justify-center items-center">
-          <MdEditDocument size={20} className="text-sky-600" />
-          <p className="text-md font-semibold max-md:text-xs ">
+        <div className="gap-1 rounded-lg col-span-1   bg-gradient-to-r from-blue-50 to-transparent flex   justify-center items-center">
+          <MdEditDocument size={20} className="max-md:hidden text-sky-600" />
+          <Badge className=" font-semibold max-md:text-xs ">
+            {evang.cellule.name}
+          </Badge>
+        </div>
+        <div className="relative col-span-3  max-md:col-span-3 flex justify-end gap-2 items-end my-2 ml-2 ">
+          <p className="text-xs font-semibold max-md:text-xs ">
             {evang.date.split("-").reverse().join("-")}
           </p>
-        </div>
-        <div className="relative col-span-3  max-md:col-span-2 flex justify-end gap-2 items-end my-2 ml-2 ">
           <Badge className="flex gap-2 bg-sky-800 md:hidden">
             {" "}
             <MdPeople />{" "}
