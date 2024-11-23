@@ -13,76 +13,103 @@ import { Badge } from "../ui/badge";
 import { Separator } from "../ui/separator";
 import { GiPoliceOfficerHead } from "react-icons/gi";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import im from "../../public/images/cellules/i2.jpeg";
 
 type CelDetailsProps = {
   cel: any;
   userSession?: any;
+  img?: any;
 };
 
-const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
+const CelDetails = ({ cel, userSession, img }: CelDetailsProps) => {
   // const session = await auth();
   const usr = userSession?.user;
   const router = useRouter();
+
   //  console.log("cel ", cel);
+
+  function getRandomNumber() {
+    return Math.floor(Math.random() * 23) + 1;
+  }
+
+  //console.log("getRandomNumber", "i" + getRandomNumber());
+
+  console.log("cel", cel.name, img);
+  //console.log("img", "i" + img);
+  //const imm = "/images/cellules/i1.jpeg";
+  const imm = img;
 
   return (
     <div>
       <div
         onClick={() => router.push(`/cellules/${cel.id}`)}
-        className="hover:cursor-pointer hover:bg-gradient-to-l hover:to-sky-200 hover:from-transparent p-2 bg-gradient-to-l to-sky-100 from-transparent m-1 border-2 rounded-lg mb-2"
+        className="hover:cursor-pointer hover:bg-gradient-to-l hover:to-sky-200 hover:from-transparent bg-gradient-to-l to-sky-100 from-transparent m-1 border-2 rounded-lg overflow-hidden mb-2"
       >
-        <div className="flex items-center gap-2 mb-2 ">
-          <p className="w-full flex justify-between font-semibold text-blue-800">
-            <span className="flex gap-2 items-center ">
-              <MdHome size={25} />{" "}
-              <strong className="font-normal text-2xl">{cel?.name}</strong>
-            </span>
+        <div className="relative w-full">
+          <Image
+            alt="home"
+            src={imm}
+            layout="fixed"
+            height={80}
+            width={500}
+            className="rounded-t-lg"
+          />
+
+          <div className="bg-sky-900/30 absolute w-full h-full top-0 left-0"></div>
+
+          <p className=" text-center text-5xl  font-bold my-2 boreder-4 border-black text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            {cel?.name}
           </p>
-          {!cel.grpWhatsApp && (
-            <div className="max-md:text-xs text-sm italic">
-              Pas de groupe Whatsapp disponible.
-              <p>
-                Contacter: <strong>0484/82.03.62</strong> ou{" "}
-                <strong>0485/80.22.78</strong>
-              </p>{" "}
-            </div>
-          )}
-          {cel.grpWhatsApp && (
-            <div className="flex flex-col">
-              <Badge className="border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
-                {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
-                 */}{" "}
-                <IoLogoWhatsapp size={30} className="mr-2" />
-                <Link
-                  target="_blank"
-                  href={cel.grpWhatsApp}
-                  className="font-semibold text-lg"
-                >
-                  Rejoindre
-                </Link>
-              </Badge>
-              {/*             <span className="text-xs text-center mt-1">
-                le groupe WhatsApp
-              </span> */}
-            </div>
-          )}
         </div>
 
-        <div className="flex flex-col gap-2">
-          <div className="  rounded-lg text-sky-800 flex items-center max-md:items-start gap-2  ">
-            <BiMap size={25} className="text-green-600" />
-            <div className="font-semibold flex flex-col  md:gap-2 items-start">
-              {!cel?.address?.hide && (
+        <div className="flex flex-col gap-2 p-2">
+          <div className="flex justify-between items-start ">
+            <div className=" rounded-lg text-sky-800 flex justify-between items-center max-md:items-start gap-2  ">
+              <BiMap size={25} className="text-green-600" />
+              <div className="font-semibold flex flex-col  md:gap-2 items-start">
+                {!cel?.address?.hide && (
+                  <p className="text-sm">
+                    {cel?.address?.street as string},{" "}
+                    {/*                 {cel?.address?.number as string} {cel?.address?.box as string}
+                     */}{" "}
+                  </p>
+                )}
                 <p className="text-sm">
-                  {cel?.address?.street as string},{" "}
-                  {/*                 {cel?.address?.number as string} {cel?.address?.box as string}
-                   */}{" "}
+                  {cel?.address?.postalCode as string}{" "}
+                  {cel?.address?.municipality as string}
                 </p>
+              </div>
+            </div>
+            <div className=" flex items-center gap-2 ">
+              {!cel.grpWhatsApp && (
+                <div className="text-end max-md:text-xs text-sm italic">
+                  Pas de groupe Whatsapp disponible.
+                  <p>
+                    Contacter: <strong>0484/82.03.62</strong> ou{" "}
+                    <strong>0485/80.22.78</strong>
+                  </p>{" "}
+                </div>
               )}
-              <p className="text-sm">
-                {cel?.address?.postalCode as string}{" "}
-                {cel?.address?.municipality as string}
-              </p>
+              {cel.grpWhatsApp && (
+                <div className="flex flex-col">
+                  <Badge className="border-green-600 hover:cursor-pointer max-md:text-xs  hover:text-white text-green-600 bg-transparent w-full  hover:bg-green-800 p-1">
+                    {/*             <FaRegHandPointRight size={20} className="mr-2 text-yellow-200" />
+                     */}{" "}
+                    <IoLogoWhatsapp size={30} className="mr-2" />
+                    <Link
+                      target="_blank"
+                      href={cel.grpWhatsApp}
+                      className="font-semibold text-lg"
+                    >
+                      Rejoindre
+                    </Link>
+                  </Badge>
+                  {/*             <span className="text-xs text-center mt-1">
+                le groupe WhatsApp
+              </span> */}
+                </div>
+              )}
             </div>
           </div>
 
@@ -98,7 +125,7 @@ const CelDetails = ({ cel, userSession }: CelDetailsProps) => {
           </div>
         </div>
 
-        <div className="flex  items-start mt-2">
+        <div className="flex  items-start p-2">
           <GiPoliceOfficerHead size={25} className="text-purple-600 mr-2" />{" "}
           {cel?.persons &&
             cel?.persons

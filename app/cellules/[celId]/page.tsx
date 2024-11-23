@@ -253,16 +253,7 @@ usr={usr} */
                   <div className="font-semibold flex  items-start">
                     {/*                {cel?.address?.hide && ( */}
                     <p className="max-md:text-xs">
-                      {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
-                        <>
-                          <span>{cel?.address?.street as string}, </span>
-                          {/*                           <span>
-                            {" "}
-                            {cel?.address?.number as string},{" "}
-                            {cel?.address?.box as string}{" "}
-                          </span> */}
-                        </>
-                      )}
+                      <span>{cel?.address?.street as string}, </span>
                     </p>
                     {/*      )} */}
                     <p className="max-md:text-xs ">
@@ -310,10 +301,12 @@ usr={usr} */
                 )} */}
               </div>
               <div className="flex justify-between items-center w-full p-2">
-                {usr && (
+                {usr ? (
                   <div className=" flex items-center justify-end">
                     <CelUpdateBar usr={usr} cel={cel} />
                   </div>
+                ) : (
+                  <div></div>
                 )}
                 {cel?.grpWhatsApp ? (
                   <div className="flex flex-col justify-end">

@@ -94,6 +94,14 @@ const CellulesPage = async ({
   //  cellules = cels;
   //}
 
+  const getRandomNumber = () => {
+    const tmp = Math.floor(Math.random() * 20) + 1;
+
+    return `/images/cellules/i${tmp}.jpeg`;
+  };
+
+  console.log("getRandomNumber", getRandomNumber());
+
   return (
     <PageLayout
       title="Liste des cellules d'impact"
@@ -139,7 +147,12 @@ const CellulesPage = async ({
             <ScrollArea className="h-[600px]  rounded-md border">
               <div>
                 {cellules?.map((cel: any) => (
-                  <CelDetails userSession={session} cel={cel} key={cel.id} />
+                  <CelDetails
+                    userSession={session}
+                    cel={cel}
+                    key={cel.id}
+                    img={getRandomNumber()}
+                  />
                   /*                 <CelItem userSession={session} cel={cel} key={cel.id} />
                    */
                 ))}
