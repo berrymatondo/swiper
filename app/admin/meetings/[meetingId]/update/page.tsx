@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import MeetingForm from "@/components/meeting/meetingForm";
 import MeetingFormDelete from "@/components/meeting/meetingFormDelete";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import Title from "@/components/title";
 import {
@@ -33,6 +34,8 @@ const MeetingUpdatePage = async ({
   //const zone = await res?.data;
   //console.log("params.zoneId", params.zoneId);
   //console.log("ZONE", zone);
+
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
 
   return (
     <PageLayout

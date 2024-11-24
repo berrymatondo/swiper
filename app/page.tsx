@@ -19,6 +19,7 @@ export default function Home() {
   return (
     <main className="relative text-white flex flex-col md:flex-row gap-10 justify-center items-center  h-screen md:px-2">
       <BulleInfo />
+
       <Image
         alt="bcg"
         src={im}

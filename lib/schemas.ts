@@ -44,6 +44,7 @@ export const celFormSchema = z.object({
 
   grpWhatsApp: z.string().optional(),
   status: z.string(),
+  ban: z.string().optional(),
 
   zoneId: z.string().optional(),
   addressId: z.string().optional(),
@@ -225,4 +226,10 @@ export const evangFormSchema = z.object({
 export const dateSchema = z.object({
   dateId: z.string(),
   byMonth: z.boolean().default(false),
+});
+
+export const paramSchema = z.object({
+  id: z.string().optional(),
+  label: z.string().optional(),
+  isActive: z.boolean().optional(),
 });

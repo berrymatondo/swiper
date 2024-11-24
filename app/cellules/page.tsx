@@ -94,13 +94,23 @@ const CellulesPage = async ({
   //  cellules = cels;
   //}
 
-  const getRandomNumber = () => {
+  const getRandomNumber = (cel: any) => {
     const tmp = Math.floor(Math.random() * 20) + 1;
 
-    return `/images/cellules/i${tmp}.jpeg`;
+    if (cel?.ban?.length > 0) {
+      console.log("xxx", `/images/cellules/${cel?.ban}.jpeg`);
+
+      return `/images/cellules/${cel?.ban}.jpeg`;
+    } else {
+      //return `/images/cellules/i${tmp}.jpeg`;
+      // return `/images/cellules/i1.jpeg`;
+      console.log("hrererere", cel?.id);
+
+      return `/images/cellules/i2.jpeg`;
+    }
   };
 
-  console.log("getRandomNumber", getRandomNumber());
+  // console.log("getRandomNumber", getRandomNumber(cel));
 
   return (
     <PageLayout
@@ -151,7 +161,7 @@ const CellulesPage = async ({
                     userSession={session}
                     cel={cel}
                     key={cel.id}
-                    img={getRandomNumber()}
+                    img={getRandomNumber(cel)}
                   />
                   /*                 <CelItem userSession={session} cel={cel} key={cel.id} />
                    */

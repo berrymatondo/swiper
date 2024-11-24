@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import EvangForm from "@/components/evang/evangForm";
 import MeetingForm from "@/components/meeting/meetingForm";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import {
   Breadcrumb,
@@ -26,6 +27,8 @@ const AddEvangPage = async ({
   const cellules = res?.data;
   const ress = await getAllZones();
   const zones = ress?.data;
+
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
 
   return (
     <PageLayout

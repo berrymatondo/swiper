@@ -17,6 +17,7 @@ import PersonItem from "@/components/person/personItem";
 import SearchPer from "@/components/searchPer";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+import NotAccess from "@/components/notAccess";
 
 const MembersPage = async ({
   searchParams,
@@ -25,6 +26,9 @@ const MembersPage = async ({
 }) => {
   const session = await auth();
   const usr: any = session?.user;
+
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE" && usr?.role != "VISITOR")
+    return <NotAccess />;
 
   //console.log("usr", usr);
 
@@ -184,7 +188,7 @@ const MembersPage = async ({
 
         <div className="max-sm:max-h-[600px] overflow-auto lg:grid md:grid-cols-2  md:gap-3">
           {personbise?.map((per: any) => (
-            <PersonItem per={per} key={per.id} />
+            <PersonItem per={per} key={per.id} usr={usr} />
           ))}
         </div>
       </div>

@@ -1,4 +1,6 @@
+import { auth } from "@/auth";
 import CelFormDelete from "@/components/cel/celFormDelete";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import PerFormDelete from "@/components/person/perFormDelete";
 import Title from "@/components/title";
@@ -28,6 +30,10 @@ const DeletePerPage = async ({ params }: DeletePerPageProps) => {
   const per = await res?.data;
   //console.log("params.zoneId", params.zoneId);
   //console.log("ZONE", zone);
+
+  const session = await auth();
+  const usr: any = session?.user;
+  if (usr?.role != "ADMIN") return <NotAccess />;
 
   return (
     <PageLayout

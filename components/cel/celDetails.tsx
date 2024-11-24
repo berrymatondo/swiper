@@ -35,10 +35,12 @@ const CelDetails = ({ cel, userSession, img }: CelDetailsProps) => {
 
   //console.log("getRandomNumber", "i" + getRandomNumber());
 
-  console.log("cel", cel.name, img);
+  console.log("cel image", img);
   //console.log("img", "i" + img);
   //const imm = "/images/cellules/i1.jpeg";
   const imm = img;
+
+  //console.log("usr", usr?.role);
 
   return (
     <div>
@@ -99,7 +101,7 @@ const CelDetails = ({ cel, userSession, img }: CelDetailsProps) => {
                     <IoLogoWhatsapp size={30} className="mr-2" />
                     <Link
                       target="_blank"
-                      href={cel.grpWhatsApp}
+                      href={usr?.role == "VISITOR" ? "#" : cel.grpWhatsApp}
                       className="font-semibold text-lg"
                     >
                       Rejoindre

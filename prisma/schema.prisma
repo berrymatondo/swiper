@@ -85,6 +85,7 @@ model Cellule {
   users User[] 
   meetings Meeting[] 
   evangs Evang[] 
+  ban String?
 
   zoneId Int?
   zone Zone? @relation(fields: [zoneId], references: [id])
@@ -188,4 +189,17 @@ model Evang {
   createAt DateTime? @default(now())
   updatedAt DateTime?  @updatedAt
   @@map("evang")
+}
+
+
+
+
+model Parametre {
+  id Int @id @default(autoincrement())
+  label String @unique
+  isActive Boolean @default(false)
+
+  createAt DateTime? @default(now())
+  updatedAt DateTime?  @updatedAt
+  @@map("parametres")
 }

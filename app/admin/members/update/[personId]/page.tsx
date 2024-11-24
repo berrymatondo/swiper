@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import CelForm from "@/components/cel/celForm";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import PersonForm from "@/components/person/personForm";
 import {
@@ -41,6 +42,7 @@ const UpdatePerPage = async ({ params }: UpdatePerPageProps) => {
   //console.log("personId", params.personId);
   //console.log("PER", per);
 
+  if (usr?.role != "ADMIN") return <NotAccess />;
   return (
     <PageLayout
       title="Editer un membre"

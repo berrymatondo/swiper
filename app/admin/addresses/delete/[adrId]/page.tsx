@@ -1,5 +1,7 @@
+import { auth } from "@/auth";
 import AdrFormDelete from "@/components/address/AdrFormDelete";
 import CelFormDelete from "@/components/cel/celFormDelete";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import Title from "@/components/title";
 import {
@@ -28,6 +30,10 @@ const DeleteAdrPage = async ({ params }: DeleteAdrPageProps) => {
   const adr = await res?.data;
   //console.log("params.zoneId", params.zoneId);
   //console.log("ZONE", zone);
+
+  const session = await auth();
+  const usr: any = session?.user;
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
 
   return (
     <PageLayout

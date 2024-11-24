@@ -16,7 +16,10 @@ const DocsPage = async () => {
   const session = await auth();
   const usr: any = session?.user;
 
-  if (!usr || (usr?.role != "PILOTE" && usr.role != "ADMIN"))
+  if (
+    !usr ||
+    (usr?.role != "PILOTE" && usr.role != "ADMIN" && usr.role != "VISITOR")
+  )
     return <NotAccess />;
 
   return (

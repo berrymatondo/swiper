@@ -60,6 +60,7 @@ import NotAccess from "@/components/notAccess";
 import ExportAllMeetings from "@/components/reports/expAllMeetings";
 import MeetingsByDate from "@/components/meeting/meetingsByDate";
 import EvangItem from "@/components/evang/evangItem";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -252,7 +253,7 @@ const DashboardPage = async () => {
 
   //console.log("tmp4 ", tmp4);
 
-  if (usr?.role != "ADMIN") return <NotAccess />;
+  if (usr?.role != "ADMIN" && usr?.role != "VISITOR") return <NotAccess />;
 
   return (
     <PageLayout
@@ -432,7 +433,9 @@ const DashboardPage = async () => {
           </div> */}
         </div>
         <div>
-          {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
+          {(usr?.role == "ADMIN" ||
+            usr?.role == "PILOTE" ||
+            usr?.role == "VISITOR") && (
             /*             <CelMembers members={members} />
              */ <div className="md:flex md:justify-between md:gap-4">
               {/*               <div className="md:hidden">
@@ -553,9 +556,11 @@ function TabsDemo({
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
-                  <MeetingsByDate dates={meetDates} usr={usr} />
-                </div>
+                <ScrollArea className="h-[300px]">
+                  <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
+                    <MeetingsByDate dates={meetDates} usr={usr} />
+                  </div>
+                </ScrollArea>
 
                 {/*                 <ExportAllMeetings meetings={meetings} name={name} />
 
@@ -645,9 +650,11 @@ function TabsDemo({
                 <div key={index} className="flex gap-2 max-md:text-xs">
                   <p>
                     {index + 1}. {mbr?.firstname}{" "}
-                    <strong>{mbr?.lastname}</strong>{" "}
+                    <strong>
+                      {usr?.role == "VISITOR" ? "xxx" : mbr?.lastname}
+                    </strong>{" "}
                   </p>
-                  <p>{mbr?.mobile}</p>
+                  <p>{usr?.role == "VISITOR" ? "xxx" : mbr?.mobile}</p>
                 </div>
               ))}
             </CardContent>

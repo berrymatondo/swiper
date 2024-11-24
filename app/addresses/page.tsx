@@ -16,6 +16,7 @@ import prisma from "@/lib/prisma";
 import AdrItem from "@/components/address/adrItem";
 import SearchAdr from "@/components/searchAdr";
 import { auth } from "@/auth";
+import NotAccess from "@/components/notAccess";
 
 const AddressesPage = async ({
   searchParams,
@@ -53,6 +54,7 @@ const AddressesPage = async ({
   const usr: any = session?.user;
   const role = usr?.role;
 
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
   //console.log("ADRS:", addresses);
 
   return (

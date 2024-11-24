@@ -64,6 +64,7 @@ export const CelForm = ({ cel, allZones, addresses, usr }: CelFormProps) => {
       days: cel?.days ? cel?.days : "Tous les jeudis",
       hours: cel?.hours ? cel?.hours : "De 19h à 20h30",
       grpWhatsApp: cel?.grpWhatsApp ? cel?.grpWhatsApp : "",
+      ban: cel?.ban ? cel?.ban : "",
       zoneId: cel?.zoneId?.toString(),
       addressId: cel?.addressId ? cel?.addressId.toString() : "",
       /*       respoId: zone?.respoId ? zone?.respoId : undefined,
@@ -97,7 +98,7 @@ export const CelForm = ({ cel, allZones, addresses, usr }: CelFormProps) => {
  */
   // Process Form
   const procesForm = async (values: z.infer<typeof celFormSchema>) => {
-    //console.log("Value: ", values);
+    //  console.log("Value: ", values);
     // console.log("Zone:", zone);
 
     let res;
@@ -456,6 +457,25 @@ export const CelForm = ({ cel, allZones, addresses, usr }: CelFormProps) => {
                       <Input
                         {...field}
                         placeholder="Entrer le groupe WhatsApp"
+                        type="text"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+            <FormField
+              control={form.control}
+              name="ban"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>{"Bannière"}</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        placeholder="Entrer le lien de la bannière"
                         type="text"
                       />
                     </FormControl>

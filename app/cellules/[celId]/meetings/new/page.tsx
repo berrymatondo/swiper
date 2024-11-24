@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import MeetingForm from "@/components/meeting/meetingForm";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import {
   Breadcrumb,
@@ -22,6 +23,8 @@ const AddMeetingPage = async ({
   const usr: any = session?.user;
   const res = await getAllCels();
   const cellules = await res?.data;
+
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
 
   return (
     <PageLayout

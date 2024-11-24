@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import CelForm from "@/components/cel/celForm";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import Title from "@/components/title";
 import {
@@ -22,6 +23,8 @@ const AddCelPage = async () => {
 
   const res2 = await getAddresses();
   const allAddresses = await res2?.data;
+
+  if (usr?.role != "ADMIN") return <NotAccess />;
 
   return (
     <PageLayout

@@ -20,9 +20,10 @@ import { GiPoliceOfficerHead } from "react-icons/gi";
 
 type PersonItemProps = {
   per: any;
+  usr?: any;
 };
 
-const PersonItem = ({ per }: PersonItemProps) => {
+const PersonItem = ({ per, usr }: PersonItemProps) => {
   const router = useRouter();
 
   // console.log("PER", per);
@@ -51,7 +52,7 @@ const PersonItem = ({ per }: PersonItemProps) => {
               onClick={() => router.push(`/members/${per.id}`)}
               className="text-sm font-semibold "
             >
-              {per.lastname}
+              {usr?.role == "VISITOR" ? "xxx" : per.lastname}
             </p>
           </div>
           <p
@@ -59,10 +60,11 @@ const PersonItem = ({ per }: PersonItemProps) => {
             className="p-1 text-sm flex max-md:flex-col max-md:items-start items-end gap-2"
           >
             <span className="text-sm flex items-end gap-2 md:p-1">
-              <MdPhone size={20} /> {per.mobile}
+              <MdPhone size={20} />{" "}
+              {usr?.role == "VISITOR" ? "xxx" : per.mobile}
             </span>
             <span className="text-sm flex items-end gap-2 md:p-1">
-              <MdEmail size={20} /> {per.email}
+              <MdEmail size={20} /> {usr?.role == "VISITOR" ? "xxx" : per.email}
             </span>
           </p>
           <div className="flex justify-between items-end  w-full">

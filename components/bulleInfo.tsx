@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import eva from "../public/pstchristian.png";
+import eva from "../public/dom.png";
 import Link from "next/link";
 
 const BulleInfo = () => {
@@ -26,13 +26,13 @@ const BulleInfo = () => {
             className="flex flex-col mt-2  hover:cursor-pointer hover:bg-sky-800/90"
             onClick={() =>
               //router.push("https://www.youtube.com/watch?v=dpULmVf87DM")
-              window.open("https://www.youtube.com/watch?v=dpULmVf87DM")
+              window.open("https://www.youtube.com/watch?v=q7qujZC9e04")
             }
           >
             <Badge className="flex flex-col  bg-sky-600">
               Revoir le Culte du
               <span className="text-yellow-400 font-semibold text-sm">
-                17/11/2024
+                24/11/2024
               </span>
             </Badge>
             <div className="flex mt-2">
@@ -52,7 +52,7 @@ const BulleInfo = () => {
               </div>
             </div>
             <p className="text-center mt-2 text-xs  font-medium text-yellow-500">
-              Pst Christian Saboukoulou
+              Pst Dominique Mbog
             </p>
           </div>
         </div>
@@ -72,11 +72,12 @@ const BulleInfo = () => {
               <Link
                 className="flex flex-col items-center"
                 target="_blank"
-                href="./tmp/ICC_MON_EGLISE_20241117.pdf"
+                // href="./tmp/ICC_MON_EGLISE_20241124.pdf"
+                href="https://qrco.de/ICCMonEglise"
               >
                 <p>ICC Mon Eglise</p>
                 <span className="text-yellow-400 font-semibold text-sm">
-                  17/11/2024
+                  24/11/2024
                 </span>
               </Link>
             </Badge>

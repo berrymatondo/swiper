@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import PersonForm from "@/components/person/personForm";
 import {
@@ -18,6 +19,8 @@ const AddMemberPage = async () => {
   const usr: any = session?.user;
   const res = await getAllCels();
   const cellules = await res?.data;
+
+  if (usr?.role != "ADMIN") return <NotAccess />;
 
   return (
     <PageLayout

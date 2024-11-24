@@ -114,7 +114,7 @@ const NavMob = ({ usr }: NavMobProps) => {
           </div>
         </div> */}
         <div className="flex flex-col pt-8 gap-4">
-          {usr?.role == "ADMIN" && (
+          {(usr?.role == "ADMIN" || usr?.role == "VISITOR") && (
             <Button
               onClick={() => {
                 router.push("/dashboard");

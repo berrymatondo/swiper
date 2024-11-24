@@ -21,6 +21,7 @@ export const addCel = async (data: Inputs) => {
           days: data.days,
           hours: data.hours,
           grpWhatsApp: data.grpWhatsApp,
+          ban: data.ban,
 
           zoneId: data.zoneId ? +data.zoneId : undefined,
           addressId: data.addressId ? +data.addressId : undefined,
@@ -184,7 +185,7 @@ export const getAllFilterCels = async (search: any) => {
 
 // UPDATE CELLULE
 export const updateCel = async (data: Inputs) => {
-  //console.log("update zone:", data);
+  // console.log("update zonezz:", data);
 
   const resut = celFormSchema.safeParse(data);
   if (resut.success) {
@@ -198,6 +199,7 @@ export const updateCel = async (data: Inputs) => {
           days: data.days,
           hours: data.hours,
           grpWhatsApp: data.grpWhatsApp,
+          ban: data.ban,
           zoneId: data?.zoneId ? +data?.zoneId : undefined,
           addressId: data?.addressId ? +data?.addressId : undefined,
           statut: data.status as CelStatuses,

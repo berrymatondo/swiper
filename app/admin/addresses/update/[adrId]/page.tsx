@@ -1,5 +1,7 @@
+import { auth } from "@/auth";
 import AdrForm from "@/components/address/adrForm";
 import CelForm from "@/components/cel/celForm";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import {
   Breadcrumb,
@@ -30,6 +32,10 @@ const UpdateAdrPage = async ({ params }: UpdateAdrPageProps) => {
 
   //console.log("params.zoneId", params.zoneId);
   //console.log("adr", adr);
+
+  const session = await auth();
+  const usr: any = session?.user;
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
 
   return (
     <PageLayout

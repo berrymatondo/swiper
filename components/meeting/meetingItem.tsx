@@ -120,16 +120,18 @@ const MeetingItem = ({ meeting, usr }: MeetingItemProps) => {
             Supprimer
           </Badge>
         )}
-        <Badge
-          className=""
-          onClick={() =>
-            router.push(
-              `/admin/meetings/${meeting.id}/update/?meetingId=${meeting.id}&celluleId=${meeting.celluleId}`
-            )
-          }
-        >
-          Modifier
-        </Badge>
+        {(usr?.role == "ADMIN" || usr?.role == "PILOTE") && (
+          <Badge
+            className=""
+            onClick={() =>
+              router.push(
+                `/admin/meetings/${meeting.id}/update/?meetingId=${meeting.id}&celluleId=${meeting.celluleId}`
+              )
+            }
+          >
+            Modifier
+          </Badge>
+        )}
       </div>
     </div>
   );

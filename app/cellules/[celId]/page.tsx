@@ -78,6 +78,8 @@ const CelDetailsPage = async ({
 
   const res = await getCel(params.celId);
   const cel = res?.data;
+  const imag = `/images/cellules/${cel?.ban}.jpeg`;
+  console.log("Image", imag);
 
   const resu = await getPersonsCel(params.celId);
   const members = resu?.data;
@@ -173,6 +175,9 @@ usr={usr} */
 
   //console.log("usr", usr);
 
+  //console.log("im", im);
+  //console.log("ban", cel?.ban);
+
   return (
     <PageLayout
       title="Détails d'une cellule d'impact"
@@ -236,9 +241,11 @@ usr={usr} */
                 <div className="relative w-full">
                   <Image
                     alt="home"
-                    src={im}
+                    //src={imag}
                     layout="fixed"
-                    height={475}
+                    src={cel?.ban ? imag : im}
+                    height={80}
+                    width={500}
                     className="rounded-t-lg"
                   />
 
@@ -316,7 +323,7 @@ usr={usr} */
                       <IoLogoWhatsapp size={30} className="mr-2" />
                       <Link
                         target="_blank"
-                        href={cel.grpWhatsApp}
+                        href={usr?.role == "VISITOR" ? "#" : cel.grpWhatsApp}
                         className="font-semibold text-base"
                       >
                         Rejoindre
@@ -350,6 +357,7 @@ usr={usr} */
 
           <div className="p-2">
             {(usr?.role == "ADMIN" ||
+              usr?.role == "VISITOR" ||
               (usr?.role == "PILOTE" && usr?.celluleId == cel?.id)) && (
               /*             <CelMembers members={members} />
                */

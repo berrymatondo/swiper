@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import CelForm from "@/components/cel/celForm";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import {
   Breadcrumb,
@@ -36,6 +37,8 @@ const UpdateCelPage = async ({ params }: UpdateCelPageProps) => {
 
   //console.log("params.zoneId", params.zoneId);
   //console.log("CEL", cel);
+
+  if (usr?.role != "ADMIN" && usr?.role != "PILOTE") return <NotAccess />;
 
   return (
     <PageLayout

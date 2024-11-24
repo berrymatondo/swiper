@@ -254,7 +254,7 @@ export const loginlogin = async (data: Inputs) => {
   }
 
   data = { ...data, username: data.username.toLowerCase() };
-  console.log("Call sinin", data);
+  //console.log("Call sinin", data);
 
   const res = await signIn("credentials", {
     ...data,
