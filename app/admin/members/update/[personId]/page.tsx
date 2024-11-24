@@ -47,6 +47,7 @@ const UpdatePerPage = async ({ params }: UpdatePerPageProps) => {
     <PageLayout
       title="Editer un membre"
       description="Cette page permet d'éditer un membre d'une cellule d'impact"
+      usr={usr}
     >
       <CustomBreadcrumb name="Editer un membre" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

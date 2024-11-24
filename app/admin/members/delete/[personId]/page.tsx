@@ -39,6 +39,7 @@ const DeletePerPage = async ({ params }: DeletePerPageProps) => {
     <PageLayout
       title="Supprimer un membre"
       description="Cette page permet de supprimer un membre d'une cellule d'impact"
+      usr={usr}
     >
       <CustomBreadcrumb name="Suppression membre" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

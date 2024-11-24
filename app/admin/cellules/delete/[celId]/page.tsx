@@ -37,6 +37,7 @@ const DeleteCelPage = async ({ params }: DeleteCelPageProps) => {
     <PageLayout
       title="Supprimer une cellule"
       description="Cette page permet de supprimer une cellule d'impact"
+      usr={usr}
     >
       <CustomBreadcrumb name="Suppression cellule" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

@@ -30,6 +30,7 @@ const AddCelPage = async () => {
     <PageLayout
       title="Créer une nouvelle cellule"
       description="Cette page permet de créer une nouvelle cellule d'impact"
+      usr={usr}
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

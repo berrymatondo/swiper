@@ -1,3 +1,5 @@
+import { auth } from "@/auth";
+import NotAccess from "@/components/notAccess";
 import PageLayout from "@/components/pageLayout";
 import Title from "@/components/title";
 import {
@@ -23,11 +25,15 @@ const UpdateZonePage = async ({ params }: UpdateZonePageProps) => {
   const zone = await res?.data;
   //console.log("params.zoneId", params.zoneId);
   //console.log("ZONE", zone); //
+  const session = await auth();
+  const usr: any = session?.user;
+  if (usr?.role != "ADMIN") return <NotAccess />;
 
   return (
     <PageLayout
       title="Editer une zone"
       description="Cette page permet d'éditer une zone d'impact"
+      usr={usr}
     >
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
         <ZoneForm zone={zone} />

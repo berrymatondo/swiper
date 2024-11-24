@@ -34,6 +34,7 @@ const EvangDeletePage = async ({
     <PageLayout
       title="Supprimerr un rapport"
       description="Cette page permet de supprimer un raport"
+      usr={usr}
     >
       <CustomBreadcrumb name="Suppression rapport" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

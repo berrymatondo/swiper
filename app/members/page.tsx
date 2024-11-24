@@ -139,6 +139,7 @@ const MembersPage = async ({
     <PageLayout
       title="Liste des membres des cellules d'impact"
       description="La liste de tous les membres des cellules d'impact"
+      usr={usr}
     >
       <div className="">
         <CustomBreadcrumb name={`Membres (${personbise?.length})`} />

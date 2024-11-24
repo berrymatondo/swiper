@@ -26,6 +26,7 @@ const AddMemberPage = async () => {
     <PageLayout
       title="Nouveau nouveau membre"
       description="Cette page permet de créer  un nouveau membre lié à une cellule d'impact"
+      usr={usr}
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

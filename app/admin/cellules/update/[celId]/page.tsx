@@ -44,6 +44,7 @@ const UpdateCelPage = async ({ params }: UpdateCelPageProps) => {
     <PageLayout
       title="Editer une cellule"
       description="Cette page permet d'éditer une cellule d'impact"
+      usr={usr}
     >
       <CustomBreadcrumb name="Editer une cellule" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

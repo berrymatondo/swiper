@@ -43,6 +43,7 @@ const EvangUpdatePage = async ({
     <PageLayout
       title="Modifier un rapport"
       description="Cette page permet de modifier un raport"
+      usr={usr}
     >
       <CustomBreadcrumb name="Modification rapport" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">

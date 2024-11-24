@@ -26,6 +26,7 @@ const DocsPage = async () => {
     <PageLayout
       title="Détails d'une cellule d'impact"
       description="Cette page donne toutes les informations sur une cellule d'impact"
+      usr={usr}
     >
       <div>
         <CustomBreadcrumb name={`Documentation ${usr?.role}`} />

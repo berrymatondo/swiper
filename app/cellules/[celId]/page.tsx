@@ -79,7 +79,7 @@ const CelDetailsPage = async ({
   const res = await getCel(params.celId);
   const cel = res?.data;
   const imag = `/images/cellules/${cel?.ban}.jpeg`;
-  console.log("Image", imag);
+  //console.log("Image", imag);
 
   const resu = await getPersonsCel(params.celId);
   const members = resu?.data;
@@ -182,6 +182,7 @@ usr={usr} */
     <PageLayout
       title="Détails d'une cellule d'impact"
       description="Cette page donne toutes les informations sur une cellule d'impact"
+      usr={usr}
     >
       <div>
         <CustomBreadcrumb
@@ -238,15 +239,16 @@ usr={usr} */
                 </div>
               )} */}
               <div className=" flex flex-col gap-2">
-                <div className="relative w-full">
+                <div className="relative h-40 w-full">
                   <Image
                     alt="home"
                     //src={imag}
                     layout="fixed"
                     src={cel?.ban ? imag : im}
-                    height={80}
-                    width={500}
-                    className="rounded-t-lg"
+                    fill
+                    /*       height={80}
+                    width={500} */
+                    className="rounded-t-lg object-cover"
                   />
 
                   <div className="bg-sky-900/30 absolute w-full h-full top-0 left-0"></div>

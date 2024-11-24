@@ -48,19 +48,20 @@ const CelDetails = ({ cel, userSession, img }: CelDetailsProps) => {
         onClick={() => router.push(`/cellules/${cel.id}`)}
         className="hover:cursor-pointer hover:bg-gradient-to-l hover:to-sky-200 hover:from-transparent bg-gradient-to-l to-sky-100 from-transparent m-1 border-2 rounded-lg overflow-hidden mb-2"
       >
-        <div className="relative w-full">
+        <div className="relative h-40 w-full">
           <Image
             alt="home"
             src={imm}
             layout="fixed"
-            height={80}
-            width={500}
-            className="rounded-t-lg"
+            fill
+            /*          height={80}
+            width={500} */
+            className="rounded-t-lg object-cover"
           />
 
           <div className="bg-sky-900/30 absolute w-full h-full top-0 left-0"></div>
 
-          <p className=" text-center text-5xl  font-bold my-2 boreder-4 border-black text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <p className=" text-center text-4xl  font-bold my-2 boreder-4 border-black text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             {cel?.name}
           </p>
         </div>

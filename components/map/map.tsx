@@ -194,7 +194,7 @@ export default function Map({ cels, haut, campus, zoom, show }: MapProps) {
           //zoom={zoom ? zoom : 10}
           zoom={8}
           scrollWheelZoom={true}
-          style={{ height: h, width: "100%" }}
+          style={{ height: h, width: "100%", zIndex: 10 }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
