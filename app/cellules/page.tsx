@@ -21,6 +21,7 @@ import CelDetails from "@/components/cel/celDetails";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getAllFilterCels } from "@/lib/_celActions";
 import { Badge } from "@/components/ui/badge";
+import def from "../../public/images/cellules/default.jpeg";
 
 const CellulesPage = async ({
   searchParams,
@@ -104,9 +105,9 @@ const CellulesPage = async ({
     } else {
       //return `/images/cellules/i${tmp}.jpeg`;
       // return `/images/cellules/i1.jpeg`;
-      console.log("hrererere", cel?.id);
+      //console.log("hrererere", cel?.id);
 
-      return `/images/cellules/i2.jpeg`;
+      return def;
     }
   };
 

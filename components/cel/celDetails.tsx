@@ -35,7 +35,7 @@ const CelDetails = ({ cel, userSession, img }: CelDetailsProps) => {
 
   //console.log("getRandomNumber", "i" + getRandomNumber());
 
-  console.log("cel image", img);
+  //console.log("cel image", img);
   //console.log("img", "i" + img);
   //const imm = "/images/cellules/i1.jpeg";
   const imm = img;
