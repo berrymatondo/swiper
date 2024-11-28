@@ -221,23 +221,7 @@ usr={usr} */
                   </span>
                 </p>
               </div> */}
-              {/*               {usr?.role == "ADMIN" && (
-                <div className="flex flex-col items-start">
-                  {cel?.persons &&
-                    cel?.persons
-                      ?.filter((per: Person) => per.isPilote == true)
-                      .map((person: Person) => (
-                        <div
-                          className="flex justify-start items-center gap-2"
-                          key={person.id}
-                        >
-                          <GiPoliceOfficerHead className="text-orange-600" />{" "}
-        
-                          {person.firstname}
-                        </div>
-                      ))}
-                </div>
-              )} */}
+
               <div className=" flex flex-col gap-2">
                 <div className="relative h-40 w-full">
                   <Image
@@ -283,6 +267,22 @@ usr={usr} */
                     <p>{cel?.hours}</p>
                   </div>
                 </div>
+                {usr?.role == "ADMIN" && (
+                  <div className=" px-2 flex flex-col items-start">
+                    {cel?.persons &&
+                      cel?.persons
+                        ?.filter((per: Person) => per.isPilote == true)
+                        .map((person: Person) => (
+                          <div
+                            className="flex justify-start items-center gap-2"
+                            key={person.id}
+                          >
+                            <GiPoliceOfficerHead className="text-orange-600" />{" "}
+                            {person.firstname}
+                          </div>
+                        ))}
+                  </div>
+                )}
                 {/* 
                 <div className="">
            

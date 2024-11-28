@@ -34,7 +34,9 @@ const EvangFormDelete = ({
     },
   });
 
-  const procesForm = async (values: z.infer<typeof evangFormSchema>) => {
+  const procesForm = async (values: any) => {
+    console.log("evangId,celluleId:", evangId, celluleId);
+
     const res = await deleteEvang(evangId, celluleId);
 
     if (!res) {
@@ -71,7 +73,15 @@ const EvangFormDelete = ({
               Annuler
             </Button>
 
-            <Button className="max-md:mt-4" type="submit">
+            <Button
+              onClick={async () => {
+                // console.log("ICCCCC");
+                await deleteEvang(evangId, celluleId);
+                router.push(`/cellules/${celluleId}`);
+              }}
+              className="max-md:mt-4"
+              type="button"
+            >
               Confirmer
             </Button>
           </div>

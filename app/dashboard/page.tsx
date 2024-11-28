@@ -16,6 +16,8 @@ import {
   MdAddCircle,
   MdAddCircleOutline,
   MdCalendarMonth,
+  MdCheckBox,
+  MdCheckBoxOutlineBlank,
   MdHome,
   MdHouse,
   MdPeople,
@@ -61,6 +63,7 @@ import ExportAllMeetings from "@/components/reports/expAllMeetings";
 import MeetingsByDate from "@/components/meeting/meetingsByDate";
 import EvangItem from "@/components/evang/evangItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import MissingReports from "@/components/dashboard/missingRep";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -253,6 +256,60 @@ const DashboardPage = async () => {
 
   //console.log("tmp4 ", tmp4);
 
+  // Rapports NON rendus
+  let resuu: any = [];
+
+  if (meetDates) {
+    //console.log("totmeet", totmeet);
+    //console.log("meetDates", meetDates);
+
+    //console.log("totcel", totcel);
+    const actCels = totcel?.filter((cel: any) => cel.statut == "ACTIF");
+    //console.log("totcel", actCels);
+
+    if (actCels) {
+      for (let i = 0; i < meetDates?.length; i++) {
+        let tempo: any = [];
+        for (let j = 0; j < actCels?.length; j++) {
+          let fnd = totmeet?.find(
+            (el: any) =>
+              el.date == meetDates[i].date && el.celluleId == actCels[j].id
+          );
+
+          tempo.push({
+            id: actCels[j].id,
+            name: actCels[j].name,
+            //  date: meetDates[i].date,
+            sent: fnd ? true : false,
+            tot: fnd ? +fnd?.nHom + +fnd?.nFem + +fnd?.nEnf : 0,
+          });
+        }
+        resuu.push({ date: meetDates[i].date, rap: tempo });
+        // console.log("meetDates[i]", meetDates[i].date);
+
+        //   console.log("TEMP", tempo);
+      }
+
+      /*       for (let j = 0; j < actCels?.length; j++) {
+        for (let i = 0; i < meetDates?.length; i++) {
+          let fnd = totmeet?.find(
+            (el: any) =>
+              el.date == meetDates[i].date && el.celluleId == actCels[j].id
+          );
+
+          resuu.push({
+            id: actCels[j].id,
+            name: actCels[j].name,
+            date: meetDates[i].date,
+            sent: fnd ? true : false,
+          });
+        }
+      } */
+    }
+  }
+
+  //console.log("resu", resuu);
+
   if (usr?.role != "ADMIN" && usr?.role != "VISITOR") return <NotAccess />;
 
   return (
@@ -437,7 +494,7 @@ const DashboardPage = async () => {
             usr?.role == "PILOTE" ||
             usr?.role == "VISITOR") && (
             /*             <CelMembers members={members} />
-             */ <div className="md:flex md:justify-between md:gap-4">
+             */ <div className="md:flex md:flex-col md:justify-between md:gap-4">
               {/*               <div className="md:hidden">
                 <ParticipationGraph
                   meetings={tmp2}
@@ -446,6 +503,7 @@ const DashboardPage = async () => {
                   data={tmp3}
                 />
               </div> */}
+              <MissingReports resuu={resuu} />
               <TabsDemo
                 meetings={totmeet}
                 name={cel?.name}
