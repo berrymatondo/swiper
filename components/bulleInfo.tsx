@@ -4,7 +4,7 @@ import { MdClose } from "react-icons/md";
 import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import eva from "../public/dom.png";
+import eva from "../public/job.jpg";
 import Link from "next/link";
 
 const BulleInfo = () => {
@@ -26,20 +26,18 @@ const BulleInfo = () => {
             className="flex flex-col mt-2  hover:cursor-pointer hover:bg-sky-800/90"
             onClick={() =>
               //router.push("https://www.youtube.com/watch?v=dpULmVf87DM")
-              window.open("https://www.youtube.com/watch?v=q7qujZC9e04")
+              window.open("https://www.youtube.com/watch?v=8sNseYPszPs&t=34s")
             }
           >
             <Badge className="flex flex-col  bg-sky-600">
               Revoir le Culte du
               <span className="text-yellow-400 font-semibold text-sm">
-                24/11/2024
+                30/11/2024
               </span>
             </Badge>
             <div className="flex mt-2">
               <p className="text-center font-medium text-xs">
-                {
-                  "PROFESSION GAGNEURS D'ÂMES: TU DOIS ACCUMULER DE L'EXPÉRIENCE"
-                }
+                {"CULTE SPECIAL DE CELEBRATION ET DE GUERISON"}
               </p>
               <div className="w-28">
                 <Image
@@ -52,7 +50,7 @@ const BulleInfo = () => {
               </div>
             </div>
             <p className="text-center mt-2 text-xs  font-medium text-yellow-500">
-              Pst Dominique Mbog
+              Dr Job Mukadi
             </p>
           </div>
         </div>
@@ -77,7 +75,7 @@ const BulleInfo = () => {
               >
                 <p>ICC Mon Eglise</p>
                 <span className="text-yellow-400 font-semibold text-sm">
-                  24/11/2024
+                  30/11/2024
                 </span>
               </Link>
             </Badge>
