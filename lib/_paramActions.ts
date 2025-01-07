@@ -18,10 +18,13 @@ export const addParam = async (data: Inputs) => {
         data: {
           label: data.label ? data.label : "x",
           isActive: data.isActive,
+          value1: data.value1,
+          value2: data.value2,
+          value3: data.value3,
         },
       });
 
-      revalidatePath("/meetings");
+      revalidatePath("/parameters");
 
       return {
         success: true,
@@ -49,10 +52,13 @@ export const updateParam = async (data: Inputs) => {
         },
         data: {
           isActive: data.isActive,
+          value1: data.value1,
+          value2: data.value2,
+          value3: data.value3,
         },
       });
 
-      revalidatePath("/meetings");
+      revalidatePath("/parameters");
 
       return {
         success: true,
@@ -74,7 +80,7 @@ export const getAllParameters = async () => {
   try {
     const zones = await prisma.parametre.findMany();
 
-    revalidatePath("/meetings");
+    revalidatePath("/parameters");
 
     return {
       success: true,

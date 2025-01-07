@@ -8,6 +8,7 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { GrUserAdmin } from "react-icons/gr";
 import { Label } from "@/components/ui/label";
 import BulleInfo from "@/components/bulleInfo";
+import { getParamByLabel } from "@/lib/_paramActions";
 
 const items = [
   { id: 1, title: "Plus d'informations" },
@@ -15,10 +16,13 @@ const items = [
   { id: 3, title: "Espace Admin" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const LASTSUNDAY = await getParamByLabel("LASTSUNDAY");
+  const LASTWORSHIP = await getParamByLabel("LASTWORSHIP");
+
   return (
     <main className="relative text-white flex flex-col md:flex-row gap-10 justify-center items-center  h-screen md:px-2">
-      <BulleInfo />
+      <BulleInfo ls={LASTSUNDAY} lw={LASTWORSHIP} />
 
       <Image
         alt="bcg"

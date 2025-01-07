@@ -3,17 +3,17 @@ import Upload from "@/components/upload";
 import { getAllParameters } from "@/lib/_paramActions";
 import React from "react";
 
-const MeetingsPage = async () => {
+const ParametersPage = async () => {
   const paramList = await getAllParameters();
-  console.log("paramList", paramList?.data);
+  console.log("paramList ", paramList?.data);
 
   return (
     <div>
-      {/*       <ParamForm paramList={paramList?.data} />
+      <ParamForm paramList={paramList?.data} />
+      {/*       <Upload />
        */}{" "}
-      <Upload />
     </div>
   );
 };
 
-export default MeetingsPage;
+export default ParametersPage;

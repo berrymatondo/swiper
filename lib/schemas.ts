@@ -232,4 +232,7 @@ export const paramSchema = z.object({
   id: z.string().optional(),
   label: z.string().optional(),
   isActive: z.boolean().optional(),
+  value1: z.string().optional(),
+  value2: z.string().optional(),
+  value3: z.string().optional(),
 });

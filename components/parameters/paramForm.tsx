@@ -7,7 +7,7 @@ type ParamFormProps = {
 const ParamForm = ({ paramList }: ParamFormProps) => {
   console.log("ParamList", paramList);
 
-  return <div>paramForm</div>;
+  return <div>paramForm R</div>;
 };
 
 export default ParamForm;
