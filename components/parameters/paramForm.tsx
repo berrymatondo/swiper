@@ -10,7 +10,7 @@ const ParamForm = ({ paramList }: ParamFormProps) => {
   return (
     <div>
       {paramList.map((pr: any) => (
-        <div>
+        <div key={pr.label}>
           {pr.label} - {pr.value1}
         </div>
       ))}
