@@ -69,46 +69,7 @@ const credentialsConfig = CredentialsProvider({
   },
 });
 
-const config: NextAuthConfig = {
-  providers: [credentialsConfig],
-  callbacks: {
-    async jwt({ token, user }) {
-      // Ajouter une propriété pour gérer l'expiration
-      if (user) {
-        token.user = user;
-        token.expires = Date.now() + 2 * 60 * 1000; // Expiration après 2 minutes
-      }
-
-      // Vérifier si le token a expiré
-      if (typeof token.expires === "number" && Date.now() > token.expires) {
-        throw new Error("Token expiré");
-      }
-
-      return token;
-    },
-
-    async session({ session, token }) {
-      // Vérifier si le token a expiré
-      /*       if (typeof token.expires === "number"  && Date.now() > token.expires) {
-        session.user = null as any;
-        return null;
-      } */
-
-      session.user = token.user as any;
-      return session;
-    },
-  },
-  trustHost: true,
-  pages: {
-    signIn: "/auth/login",
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 2 * 60, // Durée de validité de la session en secondes (2 minutes)
-  },
-};
-
-/* const config = {
+const config = {
   providers: [credentialsConfig],
   callbacks: {
     authorized({ request, auth }) {
@@ -132,5 +93,5 @@ const config: NextAuthConfig = {
     strategy: "jwt",
   },
 } satisfies NextAuthConfig;
- */
+
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
