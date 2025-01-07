@@ -7,7 +7,15 @@ type ParamFormProps = {
 const ParamForm = ({ paramList }: ParamFormProps) => {
   console.log("ParamList", paramList);
 
-  return <div>paramForm R</div>;
+  return (
+    <div>
+      {paramList.map((pr: any) => (
+        <div>
+          {pr.label} - {pr.value1}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default ParamForm;

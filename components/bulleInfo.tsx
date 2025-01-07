@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Badge } from "./ui/badge";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import eva from "../public/job.jpg";
 import Link from "next/link";
+import { getParamByLabel } from "@/lib/_paramActions";
 
 type BulleInfoProps = {
   ls: any;
@@ -14,12 +15,31 @@ type BulleInfoProps = {
 const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
   const [close, setClose] = useState(false);
   const [close2, setClose2] = useState(false);
+  const [embed2, setEmbed2] = useState<any>("");
+  const [date2, setDate2] = useState<any>("");
+  const [videoId, setVideoId] = useState<any>("");
   const router = useRouter();
 
-  const videoId = lw?.data?.value1.split("=")[1];
+  //const videoId = lw?.data?.value1.split("=")[1];
+  //console.log("videoId", videoId);
 
-  const lien = "https://www.youtube.com/watch?v=" + videoId;
-  const embeded = "https://www.youtube.com/embed/" + videoId;
+  //const lien = "https://www.youtube.com/watch?v=" + videoId;
+  //const embeded = "https://www.youtube.com/embed/" + videoId;
+
+  useEffect(() => {
+    const getParams = async () => {
+      const res = await getParamByLabel("LASTWORSHIP");
+      //console.log("res", res?.data?.value1?.split("=")[1]);
+      setEmbed2(res?.data?.value1);
+      //console.log("id", res?.data?.value1);
+      const res2 = await getParamByLabel("LASTSUNDAY");
+      console.log("res", res?.data?.value1?.split("=")[1]);
+      setVideoId(res?.data?.value1?.split("=")[1]);
+      setDate2(res2?.data?.value1);
+      console.log("date", res2?.data?.value1);
+    };
+    getParams();
+  }, []);
 
   return (
     <div className="flex flex-col gap-4 absolute top-2 left-2">
@@ -65,12 +85,12 @@ const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
             <a
               className="absolute block top-0 left-0 w-full h-full z-10 bg-transparent"
               target="_blank"
-              href={lien}
+              href={embed2}
             ></a>
             <iframe
               className="w-full h-full"
               title="Revoir dernier culte"
-              src={embeded}
+              src={`https://www.youtube.com/embed/${videoId}`}
             />
           </div>
         </div>
@@ -89,7 +109,7 @@ const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
                 >
                   <p>ICC Mon Eglise</p>
                   <span className="text-yellow-400 font-semibold text-xs">
-                    {ls?.data?.value1}
+                    {date2}
                   </span>
                 </Link>
               </Badge>

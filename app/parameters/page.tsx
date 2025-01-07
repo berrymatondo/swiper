@@ -5,7 +5,7 @@ import React from "react";
 
 const ParametersPage = async () => {
   const paramList = await getAllParameters();
-  console.log("paramList ", paramList?.data);
+  //console.log("paramList ", paramList?.data);
 
   return (
     <div>
