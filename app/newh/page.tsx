@@ -78,7 +78,7 @@ const NewHomePage = async () => {
           </div>
           <div className="text-neutral-600">
             <p className="text-center">
-              Les cellules de maison sont des cellules de l'Eglise{" "}
+              {"Les cellules de maison sont des cellules de l'Eglise "}
               <Link
                 href="https://impactcentrechretien.com"
                 target="_blank"
@@ -93,12 +93,12 @@ const NewHomePage = async () => {
               <span className="text-sky-900 font-bold">
                 tous les jeudis de 19h00 à 20h15
               </span>{" "}
-              dans les maisons hôtes pour s'édifier{" "}
+              {"dans les maisons hôtes pour s'édifier "}
             </p>
             <p className="text-center">
-              {" "}
-              afin d'influencer leurs villes et leurs quartiers avec les valeurs
-              de Christ !
+              {
+                "afin d'influencer leurs villes et leurs quartiers avec les valeurs          de Christ ! "
+              }
             </p>
             <div className="bg-orange-400/20 -z-10 rounded-xl h-full absolute left-0 top-0 right-1/2 bottom-0"></div>
           </div>
@@ -141,8 +141,7 @@ const NewHomePage = async () => {
               target="_blank"
               className="text-orange-700 font-bold italic hover:text-sky-700"
             >
-              {" "}
-              Impact Centre Chrétien.
+              {" Impact Centre Chrétien."}
             </Link>
           </p>{" "}
           <p className="text-center ">
@@ -150,12 +149,12 @@ const NewHomePage = async () => {
             <span className="text-sky-900 font-bold">
               tous les jeudis de 19h00 à 20h15
             </span>{" "}
-            dans les maisons hôtes pour s'édifier{" "}
+            {" dans les maisons hôtes pour s'édifier "}
           </p>
           <p className="text-center">
-            {" "}
-            afin d'influencer leurs villes et leurs quartiers avec les valeurs
-            de Christ !
+            {
+              "afin d'influencer leurs villes et leurs quartiers avec les valeurs             de Christ ! "
+            }
           </p>
           <Image
             alt="im1"
