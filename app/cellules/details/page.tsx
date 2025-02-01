@@ -40,6 +40,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import ExpAllCel from "@/components/reports/expAllCel";
+import DetailedPDF from "@/components/detailedpdf";
 
 const DetailsPage = async () => {
   const session = await auth();
@@ -68,9 +69,12 @@ const DetailsPage = async () => {
         />
 
         <div className="p-1">
-          <ExpAllCel celss={cellules} />
+          <div className="flex items-center gap-2">
+            <ExpAllCel celss={cellules} />
+            <DetailedPDF idd="mytable" />
+          </div>
           <ScrollArea className="h-[600px]  rounded-md border">
-            <div>
+            <div id="mytable">
               <TableDemo cellules={cellules} />
               {/*               <ListCelComplet cellules={cellules} />
                */}{" "}
@@ -113,16 +117,21 @@ type TableDemoProps = {
 };
 
 const TableDemo = ({ cellules }: TableDemoProps) => {
+  //  console.log("cellules ", cellules);
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[150px]">Cellule</TableHead>
+          <TableHead className="max-md:hidden">Zone</TableHead>
           <TableHead className="max-md:hidden">Pilote</TableHead>
           <TableHead className="max-md:hidden">Hôte</TableHead>
-          <TableHead className="max-md:hidden">Adresse</TableHead>
+          <TableHead className="max-md:hidden">Evangélisation</TableHead>
+          {/*           <TableHead className="max-md:hidden">Adresse</TableHead>
+           */}{" "}
           <TableHead className="max-md:hidden">Whatsapp</TableHead>
-          <TableHead className="max-md:hidden">Statut</TableHead>
+          <TableHead className="max-md:hidden text-right">Statut</TableHead>
           {/*           <TableHead className="text-right">Statut</TableHead>
            */}{" "}
         </TableRow>
@@ -133,14 +142,12 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
           .map((cel: any, index: number) => (
             <TableRow key={cel?.id}>
               <TableCell className="font-medium max-md:bg-sky-100 max-md:my-1 max-md:border max-md:rounded-lg max-md:flex max-md:flex-col max-md:gap-2">
-                <Badge className="bg-sky-600 ">
-                  <Link
-                    className="text-white text-sm w-full text-center"
-                    href={`/cellules/${cel?.id}`}
-                  >
-                    {cel?.name}
-                  </Link>
-                </Badge>
+                <Link
+                  className="text-sky-600 text-sm w-full text-center"
+                  href={`/cellules/${cel?.id}`}
+                >
+                  {cel?.name}
+                </Link>
                 <div className="md:hidden">
                   {cel?.persons
                     .filter(
@@ -174,11 +181,11 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                       </div>
                     ))}
                 </div>
-                <div className="md:hidden">
+                {/*                 <div className="md:hidden">
                   {cel?.address?.street} {cel?.address?.number}{" "}
                   {cel?.address?.box},{cel?.address?.postalCode}{" "}
                   {cel?.address?.municipality}
-                </div>
+                </div> */}
                 <div className="text-right md:hidden">
                   {" "}
                   {cel?.grpWhatsApp ? (
@@ -188,6 +195,11 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                   )}
                 </div>
               </TableCell>
+
+              <TableCell className="whitespace-nowrap">
+                {cel?.zone?.name}
+              </TableCell>
+
               <TableCell className="max-md:hidden">
                 {cel?.persons
                   .filter((pp: any) => pp?.isPilote == true)
@@ -215,10 +227,29 @@ const TableDemo = ({ cellules }: TableDemoProps) => {
                   ))}
               </TableCell>
               <TableCell className="max-md:hidden">
+                <p>
+                  <span>{cel?.zone?.evang?.firstname}</span>{" "}
+                  <span>{cel?.zone?.evang?.lastname}</span>
+                </p>
+                <p>{cel?.zone?.evang?.mobile}</p>
+                {/*                 {cel.persons
+                  .filter((pp: any) => pp?.isEvang == true)
+                  .map((per: any, index: number) => (
+                    <div key={index}>
+                      <p>
+                        {per?.firstname}{" "}
+                        <strong className="uppercase">{per?.lastname}</strong>
+                      </p>
+                      <p>{per?.mobile}</p>
+                    </div>
+                  ))} */}
+              </TableCell>
+
+              {/*               <TableCell className="max-md:hidden">
                 {cel?.address?.street} {cel?.address?.number}{" "}
                 {cel?.address?.box},{cel?.address?.postalCode}{" "}
                 {cel?.address?.municipality}
-              </TableCell>
+              </TableCell> */}
               <TableCell className="max-md:hidden">
                 {" "}
                 {cel?.grpWhatsApp ? (

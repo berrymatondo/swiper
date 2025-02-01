@@ -64,6 +64,7 @@ import MeetingsByDate from "@/components/meeting/meetingsByDate";
 import EvangItem from "@/components/evang/evangItem";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import MissingReports from "@/components/dashboard/missingRep";
+import DetailedPDF from "@/components/detailedpdf";
 
 const DashboardPage = async () => {
   const session = await auth();
@@ -317,11 +318,13 @@ const DashboardPage = async () => {
       title="Détails d'une cellule d'impact"
       description="Cette page donne toutes les informations sur une cellule d'impact"
     >
-      <div>
+      <div id="rapport">
         <CustomBreadcrumb
           name={"Dashboard"}
           //   zoneName={cel?.zone?.name as string}
         />
+
+        <DetailedPDF idd="rapport" />
 
         <div className="flex max-md:flex-col  md:justify-between">
           <div className="flex md:w-1/2">
@@ -503,7 +506,9 @@ const DashboardPage = async () => {
                   data={tmp3}
                 />
               </div> */}
-              <MissingReports resuu={resuu} />
+              <div data-html2canvas-ignore>
+                <MissingReports resuu={resuu} />
+              </div>
               <TabsDemo
                 meetings={totmeet}
                 name={cel?.name}

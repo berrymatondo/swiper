@@ -17,8 +17,11 @@ export const personFormSchema = z.object({
   isPilote: z.boolean().default(false),
   isRespo: z.boolean().default(false),
   isGest: z.boolean().default(false),
+  isEvang: z.boolean().default(false),
+  isSuper: z.boolean().default(false),
   celluleId: z.string().optional(),
   addressId: z.string().optional(),
+  zoneId: z.string().optional(),
 });
 
 export const zoneFormSchema = z.object({
@@ -27,7 +30,8 @@ export const zoneFormSchema = z.object({
     message: "Le nom du secteur est obligatoire",
   }),
   status: z.string(),
-  respoId: z.number().optional(),
+  respoId: z.string().optional(),
+  personId: z.string().optional(),
 });
 
 export const celFormSchema = z.object({

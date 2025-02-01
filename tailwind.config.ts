@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
-
-const config = {
+import colors from "tailwindcss/colors";
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -60,29 +63,50 @@ const config = {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        scroll: {
+          to: { transform: "translate(calc(-50% - 0.5rem))" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        scroll:
+          "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
 
 export default config;
+
+function addVariablesForColors({
+  addBase,
+  theme,
+}: {
+  addBase: (styles: Record<string, any>) => void;
+  theme: (path: string) => Record<string, string>;
+}) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+    Object.entries(allColors)
+      .map(([key, val]) => {
+        if (typeof val === "string") {
+          return [`--${key}`, val];
+        }
+        return [];
+      })
+      .filter(Boolean)
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}

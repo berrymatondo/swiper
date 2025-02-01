@@ -15,18 +15,18 @@ type BulleInfoProps = {
 const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
   const [close, setClose] = useState(false);
   const [close2, setClose2] = useState(false);
-  const [embed2, setEmbed2] = useState<any>("");
+  /*   const [embed2, setEmbed2] = useState<any>("");
   const [date2, setDate2] = useState<any>("");
-  const [videoId, setVideoId] = useState<any>("");
+  const [videoId, setVideoId] = useState<any>(""); */
   const router = useRouter();
 
-  //const videoId = lw?.data?.value1.split("=")[1];
+  const videoId = lw?.data?.value1.split("=")[1];
   //console.log("videoId", videoId);
 
-  //const lien = "https://www.youtube.com/watch?v=" + videoId;
-  //const embeded = "https://www.youtube.com/embed/" + videoId;
+  const lien = "https://www.youtube.com/watch?v=" + videoId;
+  const embeded = "https://www.youtube.com/embed/" + videoId;
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const getParams = async () => {
       const res = await getParamByLabel("LASTWORSHIP");
       //console.log("res", res?.data?.value1?.split("=")[1]);
@@ -39,7 +39,7 @@ const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
       console.log("date", res2?.data?.value1);
     };
     getParams();
-  }, []);
+  }, []); */
 
   return (
     <div className="flex flex-col gap-4 absolute top-2 left-2">
@@ -85,12 +85,13 @@ const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
             <a
               className="absolute block top-0 left-0 w-full h-full z-10 bg-transparent"
               target="_blank"
-              href={embed2}
+              href={lien}
             ></a>
             <iframe
               className="w-full h-full"
               title="Revoir dernier culte"
-              src={`https://www.youtube.com/embed/${videoId}`}
+              src={embeded}
+              // src={`https://www.youtube.com/embed/${videoId}`}
             />
           </div>
         </div>
@@ -109,7 +110,7 @@ const BulleInfo = ({ ls, lw }: BulleInfoProps) => {
                 >
                   <p>ICC Mon Eglise</p>
                   <span className="text-yellow-400 font-semibold text-xs">
-                    {date2}
+                    {ls?.data?.value1}
                   </span>
                 </Link>
               </Badge>

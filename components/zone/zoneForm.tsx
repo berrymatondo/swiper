@@ -25,13 +25,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { addZone, updateZone } from "@/lib/_zoneActions";
 import { useRouter } from "next/navigation";
-import { Zone, ZonesStatuses } from "@prisma/client";
+import { Person, Zone, ZonesStatuses } from "@prisma/client";
 
 type ZoneFormProps = {
   zone?: any;
+  persons?: any;
 };
 
-export const ZoneForm = ({ zone }: ZoneFormProps) => {
+export const ZoneForm = ({ zone, persons }: ZoneFormProps) => {
+  // console.log("Zone ", zone);
+  // console.log("Person", persons);
+
   const router = useRouter();
 
   const form = useForm<z.infer<typeof zoneFormSchema>>({
@@ -39,7 +43,8 @@ export const ZoneForm = ({ zone }: ZoneFormProps) => {
     defaultValues: {
       id: zone?.id ? zone.id : undefined,
       name: zone?.name ? zone?.name : "",
-      respoId: zone?.respoId ? zone?.respoId : undefined,
+      respoId: zone?.respoId ? zone?.respoId.toString() : undefined,
+      personId: zone?.evangId ? zone?.evangId.toString() : undefined,
       status: zone?.statut ? zone?.statut : "INACTIF",
     },
   });
@@ -127,6 +132,78 @@ export const ZoneForm = ({ zone }: ZoneFormProps) => {
                                 )
                               )
                             : null}
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+            )}
+
+            {zone && (
+              <FormField
+                control={form.control}
+                name="respoId"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Superviseur des cellules </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger id="framework">
+                          <SelectValue placeholder="Sélectionner une personne" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {persons
+                            ?.filter((p: Person) => p.isSuper == true)
+                            ?.map((per: Person) => (
+                              <SelectItem
+                                key={per.id}
+                                value={per.id.toString()}
+                              >
+                                {per.firstname} {per.lastname}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
+              />
+            )}
+
+            {zone && (
+              <FormField
+                control={form.control}
+                name="personId"
+                render={({ field }) => {
+                  return (
+                    <FormItem>
+                      <FormLabel>Superviseur évangélisation </FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger id="framework">
+                          <SelectValue placeholder="Sélectionner une personne" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                          {persons
+                            ?.filter((p: Person) => p.isEvang == true)
+                            ?.map((per: Person) => (
+                              <SelectItem
+                                key={per.id}
+                                value={per.id.toString()}
+                              >
+                                {per.firstname} {per.lastname}
+                              </SelectItem>
+                            ))}
                         </SelectContent>
                       </Select>
 

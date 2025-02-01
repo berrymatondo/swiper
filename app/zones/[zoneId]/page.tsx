@@ -68,7 +68,7 @@ const ZoneDetailsPage = async ({ params }: ZoneDetailsPageProps) => {
               <Link
                 key={cell.id}
                 href={`/cellules/${cell.id}`}
-                className="flex flex-col shadow-md bg-gradient-to-r from-blue-100 to-purple-300 my-1 rounded-lg p-1 "
+                className="flex flex-col shadow-md bg-gradient-to-r from-gray-100 to-white my-1 rounded-lg p-1 "
               >
                 <div className="p-2 ">
                   <div className="flex items-center  gap-2 mb-2 ">
@@ -94,12 +94,12 @@ const ZoneDetailsPage = async ({ params }: ZoneDetailsPageProps) => {
                               ""
                             )}
                           </span>
-                          <Link
+                          {/*                           <Link
                             href={`/cellules/${cell.id}/newmbr`}
                             className="max-md:text-xs ml-2 p-1 px-2 rounded-full bg-blue-800 text-sm text-white"
                           >
                             Rejoindre
-                          </Link>{" "}
+                          </Link>{" "} */}
                         </p>
                       </p>
                     </div>
@@ -107,14 +107,19 @@ const ZoneDetailsPage = async ({ params }: ZoneDetailsPageProps) => {
 
                   <div className=" gap-2 mb-2">
                     {cell?.persons &&
-                      cell?.persons?.map((person: Person) => (
-                        <p className="flex items-center gap-2" key={person.id}>
-                          <FaMobileAlt /> {person.mobile} ({person.firstname})
-                        </p>
-                      ))}
+                      cell?.persons
+                        ?.filter((per: Person) => per.isPilote == true)
+                        ?.map((person: Person) => (
+                          <p
+                            className="flex items-center gap-2"
+                            key={person.id}
+                          >
+                            <FaMobileAlt /> {person.mobile} ({person.firstname})
+                          </p>
+                        ))}
                   </div>
 
-                  <div className="flex  items-start gap-2  ">
+                  {/*                   <div className="flex  items-start gap-2  ">
                     <BiMap />
                     <div className="flex max-md:flex-col md:gap-2 items-start">
                       <p>
@@ -126,7 +131,7 @@ const ZoneDetailsPage = async ({ params }: ZoneDetailsPageProps) => {
                         {cell?.address?.municipality}
                       </p>
                     </div>
-                  </div>
+                  </div> 
 
                   <div className="flex gap-4">
                     <div className=" flex items-center gap-2 mb-2">
@@ -137,7 +142,7 @@ const ZoneDetailsPage = async ({ params }: ZoneDetailsPageProps) => {
                       <GoClock />
                       <p>{cell?.hours}</p>
                     </div>
-                  </div>
+                  </div>*/}
                 </div>
               </Link>
             ))}

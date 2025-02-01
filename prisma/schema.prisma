@@ -36,6 +36,7 @@ enum UserRoles {
  VISITOR
  PILOTE
  RESPO
+ EVANG
  ADMIN
 }
 
@@ -67,6 +68,9 @@ model Zone {
 
   respoId Int?
   respo Person? @relation(fields: [respoId], references: [id]) 
+
+  evangId Int?
+  evang Person? @relation("evang", fields: [evangId], references: [id]) 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -132,7 +136,11 @@ model Person {
   isPilote Boolean? @default(false)
   isRespo Boolean? @default(false)
   isGest Boolean? @default(false)
+  isEvang Boolean? @default(false)
+  isSuper Boolean? @default(false)
   zones Zone[]
+  evangs Zone[] @relation("evang")
+  
   
   celluleId Int?
   cellule Cellule? @relation(fields: [celluleId], references: [id]) 

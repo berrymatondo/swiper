@@ -28,15 +28,15 @@ const UpdatePerPage = async ({ params }: UpdatePerPageProps) => {
   const usr: any = session?.user;
 
   const res = await getPerson(params.personId);
-  const per = await res?.data;
+  const per = res?.data;
 
   const res1 = await getAllCels();
-  const cels = await res1?.data;
+  const cels = res1?.data;
 
   //console.log("CELS:", cels);
 
-  //const res1 = await getAllZones();
-  //const allZones = await res1?.data;
+  const res2 = await getAllZones();
+  const zones = res2?.data;
 
   //console.log("params.zoneId", params.zoneId);
   //console.log("personId", params.personId);
@@ -51,7 +51,7 @@ const UpdatePerPage = async ({ params }: UpdatePerPageProps) => {
     >
       <CustomBreadcrumb name="Editer un membre" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <PersonForm mbr={per} cels={cels} userSession={usr} />
+        <PersonForm mbr={per} cels={cels} userSession={usr} zones={zones} />
       </div>
     </PageLayout>
   );

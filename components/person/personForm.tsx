@@ -34,21 +34,25 @@ import { addPerson, updatePerson } from "@/lib/_personActions";
 type PersonFormProps = {
   mbr?: any;
   cels?: any;
+  zones?: any;
   celId?: any;
+  zId?: any;
   userSession: any;
 };
 
 export const PersonForm = ({
   cels,
+  zones,
   mbr,
   celId,
+  zId,
   userSession,
 }: PersonFormProps) => {
   const router = useRouter();
-  const [zones, setZones] = useState<any>();
+  //const [zones, setZones] = useState<any>();
   const [addresses, setAddresses] = useState<any>();
 
-  //console.log("allZones:", allZones);
+  //console.log("allZones:", zones);
   //console.log("mbr:", mbr);
   //  console.log("cels:", cels);
 
@@ -65,11 +69,16 @@ export const PersonForm = ({
         : mbr?.celluleId
         ? mbr?.celluleId.toString()
         : "",
+
+      zoneId: zId ? zId.toString() : mbr?.zoneId ? mbr?.zoneId.toString() : "",
+
       isIcc: mbr?.isIcc ? mbr?.isIcc : false,
       isStar: mbr?.isStar ? mbr?.isStar : false,
       isPilote: mbr?.isPilote ? mbr?.isPilote : false,
       isRespo: mbr?.isRespo ? mbr?.isRespo : false,
       isGest: mbr?.isGest ? mbr?.isGest : false,
+      isEvang: mbr?.isEvang ? mbr?.isEvang : false,
+      isSuper: mbr?.isSuper ? mbr?.isSuper : false,
       /*       id: cel?.id ? cel.id : undefined,
       name: cel?.name ? cel?.name : "",
       days: cel?.days ? cel?.days : "Tous les jeudis",
@@ -111,10 +120,11 @@ export const PersonForm = ({
   const pilote = form.watch("isPilote");
   const respo = form.watch("isRespo");
   const gest = form.watch("isGest");
+  const evang = form.watch("isEvang");
   //const sel = form.watch("giId");
 
   const procesForm = async (values: z.infer<typeof personFormSchema>) => {
-    //console.log("Value:", values);
+    console.log("Value:", values);
     // console.log("Zone:", zone);
 
     let res;
@@ -387,6 +397,90 @@ export const PersonForm = ({
                   }}
                 />
               )}
+
+              {!celId && icc && star && userSession?.role == "ADMIN" && (
+                <FormField
+                  control={form.control}
+                  name="isEvang"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="w-full">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label className="ml-2" htmlFor="isStar">
+                          {
+                            "Etes-vous superviseur des sorties d'évangélisation?"
+                          }
+                        </Label>
+
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+              )}
+
+              {!celId && icc && star && userSession?.role == "ADMIN" && (
+                <FormField
+                  control={form.control}
+                  name="isSuper"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="w-full">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <Label className="ml-2" htmlFor="isStar">
+                          {"Etes-vous superviseur des cellules ?"}
+                        </Label>
+
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+              )}
+
+              {/*               {evang && (
+                <FormField
+                  control={form.control}
+                  name="zoneId"
+                  render={({ field }) => {
+                    return (
+                      <FormItem>
+                        <FormLabel>Zone de la cellule </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger id="framework">
+                            <SelectValue placeholder="Sélectionner une zone" />
+                          </SelectTrigger>
+                          <SelectContent position="popper">
+                            {zones.map((zone: Zone) => (
+                              <SelectItem
+                                key={zone.id}
+                                value={zone.id.toString()}
+                              >
+                                {zone.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+
+                        <FormMessage />
+                      </FormItem>
+                    );
+                  }}
+                />
+              )} */}
             </div>
             {/*             {zones?.length > 0 && (
              */}{" "}

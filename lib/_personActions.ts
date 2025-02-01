@@ -24,6 +24,8 @@ export const addPerson = async (data: Inputs) => {
           isStar: data.isStar,
           isPilote: data.isPilote,
           isGest: data.isGest,
+          isEvang: data.isEvang,
+          isSuper: data.isSuper,
           isRespo: data.isRespo,
           celluleId: data.celluleId ? +data.celluleId : undefined,
           addressId: data.addressId ? +data.addressId : undefined,
@@ -47,7 +49,7 @@ export const addPerson = async (data: Inputs) => {
 
 // UPDATE PERSON
 export const updatePerson = async (data: Inputs) => {
-  // console.log("update PERSONNNNNN:", data);
+  console.log("update PERSONNNNNN:", data);
 
   const resut = personFormSchema.safeParse(data);
   if (resut.success) {
@@ -67,6 +69,8 @@ export const updatePerson = async (data: Inputs) => {
           isPilote: data.isPilote,
           isRespo: data.isRespo,
           isGest: data.isGest,
+          isEvang: data.isEvang,
+          isSuper: data.isSuper,
           //statut: data.status as CelStatuses,
           /*           respoId: data.respoId ? +data.respoId : undefined,
            */

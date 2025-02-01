@@ -8,14 +8,17 @@ const SearchPer = ({
   search,
   pilote,
   hote,
+  evang,
 }: {
   search?: string;
   pilote?: boolean;
   hote?: boolean;
+  evang?: boolean;
 }) => {
   const [text, setText] = useState(search);
   const [pilotee, setPilotee] = useState(pilote);
   const [hotee, setHotee] = useState(hote);
+  const [evange, setEvange] = useState(evang);
   const [query] = useDebounce(text, 300);
   const router = useRouter();
 
@@ -29,10 +32,13 @@ const SearchPer = ({
       return;
     }
 
-    if (!query) router.push(`/members?pilote=${pilotee}&hote=${hotee}`);
+    if (!query)
+      router.push(`/members?pilote=${pilotee}&hote=${hotee}&evang=${evange}`);
     else
-      router.push(`/members?search=${query}&pilote=${pilotee}&hote=${hotee}`);
-  }, [router, query, pilotee, hotee]);
+      router.push(
+        `/members?search=${query}&pilote=${pilotee}&hote=${hotee}&evang=${evange}`
+      );
+  }, [router, query, pilotee, hotee, evange]);
 
   return (
     <div className="flex gap-4">
@@ -56,6 +62,14 @@ const SearchPer = ({
           checked={hotee}
         />
         <label>Hôte</label>
+      </div>
+      <div className="flex items-center gap-1">
+        <input
+          type="checkbox"
+          onChange={(e) => setEvange(e.target.checked)}
+          checked={evange}
+        />
+        <label>Evangélisation</label>
       </div>
     </div>
   );

@@ -52,11 +52,17 @@ export const getAllCels = async () => {
       include: {
         address: true,
         persons: true,
+        zone: {
+          include: {
+            evang: true,
+          },
+        },
       },
       orderBy: { name: "asc" },
     });
 
-    revalidatePath("/cellules");
+    //revalidatePath("/cellules");
+    // console.log("cels", cels);
 
     return {
       success: true,

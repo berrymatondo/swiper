@@ -76,6 +76,14 @@ const navList = [
     color: "text-sky-700",
     right: "PILOTE",
   },
+  {
+    id: 9,
+    name: "Paramètres",
+    href: "/parameters",
+    icon: <MdEditDocument size={20} />,
+    color: "text-sky-700",
+    right: "ADMIN",
+  },
 ];
 
 type MobileNavProps = {

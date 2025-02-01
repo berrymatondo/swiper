@@ -17,8 +17,12 @@ import React from "react";
 const AddMemberPage = async () => {
   const session = await auth();
   const usr: any = session?.user;
+
   const res = await getAllCels();
-  const cellules = await res?.data;
+  const cellules = res?.data;
+
+  const res2 = await getAllZones();
+  const zones = res2?.data;
 
   if (usr?.role != "ADMIN") return <NotAccess />;
 
@@ -30,7 +34,7 @@ const AddMemberPage = async () => {
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <PersonForm cels={cellules} userSession={usr} />
+        <PersonForm cels={cellules} userSession={usr} zones={zones} />
       </div>
     </PageLayout>
   );

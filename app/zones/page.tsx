@@ -40,6 +40,8 @@ const ZonesPage = async ({
     skip: skip,
     include: {
       cellules: true,
+      evang: true,
+      respo: true,
       /*       cellules: {
         include: { persons: true, address: true },
       }, */

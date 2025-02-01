@@ -39,6 +39,8 @@
     "embla-carousel-autoplay": "^8.0.4",
     "embla-carousel-react": "^8.0.4",
     "framer-motion": "^11.5.4",
+    "html2pdf-ts": "^1.2.23",
+    "html2pdf.js": "^0.10.2",
     "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "lucide-react": "^0.378.0",

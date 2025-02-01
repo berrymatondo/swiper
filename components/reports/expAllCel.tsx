@@ -13,7 +13,7 @@ export default function ExpAllCel({ celss }: ExporProps) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  //console.log("meeting", celss);
+  // console.log("meeting", celss);
   const cels = [...celss];
   /*   let cels: any = [];
   for (let i = 0; i < celss.length; i++) {
@@ -37,20 +37,33 @@ export default function ExpAllCel({ celss }: ExporProps) {
       if (cels && Array.isArray(cels)) {
         const dataToExport = cels.map((cel: any) => ({
           Cellule: cel.name,
+          Zone: cel?.zone?.name,
           Pilotes: cel?.persons
             ?.filter((p: any) => p.isPilote == true)
-            ?.map((per: any) => per.firstname + " " + per.lastname)[0],
+            ?.map(
+              (per: any) =>
+                per.firstname + " " + per.lastname + " " + per.mobile
+            )[0],
           Hôtes: cel.persons
             ?.filter((p: any) => p.isRespo == true)
-            ?.map((per: any) => per.firstname + " " + per.lastname)[0],
-          Adresse:
+            ?.map(
+              (per: any) =>
+                per.firstname + " " + per.lastname + " " + per.mobile
+            )[0],
+          Evangélisation:
+            cel?.zone?.evang?.firstname +
+            " " +
+            cel?.zone?.evang?.lastname +
+            " " +
+            cel?.zone?.evang?.mobile,
+          /*           Adresse:
             cel.address.street +
             " " +
             cel.address.number +
             ", " +
             cel.address.postalCode +
             " " +
-            cel.address.municipality,
+            cel.address.municipality, */
 
           Groupe_Whatsapp: cel.grpWhatsApp,
           Statut: cel.statut,

@@ -40,37 +40,29 @@ export const addParam = async (data: Inputs) => {
 };
 
 // UPDATE parama
-export const updateParam = async (data: Inputs) => {
-  //console.log("update zone:", data);
+export const updateParam = async (label: string, valeur: string) => {
+  //console.log("update zone:", label, valeur);
 
-  const resut = paramSchema.safeParse(data);
-  if (resut.success) {
-    try {
-      const zone = await prisma.parametre.update({
-        where: {
-          id: data.id ? +data.id : undefined,
-        },
-        data: {
-          isActive: data.isActive,
-          value1: data.value1,
-          value2: data.value2,
-          value3: data.value3,
-        },
-      });
+  try {
+    const zone = await prisma.parametre.update({
+      where: {
+        label: label,
+      },
+      data: {
+        value1:
+          label == "LASTSUNDAY"
+            ? valeur.split("-").reverse().join("-")
+            : valeur,
+      },
+    });
 
-      revalidatePath("/parameters");
+    revalidatePath("/parameters");
 
-      return {
-        success: true,
-        data: zone,
-      };
-    } catch (error) {}
-  } else {
     return {
-      success: false,
-      error: resut.error.format(),
+      success: true,
+      data: zone,
     };
-  }
+  } catch (error) {}
 };
 
 // GET ALL ZONES

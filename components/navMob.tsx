@@ -194,6 +194,18 @@ const NavMob = ({ usr }: NavMobProps) => {
             </Button>
           )}
 
+          {usr?.role == "ADMIN" && (
+            <Button
+              onClick={() => {
+                router.push("/parameters");
+                setOpen(false);
+              }}
+              className="bg-gradient-to-r from-sky-600 to-transparent"
+            >
+              Paramètres
+            </Button>
+          )}
+
           <Button
             onClick={() => {
               router.push("/docs");

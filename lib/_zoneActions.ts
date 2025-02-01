@@ -19,6 +19,7 @@ export const addZone = async (data: Inputs) => {
         data: {
           name: data.name,
           respoId: data.respoId ? +data.respoId : undefined,
+          evangId: data.personId ? +data.personId : undefined,
         },
       });
 
@@ -52,6 +53,7 @@ export const updateZone = async (data: Inputs) => {
           name: data.name,
           statut: data.status as ZonesStatuses,
           respoId: data.respoId ? +data.respoId : undefined,
+          evangId: data.personId ? +data.personId : undefined,
         },
       });
 
@@ -105,6 +107,8 @@ export const getZone = async (zoneId: number) => {
         cellules: {
           include: { persons: true, address: true },
         },
+        respo: true,
+        evang: true,
         _count: {
           select: { cellules: true },
         },

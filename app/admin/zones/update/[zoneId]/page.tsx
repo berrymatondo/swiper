@@ -11,6 +11,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import ZoneForm from "@/components/zone/zoneForm";
+import { getAllPersons } from "@/lib/_personActions";
 import { getZone } from "@/lib/_zoneActions";
 import React from "react";
 
@@ -22,7 +23,10 @@ type UpdateZonePageProps = {
 
 const UpdateZonePage = async ({ params }: UpdateZonePageProps) => {
   const res = await getZone(params.zoneId);
-  const zone = await res?.data;
+  const zone = res?.data;
+
+  const res1 = await getAllPersons();
+  const persons = res1?.data;
   //console.log("params.zoneId", params.zoneId);
   //console.log("ZONE", zone); //
   const session = await auth();
@@ -36,7 +40,7 @@ const UpdateZonePage = async ({ params }: UpdateZonePageProps) => {
       usr={usr}
     >
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <ZoneForm zone={zone} />
+        <ZoneForm zone={zone} persons={persons} />
       </div>
     </PageLayout>
   );

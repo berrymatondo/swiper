@@ -11,11 +11,16 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import ZoneForm from "@/components/zone/zoneForm";
+import { getAllPersons } from "@/lib/_personActions";
 import React from "react";
 
 const AddZonePage = async () => {
   const session = await auth();
   const usr: any = session?.user;
+
+  const res1 = await getAllPersons();
+  const persons = res1?.data;
+
   if (usr?.role != "ADMIN") return <NotAccess />;
   return (
     <PageLayout
@@ -25,7 +30,7 @@ const AddZonePage = async () => {
     >
       <CustomBreadcrumb name="Nouveau" />
       <div className="max-w-[800px] mx-auto p-2 rounded-b-lg ">
-        <ZoneForm />
+        <ZoneForm persons={persons} />
       </div>
     </PageLayout>
   );

@@ -27,7 +27,12 @@ const MembersPage = async ({
   const session = await auth();
   const usr: any = session?.user;
 
-  if (usr?.role != "ADMIN" && usr?.role != "PILOTE" && usr?.role != "VISITOR")
+  if (
+    usr?.role != "ADMIN" &&
+    usr?.role != "PILOTE" &&
+    usr?.role != "VISITOR" &&
+    usr?.role != "EVANG"
+  )
     return <NotAccess />;
 
   //console.log("usr", usr);
@@ -65,6 +70,9 @@ const MembersPage = async ({
 
   const hote =
     typeof searchParams.hote === "string" ? searchParams.hote : false;
+
+  const evang =
+    typeof searchParams.evang === "string" ? searchParams.evang : false;
 
   //const perCount = await prisma.person.count();
 
@@ -111,6 +119,7 @@ const MembersPage = async ({
       lastname: "asc",
     }, */
     });
+  //console.log("persons", persons);
 
   let personbis;
   if (pilote == "true") {
@@ -122,16 +131,23 @@ const MembersPage = async ({
     personbise0 = personbis.filter((per: Person) => per.isRespo === true);
   } else personbise0 = [...personbis];
 
+  let personbise1;
+
+  if (evang == "true") {
+    personbise1 = personbise0.filter((per: Person) => per.isEvang === true);
+  } else personbise1 = [...personbise0];
+  console.log("personbise1: ", personbise1);
+
   if (!usr) {
     return <div>Access Denied</div>;
   }
 
   let personbise;
   if (usr?.role == "PILOTE") {
-    personbise = personbise0.filter(
+    personbise = personbise1.filter(
       (per: Person) => per.celluleId === usr.celluleId
     );
-  } else personbise = [...personbise0];
+  } else personbise = [...personbise1];
 
   //console.log("personbise ", personbise);
 
@@ -148,6 +164,7 @@ const MembersPage = async ({
             search={search}
             pilote={pilote == "true" ? true : false}
             hote={hote == "true" ? true : false}
+            evang={evang == "true" ? true : false}
           />
           {/*   <div className="flex justify-normal gap-2 ">
             {skip == 0 ? null : (
