@@ -135,7 +135,7 @@ const NewHomePage = async () => {
         </div>
         <div className="text-neutral-600">
           <p className="text-center">
-            Les cellules de maison sont des cellules de l'Eglise{" "}
+            {"Les cellules de maison sont des cellules de l'Eglise "}
             <Link
               href="https://impactcentrechretien.com"
               target="_blank"
