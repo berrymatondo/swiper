@@ -23,7 +23,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 
-const page = () => {
+const Accueil = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sliderMessages = ["Dernier culte", "ICC l'hebdo"];
 
@@ -163,14 +163,16 @@ const page = () => {
                 Les{" "}
                 <span className="font-semibold text-orange-500">
                   cellules de maison
-                </span>{" "}
-                sont des cellules de l'Eglise Impact Centre Chrétien. Les
-                membres des cellules se réunissent{" "}
+                </span>
+                {"sont des cellules de l'Eglise Impact Centre Chrétien. Les"}
+                {"membres des cellules se réunissent"}
                 <span className="font-semibold text-orange-500">
                   tous les jeudis de 19h00 à 20h15
-                </span>{" "}
-                dans les maisons hôtes pour s'édifier afin d'influencer leurs
-                villes et leurs quartiers avec les valeurs de Christ !
+                </span>
+                {
+                  "dans les maisons hôtes pour s'édifier afin d'influencer leurs "
+                }
+                {"villes et leurs quartiers avec les valeurs de Christ ! "}
               </motion.p>
             </div>
           </div>
@@ -277,9 +279,9 @@ const page = () => {
   );
 };
 
-export default page;
+export default Accueil;
 
-export function InfiniteSliderBasic() {
+const InfiniteSliderBasic = () => {
   return (
     <InfiniteSlider gap={24} reverse>
       <img src="/al.jpg" alt="Apple Music logo" className="h-[120px] w-auto" />
@@ -310,4 +312,4 @@ export function InfiniteSliderBasic() {
       />
     </InfiniteSlider>
   );
-}
+};
