@@ -20,15 +20,27 @@ const AppBar = async () => {
               <div className="flex justify-between items-center p-2 md:container">
                 <p>
                   <span className="text-sm">Welcome, </span>
-                  <span className="text-blue-600 text-sm font-semibold">
-                    {usr?.role == "PILOTE" ? (
-                      <Link href={`/cellules/${usr?.celluleId}`}>
-                        {usr?.name}
-                      </Link>
-                    ) : (
-                      session?.user?.name
-                    )}
-                  </span>
+                  {usr?.role == "PILOTE" && !usr?.zoneId && (
+                    <span className="text-blue-600 text-sm font-semibold">
+                      {usr?.role == "PILOTE" ? (
+                        <Link href={`/cellules/${usr?.celluleId}`}>
+                          {usr?.name}
+                        </Link>
+                      ) : (
+                        session?.user?.name
+                      )}
+                    </span>
+                  )}
+
+                  {usr?.role != "ADMIN" && usr?.zoneId && (
+                    <span className="text-blue-600 text-sm font-semibold">
+                      {usr?.role != "ADMIN" && usr?.zoneId ? (
+                        <Link href={`/zones/${usr?.zoneId}`}>{usr?.name}</Link>
+                      ) : (
+                        session?.user?.name
+                      )}
+                    </span>
+                  )}
                 </p>
 
                 <div className="max-md:hidden">

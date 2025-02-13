@@ -51,6 +51,9 @@ model User {
   celluleId Int?
   cellule Cellule? @relation(fields: [celluleId], references: [id])
 
+  zoneId Int?
+  zone Zone? @relation(fields: [zoneId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -64,7 +67,8 @@ model Zone {
   name String @unique
   statut ZonesStatuses @default(INACTIF)
   cellules Cellule[] 
-  evangs Evang[] 
+  evangs Evang[]
+  users User[]  
 
   respoId Int?
   respo Person? @relation(fields: [respoId], references: [id]) 

@@ -170,6 +170,7 @@ export const RegisterSchema = z
     }),
     /*     isClient: z.boolean(),*/
     celluleId: z.string().optional(),
+    zoneId: z.string().optional(),
     isAdmin: z.boolean(),
     password: z.string().min(6, {
       message: "Le mot de passe doit contenir au moins 6 caractères",

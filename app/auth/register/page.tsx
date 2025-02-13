@@ -9,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { getAllZones } from "@/lib/_zoneActions";
 import React from "react";
 
 const RagisterPage = async () => {
@@ -19,6 +20,9 @@ const RagisterPage = async () => {
     return <div>{"Vous n'avez pas les autorisations nécessaires!"}</div>;
   }
 
+  const res = await getAllZones();
+  const zones = res?.data;
+
   return (
     <PageLayout
       title="Création compte utilisateur"
@@ -27,7 +31,7 @@ const RagisterPage = async () => {
       <CustomBreadcrumb name="Nouvel utilisateur" />
 
       <div className="max-w-[800px] mx-auto p-2">
-        <RegisterForm />{" "}
+        <RegisterForm zones={zones} />{" "}
       </div>
     </PageLayout>
   );

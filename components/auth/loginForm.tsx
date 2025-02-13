@@ -45,7 +45,7 @@ const LoginForm = () => {
 
     //
 
-    //console.log("RESRES:", result);
+    console.log("RESRES:", result);
 
     if (result?.error) {
       toast.error(result?.error.toString());

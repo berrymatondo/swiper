@@ -48,13 +48,14 @@ const credentialsConfig = CredentialsProvider({
     //console.log("checkPass user:=", checkPass, user);
 
     if (checkPass) {
-      // console.log("USER", user);
+      //  console.log("USER", user);
 
       return {
         id: user.id + "",
         role: user.role,
         //email: user.email,
         celluleId: user.celluleId,
+        zoneId: user.zoneId,
         username: user.username,
         name: user.username,
         createAt: user.createdAt,

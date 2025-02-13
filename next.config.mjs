@@ -9,6 +9,7 @@ const nextConfig = {
         hostname: "ik.imagekit.io",
       },
     ],
+    domains: ["hebbkx1anhila5yf.public.blob.vercel-storage.com"],
   },
   experimental: {
     serverActions: {

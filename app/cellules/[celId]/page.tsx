@@ -267,7 +267,7 @@ usr={usr} */
                     <p>{cel?.hours}</p>
                   </div>
                 </div>
-                {usr?.role == "ADMIN" && (
+                {(usr?.zoneId || usr?.role == "ADMIN") && (
                   <div className=" px-2 flex flex-col items-start">
                     {cel?.persons &&
                       cel?.persons
@@ -360,7 +360,8 @@ usr={usr} */
           <div className="p-2">
             {(usr?.role == "ADMIN" ||
               usr?.role == "VISITOR" ||
-              (usr?.role == "PILOTE" && usr?.celluleId == cel?.id)) && (
+              (usr?.role == "PILOTE" &&
+                (usr?.celluleId == cel?.id || usr?.zoneId))) && (
               /*             <CelMembers members={members} />
                */
               <div className="w-full flex  max-md:flex-col gap-2 ">

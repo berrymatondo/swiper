@@ -55,6 +55,7 @@ export const registerUser = async (data: Inputs2) => {
           password: hashedPassword,
           role: data.isAdmin ? "ADMIN" : "PILOTE",
           celluleId: data.celluleId ? +data.celluleId : null,
+          zoneId: data.zoneId ? +data.zoneId : null,
           // userId: userTmp ? (userTmp.id ? parseInt(userTmp.id) : null) : null,
         },
       });
@@ -106,6 +107,7 @@ export const updateUser = async (data: Inputs2) => {
           data: {
             username: data.username,
             celluleId: data?.celluleId ? +data?.celluleId : null,
+            zoneId: data?.zoneId ? +data?.zoneId : null,
             //password: hashedPassword,
             role: data.isAdmin ? "ADMIN" : "PILOTE",
 
@@ -148,6 +150,7 @@ export const updateUser = async (data: Inputs2) => {
           data: {
             username: data.username,
             celluleId: data?.celluleId ? +data?.celluleId : undefined,
+            zoneId: data?.zoneId ? +data?.zoneId : undefined,
             role: data.isAdmin ? "ADMIN" : "PILOTE",
             password: hashedPassword,
 

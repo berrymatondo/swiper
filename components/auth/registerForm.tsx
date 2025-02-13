@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Cellule } from "@prisma/client";
+import { Cellule, Zone } from "@prisma/client";
 import { getAllCels } from "@/lib/_celActions";
 import { useRouter } from "next/navigation";
 import { log } from "console";
@@ -33,9 +33,10 @@ import { log } from "console";
 type RegisterFormProps = {
   usr?: any;
   cels?: any;
+  zones?: any;
 };
 
-const RegisterForm = ({ usr }: RegisterFormProps) => {
+const RegisterForm = ({ usr, zones }: RegisterFormProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [cels, setCels] = useState<any>();
@@ -53,6 +54,7 @@ const RegisterForm = ({ usr }: RegisterFormProps) => {
       /*       isClient: false,*/
       isAdmin: usr?.role == "ADMIN" ? true : false,
       celluleId: usr?.celluleId ? usr?.celluleId.toString() : "",
+      zoneId: usr?.zoneId ? usr?.zoneId.toString() : "",
     },
   });
   useEffect(() => {
@@ -294,6 +296,35 @@ const RegisterForm = ({ usr }: RegisterFormProps) => {
 
             <FormField
               control={form.control}
+              name="zoneId"
+              render={({ field }) => {
+                return (
+                  <FormItem>
+                    <FormLabel>Zone</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger id="framework">
+                        <SelectValue placeholder="Sélectionner une zone" />
+                      </SelectTrigger>
+                      <SelectContent position="popper">
+                        {zones?.map((zon: Zone) => (
+                          <SelectItem key={zon.id} value={zon.id.toString()}>
+                            {zon.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                );
+              }}
+            />
+
+            <FormField
+              control={form.control}
               name="isAdmin"
               render={({ field }) => {
                 return (
@@ -324,9 +355,18 @@ const RegisterForm = ({ usr }: RegisterFormProps) => {
               }}
             />
           </div>
-          <Button type="submit" className="w-full">
-            {loading ? "En cours de traitemnt ..." : "Enregistrer"}
-          </Button>
+          <div className="md:flex md:gap-2">
+            <Button
+              onClick={() => router.push("/auth/users")}
+              type="button"
+              className="bg-neutral-400 w-full"
+            >
+              {"Annuler"}
+            </Button>
+            <Button type="submit" className="w-full">
+              {loading ? "En cours de traitemnt ..." : "Enregistrer"}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
