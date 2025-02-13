@@ -17,7 +17,7 @@ const AppBar = async () => {
         <div className="ml-auto">
           {session && session.user ? (
             <div>
-              <div className="flex justify-between items-center p-2 md:container">
+              <div className="bg-gray-100 flex justify-between items-center p-2 md:container">
                 <p>
                   <span className="text-sm">Welcome, </span>
                   {usr?.role == "PILOTE" && !usr?.zoneId && (

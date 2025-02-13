@@ -22,15 +22,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
+import { useRouter } from "next/navigation";
 
 const Accueil = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  //const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sliderMessages = ["Dernier culte", "ICC l'hebdo"];
+  const router = useRouter();
 
   return (
     <div className="md:container min-h-screen bg-white">
-      <div className="fixed inset-x-0 top-0 z-50">
-        <header className="border-b bg-white/80 backdrop-blur-xl">
+      {/*       <div className="fixed inset-x-0 top-0 z-50">
+                 <header className="border-b bg-white/80 backdrop-blur-xl">
           <div className="container flex items-center justify-between h-16">
             <Link href="/" className="flex flex-col items-center">
               <div className="relative w-10 h-10">
@@ -88,7 +90,7 @@ const Accueil = () => {
               <Menu className="h-6 w-6" />
             </Button>
           </div>
-        </header>
+        </header> 
 
         {isMenuOpen && (
           <div className="md:hidden bg-white border-b">
@@ -117,9 +119,9 @@ const Accueil = () => {
             </nav>
           </div>
         )}
-      </div>
+      </div> */}
 
-      <main className="pt-4 pb-4">
+      <main className="pt-8 pb-4">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/*           <div className="mb-4 bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 rounded-lg overflow-hidden">
            */}{" "}
@@ -128,8 +130,8 @@ const Accueil = () => {
              */}{" "}
             <InfiniteSliderBasic />
           </div>
-          <div className="relative flex flex-col items-center text-center mb-16">
-            <div className="w-full md:hidden mb-8">
+          <div className="relative flex flex-col items-center text-center mb-16 max-md:mb-4">
+            <div className="relative text-white w-full md:hidden mb-8 max-md:mb-4">
               <div className="relative aspect-[4/3]">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202024-09-27%20at%2006.10.14%20(1)-tDYvt3g2ZqiaCRxMmwvIv9C32FPRGN.jpeg"
@@ -138,8 +140,22 @@ const Accueil = () => {
                   className="object-cover rounded-2xl"
                 />
               </div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-3xl md:text-5xl lg:text-7xl font-bold text-center mt-6 mb-6"
+                >
+                  Découvrez les{" "}
+                  <span className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">
+                    Cellules de maison
+                  </span>{" "}
+                  près de chez vous !
+                </motion.h1>
+              </div>
             </div>
-            <div className="flex flex-col items-center w-full">
+            <div className="max-md:hidden flex flex-col items-center w-full">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -153,7 +169,7 @@ const Accueil = () => {
                 près de chez vous !
               </motion.h1>
             </div>
-            <div className="w-full mt-8 md:mt-0">
+            <div className="w-full mt-4 md:mt-0">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -194,7 +210,8 @@ const Accueil = () => {
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-500 to-pink-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
                 <Button
                   size="lg"
-                  className="relative w-full py-6 md:py-8 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white text-base md:text-lg font-semibold shadow-xl overflow-hidden after:absolute after:inset-0 after:translate-x-[-100%] after:bg-gradient-to-r after:from-transparent after:via-white/25 after:to-transparent hover:after:translate-x-[100%] after:transition-transform after:duration-500"
+                  className="rounded-full relative w-full py-6 md:py-8 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white text-base md:text-lg font-semibold shadow-xl overflow-hidden after:absolute after:inset-0 after:translate-x-[-100%] after:bg-gradient-to-r after:from-transparent after:via-white/25 after:to-transparent hover:after:translate-x-[100%] after:transition-transform after:duration-500"
+                  onClick={() => router.push("/cellules")}
                 >
                   Rejoins une cellule maintenant
                   <ChevronRight className="w-5 h-5 md:w-6 md:h-6 ml-2" />
@@ -210,7 +227,7 @@ const Accueil = () => {
                   href="https://docs.google.com/forms/d/e/1FAIpQLSfS9aFTSLTsMJWSvuWkcY7he5GP18PtT5yD56I6xblHOnlHHA/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-4 py-2 rounded-full border border-orange-500/20 text-orange-500 bg-orange-500/10 text-sm hover:bg-orange-500/20 transition-colors"
+                  className="inline-block px-4 py-2 rounded-full border border-orange-500/20 text-black font-semibold bg-orange-500/10 text-sm hover:bg-orange-500/20 transition-colors"
                 >
                   Devenir pilote ou hôte
                 </Link>

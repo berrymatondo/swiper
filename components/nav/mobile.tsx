@@ -113,7 +113,7 @@ const MobileNav = ({ usr }: MobileNavProps) => {
     );
   }
   return (
-    <div className="flex justify-between items-center gap-4 p-2 my-2  text-black bg-gray-100 rounded-md">
+    <div className=" flex justify-between items-center gap-4 p-2 my-2  text-black bg-gray-100 rounded-md">
       {navList.map((nav) => (
         <Link key={nav?.id} href={nav?.href ? nav?.href : "/"}>
           <span className={`flex  justify-center items-center ${nav?.color}`}>
