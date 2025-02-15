@@ -180,13 +180,13 @@ const LandPage = () => {
                 <span className="font-semibold text-orange-500">
                   cellules de maison
                 </span>
-                {"sont des cellules de l'Eglise Impact Centre Chrétien. Les"}
-                {"membres des cellules se réunissent"}
+                {" sont des cellules de l'Eglise Impact Centre Chrétien. Les"}
+                {"membres des cellules se réunissent "}
                 <span className="font-semibold text-orange-500">
                   tous les jeudis de 19h00 à 20h15
                 </span>
                 {
-                  "dans les maisons hôtes pour s'édifier afin d'influencer leurs "
+                  " dans les maisons hôtes pour s'édifier afin d'influencer leurs "
                 }
                 {"villes et leurs quartiers avec les valeurs de Christ ! "}
               </motion.p>
