@@ -444,6 +444,16 @@ function TabsDemo({
   mbr,
   defTab,
 }: TabsDEmoProps) {
+  function sortMeetingsByDate(
+    meetings: { id: number; date: string; nHom: number }[]
+  ): { id: number; date: string; nHom: number }[] {
+    return meetings.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+  }
+
+  //console.log("Meetngs", sortMeetingsByDate(meetings));
+
   return (
     <Tabs defaultValue={defTab ? defTab : "account"} className="w-full">
       <TabsList className="grid w-full grid-cols-3">
@@ -475,9 +485,14 @@ function TabsDemo({
           </CardHeader>
           <CardContent className="space-y-2">
             <div className=" max-sm:max-h-[600px] overflow-auto md:grid  md:gap-3">
-              {meetings?.map((meet: any) => (
-                <MeetingItem key={meet.id} meeting={meet} usr={usr} />
-              ))}
+              {meetings
+                ?.sort(
+                  (a: any, b: any) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime()
+                )
+                ?.map((meet: any) => (
+                  <MeetingItem key={meet.id} meeting={meet} usr={usr} />
+                ))}
             </div>
             {/*             <div className="space-y-1">
               <Label htmlFor="name">Name</Label>

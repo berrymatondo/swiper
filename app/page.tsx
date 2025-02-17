@@ -24,6 +24,13 @@ import { useState } from "react";
 import { InfiniteSlider } from "@/components/ui/infinite-slider";
 import { useRouter } from "next/navigation";
 
+import im1 from "../public/al.jpg";
+import im2 from "../public/images/cellules/ottignies.jpeg";
+import im3 from "../public/images/cellules/haren.jpeg";
+import im4 from "../public/images/cellules/ander2.jpeg";
+import im5 from "../public/images/cellules/nossegem.jpeg";
+import im6 from "../public/images/cellules/halle.jpeg";
+
 const LandPage = () => {
   //const [isMenuOpen, setIsMenuOpen] = useState(false);
   const sliderMessages = ["Dernier culte", "ICC l'hebdo"];
@@ -301,31 +308,50 @@ export default LandPage;
 const InfiniteSliderBasic = () => {
   return (
     <InfiniteSlider gap={24} reverse>
-      <img src="/al.jpg" alt="Apple Music logo" className="h-[120px] w-auto" />
-      <img
-        src="/images/cellules/ottignies.jpeg"
+      <div className="relative h-[120px] w-[200px] rounded-lg overflow-hidden">
+        {/*         <Image
+          src={im1}
+          alt="Apple Music logo"
+          className="rounded-lg h-[120px] w-auto"
+        /> */}
+        <a
+          className="absolute block top-0 left-0 w-full h-full z-10 bg-transparent"
+          target="_blank"
+          href="https://www.youtube.com/embed/IddYKOghjnQ"
+        ></a>
+        <iframe
+          className="w-full h-full"
+          title="Revoir dernier culte"
+          src="https://www.youtube.com/embed/IddYKOghjnQ"
+        />
+        {/*         <p className="font-bold  text-center  px-2  w-full text-white text-xl z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          Dernier Culte
+        </p> */}
+      </div>
+      <Image
+        src={im2}
         alt="Chrome logo"
-        className="h-[120px] w-auto"
+        className="rounded-lg h-[120px] w-auto"
       />
-      <img
-        src="/images/cellules/haren.jpeg"
+      <Image
+        src={im3}
         alt="Strava logo"
-        className="h-[120px] w-auto"
+        className="rounded-lg h-[120px] w-auto"
       />
-      <img
-        src="/images/cellules/ander2.jpeg"
+      <Image
+        src={im4}
         alt="Nintendo logo"
-        className="h-[120px] w-auto"
+        className="rounded-lg h-[120px] w-auto"
       />
-      <img
-        src="/images/cellules/nossegem.jpeg"
+      <Image
+        src={im5}
         alt="Jquery logo"
-        className="h-[120px] w-auto"
+        className="rounded-lg h-[120px] w-auto"
       />
-      <img
-        src="/images/cellules/halle.jpeg"
+      <Image
+        src={im6}
         alt="Prada logo"
-        className="h-[120px] w-auto"
+        className="rounded-lg h-[120px] w-auto"
       />
     </InfiniteSlider>
   );

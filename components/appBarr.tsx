@@ -97,7 +97,7 @@ const AppBar = async () => {
             </span>
           </Link>
           <Link
-            className="text-white bg-gray-400 rounded-full p-2 text-xs"
+            className="text-white bg-sky-600 rounded-full p-2 text-xs"
             href="/auth/login"
           >
             Connexion
